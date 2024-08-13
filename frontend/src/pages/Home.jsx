@@ -3,7 +3,7 @@ import React from "react";
 function Home() {
     return (
         <div>
-            {'Главная'}
+            <h1>Р“Р»Р°РІРЅР°СЏ</h1>
         </div>
     )
 }

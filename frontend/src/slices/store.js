@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import api from '../services/api/api'
+import apiTeams from '../services/api/apiTeams'
 
 const store = configureStore({
     reducer: {
-        [api.reducerPath]: api.reducer,
+        [apiTeams.reducerPath]: apiTeams.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(api.middleware),
+        getDefaultMiddleware().concat(apiTeams.middleware),
 })
 
 export default store;

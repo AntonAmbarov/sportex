@@ -1,8 +1,9 @@
 import React from 'react';
 import Home from '../../pages/Home';
-import Team from '../../pages/Team';
+import Teams from '../../pages/Teams';
 import Player from '../../pages/Player';
-import Pages from '../../pages/Pages';
+
+console.log('run: routes')
 
 const routes = [
     {
@@ -10,16 +11,12 @@ const routes = [
         element: <Home />,
     },
     {
-        path: '/team',
-        element: <Team />,
+        path: '/teams',
+        element: <Teams />,
     },
     {
-        path: '/player',
+        path: '/players',
         element: <Player />,
-    },
-    {
-        path: '/pages/:id',
-        element: <Pages />,
     }
 ]
 

@@ -5,12 +5,18 @@ import { useGetTeamsQuery } from "../services/api/apiTeams";
 console.log('run: Teams')
 
 function Teams() {
+
     const { data, error, isLoading } = useGetTeamsQuery();
+
     if (isLoading) return (<div>Загрузка</div>);
-    if (error) return (<div>Ошибка</div>)
+    if (error) return (<div>Ошибка</div>);
+    if (!data || data.length === 0) return (<div>Нет данных</div>);
+
     return (
         <div>
-            {data.map(team => team.title)}
+            <ul>
+                {data.map(team => <li key={team.id}>{team.title.rendered}</li>)}
+            </ul>
         </div>
     )
 }

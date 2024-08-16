@@ -1,10 +1,8 @@
 import React from "react";
-import { useGetTeamsQuery } from "../services/api/apiTeams";
-// import { useParams } from "react-router-dom";
+import { useGetPlayersQuery } from "../services/api/apiPlayers";
 
-function Teams() {
-
-    const { data, error, isLoading } = useGetTeamsQuery();
+function Players() {
+    const { data, error, isLoading } = useGetPlayersQuery();
 
     if (isLoading) return (<div>Загрузка</div>);
     if (error) return (<div>Ошибка</div>);
@@ -13,10 +11,10 @@ function Teams() {
     return (
         <div>
             <ul>
-                {data.map(team => <li key={team.id}>{team.title.rendered}</li>)}
+                {data.map(player => <li key={player.id}>{player.title.rendered}</li>)}
             </ul>
         </div>
     )
 }
 
-export default Teams;
+export default Players;

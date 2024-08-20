@@ -1,8 +1,9 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfilCard from "../components/team/ProfilCard";
 import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
+import ProfilCard from "../components/team/ProfilCard";
+import ListSkills from "../components/team/ListSkills";
 
 function Team() {
 
@@ -15,7 +16,7 @@ function Team() {
     if (isLoading) return (<div>Загрузка</div>);
     if (error) return (<div>Ошибка</div>);
     if (!data || data.length === 0) return (<div>Нет данных</div>);
-    
+
     if (imgIsLoading) return (<div>Загрузка</div>);
     if (imgError) return (<div>Ошибка</div>);
     if (!imgData || imgData.length === 0) return (<div>Нет данных</div>);
@@ -29,7 +30,7 @@ function Team() {
                     <ProfilCard data={team} logo={imgData} />
                 </Col>
                 <Col md={9}>
-                    <div>карточки</div>
+                    <ListSkills data={team.acf} />
                 </Col>
             </Row>
         </Container>

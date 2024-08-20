@@ -15,6 +15,7 @@ function Team() {
     if (isLoading) return (<div>Загрузка</div>);
     if (error) return (<div>Ошибка</div>);
     if (!data || data.length === 0) return (<div>Нет данных</div>);
+    
     if (imgIsLoading) return (<div>Загрузка</div>);
     if (imgError) return (<div>Ошибка</div>);
     if (!imgData || imgData.length === 0) return (<div>Нет данных</div>);

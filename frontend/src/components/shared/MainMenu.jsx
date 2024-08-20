@@ -1,52 +1,40 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { setActiveMenu } from "../../slices/menuSlice";
+import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
 
-function MainMenu() {
-    const state = useSelector(state => state.menu.activeMenu);
-    const dispatch = useDispatch();
-    const handleSelect = (selectedKey, e) => {
-        e.pereventDefault();
-        const id = Number(selectedKey);
-        dispatch(setActiveMenu(id));
+const data = [
+    { name: 'Команды', path: '/teams' },
+    { name: 'Игроки', path: '/players' },
+    { name: 'Виды спорта', path: '/' },
+]
+
+function MainMenu({ variant }) {
+
+    const isHeader = variant === 'header';
+
+    const linkStyle = (isActive) => {
+        const color = isHeader ? { 'link-dark': !isActive, 'link-secondary': isActive } : 'link-light';
+        return cn('nav-link', 'px-2', color);
     }
+    const listStyle = () => {
+        return cn('list-unstyled', 'col-12', 'col-md-auto', 'mb-2', 'mb-md-0', { 'd-flex': isHeader, 'justify-content-center': isHeader });
+    }
+
     return (
-        <Nav
-            variant="pills"
-            activeKey={state}
-            onSelect={handleSelect}
-            fill
-            className="col-12 col-md-auto mb-2 mb-md-0 justify-content-center"
-        >
-            <Nav.Item>
-                <Nav.Link
-                    eventKey={1}
-                    href="/teams"
-                    className="link-dark px-2"
-                >
-                    Команды
-                </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link
-                    eventKey={2}
-                    href="/players"
-                    className="link-dark px-2"
-                >
-                    Игроки
-                </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link
-                    eventKey={3}
-                    href="/"
-                    className="link-dark px-2"
-                >
-                    Виды спорта
-                </Nav.Link>
-            </Nav.Item>
-        </Nav>
+        <nav>
+            <ul className={listStyle()}>
+                {data.map(elem => (
+                    <li key={elem.path}>
+                        <NavLink
+                            to={elem.path}
+                            className={({ isActive }) => linkStyle(isActive)}
+                        >
+                            {elem.name}
+                        </NavLink>
+                    </li>
+                ))}
+            </ul>
+        </nav>
     );
 }
 

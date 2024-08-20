@@ -16,9 +16,15 @@ const api = createApi({
                 url: `/teams?slug=${slug}&_fields=id,title,acf`,
                 method: 'GET',
             })
+        }),
+        getImg: builder.query({
+            query: (id) => ({
+                url: `/media/${id}?_fields=media_details`,
+                method: 'GET',
+            })
         })
     })
 })
 
 export default api;
-export const { useGetTeamsQuery, useGetTeamQuery } = api;
+export const { useGetTeamsQuery, useGetTeamQuery, useGetImgQuery } = api;

@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
 import ProfilCard from "../components/team/ProfilCard";
 import ListSkills from "../components/team/ListSkills";
+import RadarDiagram from "../components/shared/RadarDiagram";
 
 function Team() {
 
@@ -28,9 +29,11 @@ function Team() {
             <Row>
                 <Col md={3}>
                     <ProfilCard data={team} logo={imgData} />
+                    <RadarDiagram data={team} type={'team'} />
                 </Col>
                 <Col md={9}>
                     <ListSkills data={team.acf} />
+
                 </Col>
             </Row>
         </Container>

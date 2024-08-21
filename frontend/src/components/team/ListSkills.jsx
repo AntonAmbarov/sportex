@@ -1,11 +1,10 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
-import texts from "../../config/i18n";
+import i18n from "../../config/i18n";
 import SkillLine from "../shared/SkillLine";
 
 function ListSkills({ data }) {
-    const list = texts.team.features;
-    console.log(list)
+    const list = i18n.team.features;
     return (
         <Card className="p-3 mb-3">
             <Card.Body>

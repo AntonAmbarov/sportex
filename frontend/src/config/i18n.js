@@ -1,4 +1,4 @@
-const texts = {
+export default {
     team: {
         features: [
             { key: 'game_of_defense', name: 'Игра в обороне' },
@@ -14,5 +14,3 @@ const texts = {
         ]
     }
 }
-
-export default texts;

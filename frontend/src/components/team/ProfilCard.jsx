@@ -10,7 +10,7 @@ function ProfilCardTeam({ data, logo }) {
     const league = data.acf.league;
 
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card className="mb-3">
             <div className="ratio ratio-4x3">
                 <Card.Img variant={'top'} src={logoMd} className="object-fit-cover" />
             </div>

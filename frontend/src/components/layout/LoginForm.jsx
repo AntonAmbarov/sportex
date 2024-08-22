@@ -2,16 +2,16 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import Popap from '../shared/Popap';
 
-function SignupForm({ onClose }) {
+function LoginForm({ onClose }) {
     return (
-        <Popap title={'Регистрация'} onClose={onClose}>
+        <Popap title={'Авторизация'} onClose={onClose}>
             <Formik>
                 <Form>
-                    <p>форма регистрации</p>
+                    <p>форма авторизации</p>
                 </Form>
             </Formik>
         </Popap>
     )
 }
 
-export default SignupForm;
+export default LoginForm;

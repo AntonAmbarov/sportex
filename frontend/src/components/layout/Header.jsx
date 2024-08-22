@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Container } from 'react-bootstrap'
 import MainMenu from "../shared/MainMenu";
-import Popap from "../shared/Popap";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
 function Header() {
-    const [popapTitle, setPopapTitle] = useState(null);
-    const showPopap = (title) => {
-        setPopapTitle(title);
+
+    const [typeForm, setTypeForm] = useState(null);
+
+    const openLoginForm = () => {
+        setTypeForm('login');
     }
-    const closePopap = () => {
-        setPopapTitle(null);
+    const openRegisterForm = () => {
+        setTypeForm('register');
+    }
+    const closeForm = () => {
+        setTypeForm(null);
     }
 
     return (
@@ -37,16 +43,17 @@ function Header() {
                     </a>
                     <MainMenu variant="header" />
                     <div className="col-md-3 text-end">
-                        <button className="btn btn-outline-primary me-2" type="button" onClick={() => showPopap('Авторизация')}>
+                        <button className="btn btn-outline-primary me-2" type="button" onClick={openLoginForm}>
                             Войти
                         </button>
-                        <button className="btn btn-primary" type="button" onClick={() => showPopap('Регистрация')}>
+                        <button className="btn btn-primary" type="button" onClick={openRegisterForm}>
                             Регистрация
                         </button>
                     </div>
                 </div>
             </Container>
-            {popapTitle && <Popap title={popapTitle} onHide={closePopap}></Popap>}
+            {typeForm === 'login' && (<LoginForm onClose={closeForm} />)}
+            {typeForm === 'register' && (<SignupForm onClose={closeForm} />)}
         </header>
 
     )

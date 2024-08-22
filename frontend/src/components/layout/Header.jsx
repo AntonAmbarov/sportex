@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from 'react-bootstrap'
 import MainMenu from "../shared/MainMenu";
+import Popap from "../shared/Popap";
 
 function Header() {
-    return (
+    const [popapTitle, setPopapTitle] = useState(null);
+    const showPopap = (title) => {
+        setPopapTitle(title);
+    }
+    const closePopap = () => {
+        setPopapTitle(null);
+    }
 
+    return (
         <header className="border-bottom mb-4">
             <Container>
                 <div className="
@@ -29,15 +37,16 @@ function Header() {
                     </a>
                     <MainMenu variant="header" />
                     <div className="col-md-3 text-end">
-                        <button className="btn btn-outline-primary me-2" type="button">
+                        <button className="btn btn-outline-primary me-2" type="button" onClick={() => showPopap('Авторизация')}>
                             Войти
                         </button>
-                        <button className="btn btn-primary" type="button">
+                        <button className="btn btn-primary" type="button" onClick={() => showPopap('Регистрация')}>
                             Регистрация
                         </button>
                     </div>
                 </div>
             </Container>
+            {popapTitle && <Popap title={popapTitle} onHide={closePopap}></Popap>}
         </header>
 
     )

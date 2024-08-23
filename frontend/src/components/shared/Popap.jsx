@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Modal } from 'react-bootstrap';
 
-function Popap({ title, children, onClose }) {
-    const [show, setShow] = useState(false);
-
-    useEffect(() => setShow(true), []);
-    const handleClose = () => {
-        setShow(false);
-        onClose();
-    }
+function Popap({ title, children, onClose, show }) {
 
     return (
         <Modal
             show={show}
-            onHide={handleClose}
+            onHide={onClose}
             backdrop="static"
             keyboard={false}
         >

@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from 'react-bootstrap'
 import MainMenu from "../shared/MainMenu";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import { useDispatch } from "react-redux";
+import { openLoginForm, openRegisterForm } from "../../slices/ui";
 
 function Header() {
 
-    const [typeForm, setTypeForm] = useState(null);
-
-    const openLoginForm = () => {
-        setTypeForm('login');
-    }
-    const openRegisterForm = () => {
-        setTypeForm('register');
-    }
-    const closeForm = () => {
-        setTypeForm(null);
-    }
+    const dispatch = useDispatch();
 
     return (
         <header className="border-bottom mb-4">
@@ -43,17 +35,17 @@ function Header() {
                     </a>
                     <MainMenu variant="header" />
                     <div className="col-md-3 text-end">
-                        <button className="btn btn-outline-primary me-2" type="button" onClick={openLoginForm}>
+                        <button className="btn btn-outline-primary me-2" type="button" onClick={() => dispatch(openLoginForm())}>
                             Войти
                         </button>
-                        <button className="btn btn-primary" type="button" onClick={openRegisterForm}>
+                        <button className="btn btn-primary" type="button" onClick={() => dispatch(openRegisterForm())}>
                             Регистрация
                         </button>
                     </div>
                 </div>
             </Container>
-            {typeForm === 'login' && (<LoginForm onClose={closeForm} />)}
-            {typeForm === 'register' && (<SignupForm onClose={closeForm} />)}
+            <LoginForm />
+            <SignupForm />
         </header>
 
     )

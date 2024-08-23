@@ -45,17 +45,17 @@ function SignupForm() {
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor='email' className='form-label' hidden>Ваш e-mail</label>
-                            <Field type='email' name='email' placeholder='name@example.com' className={styleField(errors.login && touched.login)} />
+                            <Field type='email' name='email' placeholder='name@example.com' className={styleField(errors.email && touched.email)} />
                             {errors.email && touched.email ? <div className='invalid-feedback'>{errors.email}</div> : null}
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor='password' className='form-label' hidden>Ваш пароль</label>
-                            <Field type='password' name='password' placeholder='Пароль' className={styleField(errors.login && touched.login)} />
+                            <Field type='password' name='password' placeholder='Пароль' className={styleField(errors.password && touched.password)} />
                             {errors.password && touched.password ? <div className='invalid-feedback'>{errors.password}</div> : null}
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor='confirmPassword' className='form-label' hidden>Подтвердите пароль</label>
-                            <Field type='password' name='confirmPassword' placeholder='Подтвердите пароль' className={styleField(errors.login && touched.login)} />
+                            <Field type='password' name='confirmPassword' placeholder='Подтвердите пароль' className={styleField(errors.confirmPassword && touched.confirmPassword)} />
                             {errors.confirmPassword && touched.confirmPassword ? <div className='invalid-feedback'>{errors.confirmPassword}</div> : null}
                         </div>
                         <Button as='input' type='submit' value={'Зарегистрироваться'} />

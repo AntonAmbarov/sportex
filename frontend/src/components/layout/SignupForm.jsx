@@ -5,12 +5,14 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeRegisterForm } from '../../slices/ui';
 import { signupFormSchema } from '../../config/yupConfig';
+import { useRegisterMutation } from '../../services/api/apiAuth';
 import cn from 'classnames';
 
 function SignupForm() {
 
     const show = useSelector(state => state.ui.registerForm.show);
     const dispatch = useDispatch();
+    const [register] = useRegisterMutation();
 
     const styleField = (isError) => {
         return cn('form-control', {
@@ -25,8 +27,16 @@ function SignupForm() {
         confirmPassword: '',
     }
 
-    const handleSubmit = (values) => {
-        alert('Вы зарегистрированы')
+    const handleSubmit = async (values) => {
+        console.log(values)
+        try {
+            const resp = await register(values).unwrap();
+            console.log('registration ok' + resp)
+        }
+        catch (error) {
+            alert('регистрация не удалась')
+            console.error(error)
+        }
     }
 
     return (
@@ -39,8 +49,8 @@ function SignupForm() {
                 {({ errors, touched }) => (
                     <Form>
                         <div className="form-group mb-3">
-                            <label htmlFor='login' className='form-label' hidden>Ваш логин</label>
-                            <Field type='text' name='login' placeholder='Логин' className={styleField(errors.login && touched.login)} />
+                            <label htmlFor='username' className='form-label' hidden>Ваш логин</label>
+                            <Field type='text' name='username' placeholder='Логин' className={styleField(errors.login && touched.login)} />
                             {errors.login && touched.login ? <div>{errors.login}</div> : null}
                         </div>
                         <div className="form-group mb-3">

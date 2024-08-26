@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 const signupFormSchema = yup.object().shape({
-    login: yup.string()
+    username: yup.string()
         .min(3, 'Минимум 3 символа')
         .max(25, 'Максимум 25 символов')
         .required('Логин обязателен'),

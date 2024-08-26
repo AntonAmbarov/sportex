@@ -1,25 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import BASE_URL from '../../config/apiConfig';
+import baseUrl, { paths } from '../../config/apiConfig';
 
 const api = createApi({
     reducerPath: 'teams',
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+    baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getTeams: builder.query({
             query: () => ({
-                url: '/teams?_fields=id,title,acf.logo',
+                url: paths.getTeams(),
                 method: 'GET',
             })
         }),
         getTeam: builder.query({
             query: (slug) => ({
-                url: `/teams?slug=${slug}&_fields=id,title,acf`,
+                url: paths.getTeam(slug),
                 method: 'GET',
             })
         }),
         getImg: builder.query({
             query: (id) => ({
-                url: `/media/${id}?_fields=media_details`,
+                url: paths.getImg(id),
                 method: 'GET',
             })
         })

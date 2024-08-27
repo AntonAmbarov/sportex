@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeRegisterForm } from '../../slices/ui';
 import { signupFormSchema } from '../../config/yupConfig';
-import { useRegisterMutation } from '../../services/api/apiAuth';
+import { useRegisterMutation, useAuthMutation } from '../../services/api/apiAuth';
 import cn from 'classnames';
 
 function SignupForm() {
@@ -13,6 +13,7 @@ function SignupForm() {
     const show = useSelector(state => state.ui.registerForm.show);
     const dispatch = useDispatch();
     const [register] = useRegisterMutation();
+    const [login] = useAuthMutation();
 
     const styleField = (isError) => {
         return cn('form-control', {
@@ -21,20 +22,19 @@ function SignupForm() {
     }
 
     const initialValues = {
-        login: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: '',
     }
 
     const handleSubmit = async (values) => {
-        console.log(values)
         try {
-            const resp = await register(values).unwrap();
-            console.log('registration ok' + resp)
+            await register(values).unwrap();
+            login(values);
         }
         catch (error) {
-            alert('регистрация не удалась')
+            alert('Регистрация не удалась')
             console.error(error)
         }
     }
@@ -50,8 +50,8 @@ function SignupForm() {
                     <Form>
                         <div className="form-group mb-3">
                             <label htmlFor='username' className='form-label' hidden>Ваш логин</label>
-                            <Field type='text' name='username' placeholder='Логин' className={styleField(errors.login && touched.login)} />
-                            {errors.login && touched.login ? <div>{errors.login}</div> : null}
+                            <Field type='text' name='username' placeholder='Логин' className={styleField(errors.username && touched.username)} />
+                            {errors.username && touched.username ? <div>{errors.username}</div> : null}
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor='email' className='form-label' hidden>Ваш e-mail</label>

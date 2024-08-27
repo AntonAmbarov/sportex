@@ -29,7 +29,7 @@ const signupFormSchema = yup.object().shape({
 })
 
 const loginFormSchema = yup.object().shape({
-    login: yup.string()
+    username: yup.string()
         .required('Логин обязателен'),
     password: yup.string()
         .required('Пароль обязателен'),

@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseUrl, { refreshToken, postComment } from "../../config/apiConfig";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import baseUrl, {paths} from "../../config/apiConfig";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
@@ -15,7 +15,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryRefresh = async (args, api, opts) => {
     let result = await baseQuery(args, api, opts);
     if (result.error && result.error.status === 401) {
-        const { data } = await baseQuery(refreshToken, api, opts);
+        const { data } = await baseQuery(paths.refreshToken, api, opts);
         if (data?.token) {
             localStorage.setItem('token', data.token);
             result = await baseQuery(args, api, opts);
@@ -26,18 +26,4 @@ const baseQueryRefresh = async (args, api, opts) => {
     return result;
 }
 
-const apiAuthorizedUsers = createApi({
-    reducerPath: 'apiAuthorizedUsers',
-    baseQuery: baseQueryRefresh,
-    endpoints: (builder) => ({
-        postComment: builder.mutation({
-            query: (data) => ({
-                url: postComment,
-                method: 'POST',
-                body: data,
-            })
-        }),
-    })
-})
-
-export default apiAuthorizedUsers;
+export default baseQueryRefresh;

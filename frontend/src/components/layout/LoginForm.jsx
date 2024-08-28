@@ -5,14 +5,14 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeLoginForm } from '../../slices/ui';
 import { loginFormSchema } from '../../config/yupConfig';
-import { useAuthMutation } from '../../services/api/apiAuth';
+import { useGetAccessTokenMutation } from '../../services/api/apiAuth';
 import cn from 'classnames';
 
 function LoginForm() {
 
     const show = useSelector(state => state.ui.loginForm.show);
     const dispatch = useDispatch();
-    const [login] = useAuthMutation();
+    const [login] = useGetAccessTokenMutation();
 
     const styleField = (isError) => {
         return cn('form-control', {
@@ -27,12 +27,12 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         try {
-            const {token, user_display_name} = await login(values).unwrap();
+            const { token, user_display_name } = await login(values).unwrap();
             localStorage.setItem('token', token)
             localStorage.setItem('userDisplayNname', user_display_name)
             console.log(localStorage.getItem('token'))
         }
-        catch(error) {
+        catch (error) {
             alert('Авторизация не удалась')
             console.error(error)
         }

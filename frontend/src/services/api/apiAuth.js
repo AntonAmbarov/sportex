@@ -12,24 +12,15 @@ const apiAuth = createApi({
                 body: user,
             })
         }),
-        auth: builder.mutation({
+        getAccessToken: builder.mutation({
             query: (user) => ({
                 url: paths.auth(),
                 method: 'POST',
                 body: user,
             })
         }),
-        getAdminToken: builder.mutation({
-            query: () => ({
-                url: paths.getAdminToken(),
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-        })
     })
 })
 
-export const { useRegisterMutation, useAuthMutation } = apiAuth;
+export const { useRegisterMutation, useGetAccessTokenMutation } = apiAuth;
 export default apiAuth;

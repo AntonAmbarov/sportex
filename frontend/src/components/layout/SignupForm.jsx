@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeRegisterForm } from '../../slices/ui';
 import { signupFormSchema } from '../../config/yupConfig';
-import { useRegisterMutation, useAuthMutation } from '../../services/api/apiAuth';
+import { useRegisterMutation, useGetAccessTokenMutation } from '../../services/api/apiAuth';
 import cn from 'classnames';
 
 function SignupForm() {
@@ -13,7 +13,7 @@ function SignupForm() {
     const show = useSelector(state => state.ui.registerForm.show);
     const dispatch = useDispatch();
     const [register] = useRegisterMutation();
-    const [login] = useAuthMutation();
+    const [login] = useGetAccessTokenMutation();
 
     const styleField = (isError) => {
         return cn('form-control', {

@@ -1,14 +1,9 @@
 import React from "react";
 import { Container } from 'react-bootstrap'
 import MainMenu from "../shared/MainMenu";
-import SignupForm from "./SignupForm";
-import LoginForm from "./LoginForm";
-import { useDispatch } from "react-redux";
-import { openLoginForm, openRegisterForm } from "../../slices/ui";
+import UserBlock from './UserBlock';
 
 function Header() {
-
-    const dispatch = useDispatch();
 
     return (
         <header className="border-bottom mb-4">
@@ -34,20 +29,10 @@ function Header() {
                         </svg>
                     </a>
                     <MainMenu variant="header" />
-                    <div className="col-md-3 text-end">
-                        <button className="btn btn-outline-primary me-2" type="button" onClick={() => dispatch(openLoginForm())}>
-                            Войти
-                        </button>
-                        <button className="btn btn-primary" type="button" onClick={() => dispatch(openRegisterForm())}>
-                            Регистрация
-                        </button>
-                    </div>
+                    <UserBlock />
                 </div>
             </Container>
-            <LoginForm />
-            <SignupForm />
         </header>
-
     )
 }
 

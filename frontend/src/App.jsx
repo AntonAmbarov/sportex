@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setToken } from './slices/token';
+import { toggleStatusAuth } from './slices/ui';
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
     const userName = localStorage.getItem('userName');
     const token = localStorage.getItem('token');
     if (token) {
-      dispatch(setToken(userName, token));
+      dispatch(setToken({ userName, token }));
+      dispatch(toggleStatusAuth(true))
     }
   }, [])
 

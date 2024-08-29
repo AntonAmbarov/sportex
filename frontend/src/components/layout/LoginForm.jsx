@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeLoginForm } from '../../slices/ui';
 import { loginFormSchema } from '../../config/yupConfig';
 import { useLoginMutation } from '../../services/api/apiAuth';
+import { toggleStatusAuth } from '../../slices/ui';
 import cn from 'classnames';
+import { setToken } from '../../slices/token';
 
 function LoginForm() {
 
@@ -27,9 +29,11 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         try {
-            const { token, user_display_name } = await login(values).unwrap();
+            const { token, user_display_name: userName } = await login(values).unwrap();
             localStorage.setItem('token', token)
-            localStorage.setItem('userDisplayNname', user_display_name)
+            localStorage.setItem('userName', userName)
+            dispatch(setToken({ userName, token }))
+            dispatch(toggleStatusAuth(true));
         }
         catch (error) {
             alert('Авторизация не удалась')

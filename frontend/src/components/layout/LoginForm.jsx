@@ -30,14 +30,14 @@ function LoginForm() {
     const handleSubmit = async (values) => {
         try {
             const { token, user_display_name: userName } = await login(values).unwrap();
-            localStorage.setItem('token', token)
-            localStorage.setItem('userName', userName)
-            dispatch(setToken({ userName, token }))
+            localStorage.setItem('token', token);
+            localStorage.setItem('userName', userName);
+            dispatch(setToken({ userName, token }));
             dispatch(toggleStatusAuth(true));
         }
         catch (error) {
-            alert('Авторизация не удалась')
-            console.error(error)
+            alert('Авторизация не удалась');
+            console.error(error);
         }
     }
 

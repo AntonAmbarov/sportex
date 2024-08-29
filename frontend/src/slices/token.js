@@ -14,8 +14,12 @@ const tokenSlice = createSlice({
             state.userName = userName;
             state.token = token;
         },
+        removeToken: (state) => {
+            state.userName = null;
+            state.token = null;
+        }
     }
 });
 
 export default tokenSlice.reducer;
-export const { setToken } = tokenSlice.actions;
+export const { setToken, removeToken } = tokenSlice.actions;

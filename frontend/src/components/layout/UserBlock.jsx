@@ -2,14 +2,22 @@ import React from "react";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import { useDispatch, useSelector } from "react-redux";
-import { openLoginForm, openRegisterForm } from "../../slices/ui";
+import { openLoginForm, openRegisterForm, toggleStatusAuth } from "../../slices/ui";
 import { Dropdown } from "react-bootstrap";
+import { removeToken } from "../../slices/token";
 
 function UserBlock() {
 
     const dispatch = useDispatch();
     const status = useSelector(state => state.ui.statusAuth);
     const userName = useSelector(state => state.token.userName);
+
+    const handleExit = () => {
+        dispatch(toggleStatusAuth(false));
+        dispatch(removeToken());
+        localStorage.removeItem('userName');
+        localStorage.removeItem('token');
+    }
 
     const renderButtons = () => (
         <>
@@ -34,7 +42,7 @@ function UserBlock() {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="#">Выход</Dropdown.Item>
+                    <Dropdown.Item href="#" onClick={handleExit}>Выход</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </div>

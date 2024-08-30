@@ -5,6 +5,7 @@ import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
 import ProfilCard from "../components/team/ProfilCard";
 import ListSkills from "../components/team/ListSkills";
 import RadarDiagram from "../components/shared/RadarDiagram";
+import Comments from "../components/shared/Comments";
 
 function Team() {
 
@@ -33,7 +34,7 @@ function Team() {
                 </Col>
                 <Col md={9}>
                     <ListSkills data={team.acf} />
-
+                    <Comments id={team.id} />
                 </Col>
             </Row>
         </Container>

@@ -5,7 +5,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { setToken } from './slices/token';
+import { setProfil } from './slices/authorizedUser';
 import { toggleStatusAuth } from './slices/ui';
 
 function App() {
@@ -13,13 +13,12 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userName = localStorage.getItem('userName');
-    const token = localStorage.getItem('token');
-    if (token) {
-      dispatch(setToken({ userName, token }));
-      dispatch(toggleStatusAuth(true))
+    const profile = JSON.parse(localStorage.getItem('currentUser'));
+    if (profile) {
+      dispatch(setProfil(profile));
+      dispatch(toggleStatusAuth(true));
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <BrowserRouter>

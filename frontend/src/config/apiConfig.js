@@ -9,7 +9,9 @@ const paths = {
     register: () => ('/wp-json/custom/v1/register'),
     auth: () => ('/wp-json/jwt-auth/v1/token'),
     refreshToken: () => ('/wp-json/jwt-auth/v1/token/refresh'),
-    postCommetnt: () => ('/wp-json/wp/v2/comments'),
+    getComments: (id) => (`/wp-json/wp/v2/comments?post=${id}`),
+    postComment: () => ('/wp-json/wp/v2/comments'),
+    avatar: (name) => (`https://ui-avatars.com/api/?name=${name}`),
 }
 
 export { paths };

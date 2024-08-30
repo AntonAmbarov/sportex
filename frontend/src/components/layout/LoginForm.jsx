@@ -8,7 +8,7 @@ import { loginFormSchema } from '../../config/yupConfig';
 import { useLoginMutation } from '../../services/api/apiAuth';
 import { toggleStatusAuth } from '../../slices/ui';
 import cn from 'classnames';
-import { setToken } from '../../slices/token';
+import { setProfil } from '../../slices/authorizedUser';
 
 function LoginForm() {
 
@@ -29,10 +29,20 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         try {
-            const { token, user_display_name: userName } = await login(values).unwrap();
-            localStorage.setItem('token', token);
-            localStorage.setItem('userName', userName);
-            dispatch(setToken({ userName, token }));
+            const userData = await login(values).unwrap();
+
+            console.log(userData)
+
+            const profile = {
+                userDisplayName: userData.user_display_name,
+                userEmail: userData.user_email,
+                userId: userData.user_id,
+                userName: userData.user_nicename,
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(profile))
+
+            dispatch(setProfil(profile));
             dispatch(toggleStatusAuth(true));
         }
         catch (error) {

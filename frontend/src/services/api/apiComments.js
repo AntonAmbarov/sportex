@@ -8,12 +8,19 @@ const apiComments = createApi({
     endpoints: (builder) => ({
         postComment: builder.mutation({
             query: (data) => ({
-                url: paths.postComment,
+                url: paths.postComment(),
                 method: 'POST',
                 body: data,
             })
         }),
+        getComments: builder.query({
+            query: (id) => ({
+                url: paths.getComments(id),
+                method: 'GET',
+            })
+        })
     })
 })
 
 export default apiComments;
+export const { usePostCommentMutation, useGetCommentsQuery } = apiComments;

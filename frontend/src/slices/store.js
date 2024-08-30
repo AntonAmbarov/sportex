@@ -4,7 +4,7 @@ import apiPlayers from '../services/api/apiPlayers';
 import apiAuth from '../services/api/apiAuth';
 import apiComments from '../services/api/apiComments';
 import uiReducer from './ui';
-import tokenReducer from './token';
+import authorizedUserReducer from './authorizedUser';
 
 const store = configureStore({
     reducer: {
@@ -13,14 +13,14 @@ const store = configureStore({
         [apiAuth.reducerPath]: apiAuth.reducer,
         [apiComments.reducerPath]: apiComments.reducer,
         ui: uiReducer,
-        token: tokenReducer,
+        authorizedUser: authorizedUserReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             apiTeams.middleware,
             apiPlayers.middleware,
             apiAuth.middleware,
-            apiComments.middleware
+            apiComments.middleware,
         ),
 })
 

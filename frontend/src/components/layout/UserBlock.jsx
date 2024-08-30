@@ -4,17 +4,17 @@ import LoginForm from "./LoginForm";
 import { useDispatch, useSelector } from "react-redux";
 import { openLoginForm, openRegisterForm, toggleStatusAuth } from "../../slices/ui";
 import { Dropdown } from "react-bootstrap";
-import { removeToken } from "../../slices/token";
+import { removeProfil } from "../../slices/authorizedUser";
 
 function UserBlock() {
 
     const dispatch = useDispatch();
     const status = useSelector(state => state.ui.statusAuth);
-    const userName = useSelector(state => state.token.userName);
+    const userName = useSelector(state => state.authorizedUser.userName);
 
     const handleExit = () => {
         dispatch(toggleStatusAuth(false));
-        dispatch(removeToken());
+        dispatch(removeProfil());
         localStorage.removeItem('userName');
         localStorage.removeItem('token');
     }

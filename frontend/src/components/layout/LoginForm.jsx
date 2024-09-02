@@ -42,7 +42,7 @@ function LoginForm() {
 
             localStorage.setItem('currentUser', JSON.stringify(profile))
 
-            dispatch(setProfil(profile));
+            dispatch(setProfil({ profile }));
             dispatch(toggleStatusAuth(true));
         }
         catch (error) {

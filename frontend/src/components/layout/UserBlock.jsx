@@ -12,8 +12,7 @@ function UserBlock() {
     const handleExit = () => {
         dispatch(toggleStatusAuth(false));
         dispatch(removeProfil());
-        localStorage.removeItem('userName');
-        localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
     }
 
     return (

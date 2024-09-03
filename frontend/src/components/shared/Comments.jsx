@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
-import { useGetCommentsQuery } from "../../services/api/apiComments";
+import { useGetCommentsQuery, usePostCommentMutation } from "../../services/api/apiComments";
 import transformCommentsForSection from "../../utils/transformCommentsForSection";
 import { useSelector } from "react-redux";
+import transformCommentsForApi from "../../utils/transformCommentsForApi";
 
 
 function Comments({ id }) {
@@ -15,6 +16,7 @@ function Comments({ id }) {
     console.log('currentUser: ', currentUser) //log
 
     const { data: rawData, error, isLoading } = useGetCommentsQuery(id);
+    const [postComment] = usePostCommentMutation()
 
     useEffect(() => {
         if (rawData) {
@@ -27,14 +29,21 @@ function Comments({ id }) {
     if (error) return (<div>Ошибка</div>);
     if (!rawData || rawData.length === 0) return (<div>Нет данных</div>);
 
-    const handleNewComment = (comment) => {
+    const handleNewComment = async (comment) => {
         console.log('new comment: ', comment) //log
-
         setComments(prevState => [...prevState, comment]);
+        const data = transformCommentsForApi(comment, currentUser, id)
+        try {
+        const resp = await postComment(data).unwrap();
+        console.log('post successful:', resp.data)
+        }
+        catch(error) {
+            console.error(error)
+        }
     }
 
-    const handleReplyComment = (comment) => {
-        console.log(comment) //log
+    const handleReplyComment = async (comment) => {
+        console.log('reply comment', comment) //log
         setComments(prevState => {
             return prevState.map(prevComment => {
                 if (prevComment.userId === comment.parentOfRepliedCommentId) {
@@ -46,10 +55,14 @@ function Comments({ id }) {
                 return prevComment;
             })
         })
-    }
-
-    const handlePostComment = (comment) => {
-        console.log(comment) //log
+        const data = transformCommentsForApi(comment, currentUser, id)
+        try {
+            const resp = await postComment(data).unwrap();
+            console.log('post successful:', resp.data)
+            }
+            catch(error) {
+                console.error(error)
+            }
     }
 
     return (
@@ -67,7 +80,6 @@ function Comments({ id }) {
             commentData={comments}
             onSubmitAction={handleNewComment}
             onReplyAction={handleReplyComment}
-            currentData={handlePostComment}
         >
 
         </CommentSection>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { paths } from "../config/apiConfig";
+import { paths } from "../config/apiConfig";
 
 const initialState = {
     userDisplayName: null,
@@ -19,7 +19,7 @@ const authorizedUserSlice = createSlice({
             return {
                 ...state,
                 ...profile,
-                // avatar: paths.avatar(profile.userName)
+                avatar: paths.avatar(profile.userName)
             }
         },
         removeProfil: (state) => {

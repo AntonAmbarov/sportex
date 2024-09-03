@@ -1,5 +1,5 @@
 import React from "react";
-import { paths } from "../../config/apiConfig";
+// import { paths } from "../../config/apiConfig";
 
 function Avatar() {
     return (

@@ -5,6 +5,7 @@ import { useGetCommentsQuery, usePostCommentMutation } from "../../services/api/
 import transformCommentsForSection from "../../utils/transformCommentsForSection";
 import { useSelector } from "react-redux";
 import transformCommentsForApi from "../../utils/transformCommentsForApi";
+// import parse from 'html-react-parser';
 
 
 function Comments({ id }) {
@@ -12,8 +13,6 @@ function Comments({ id }) {
     const [comments, setComments] = useState();
 
     const currentUser = useSelector(state => state.authorizedUser);
-
-    console.log('currentUser: ', currentUser) //log
 
     const { data: rawData, error, isLoading } = useGetCommentsQuery(id);
     const [postComment] = usePostCommentMutation()
@@ -30,12 +29,10 @@ function Comments({ id }) {
     if (!rawData || rawData.length === 0) return (<div>Нет данных</div>);
 
     const handleNewComment = async (comment) => {
-        console.log('new comment: ', comment) //log
         setComments(prevState => [...prevState, comment]);
         const data = transformCommentsForApi(comment, currentUser, id)
         try {
-        const resp = await postComment(data).unwrap();
-        console.log('post successful:', resp.data)
+            await postComment(data).unwrap();
         }
         catch(error) {
             console.error(error)
@@ -43,7 +40,6 @@ function Comments({ id }) {
     }
 
     const handleReplyComment = async (comment) => {
-        console.log('reply comment', comment) //log
         setComments(prevState => {
             return prevState.map(prevComment => {
                 if (prevComment.userId === comment.parentOfRepliedCommentId) {
@@ -57,12 +53,11 @@ function Comments({ id }) {
         })
         const data = transformCommentsForApi(comment, currentUser, id)
         try {
-            const resp = await postComment(data).unwrap();
-            console.log('post successful:', resp.data)
-            }
-            catch(error) {
-                console.error(error)
-            }
+            await postComment(data).unwrap();
+        }
+        catch(error) {
+            console.error(error)
+        }
     }
 
     return (

@@ -2,8 +2,12 @@ import React from "react";
 import { Container } from 'react-bootstrap'
 import MainMenu from "../shared/MainMenu";
 import UserBlock from './UserBlock';
+import AuthButtons from "../shared/AuthButtons";
+import { useSelector } from "react-redux";
 
 function Header() {
+
+    const isAuthorized = useSelector(state => state.authorizedUser.userName !== null);
 
     return (
         <header className="border-bottom mb-4">
@@ -29,7 +33,8 @@ function Header() {
                         </svg>
                     </a>
                     <MainMenu variant="header" />
-                    <UserBlock />
+                    {isAuthorized ? <UserBlock /> : <AuthButtons />}
+
                 </div>
             </Container>
         </header>

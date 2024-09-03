@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import Popap from '../shared/Popap';
+import Popap from './Popap';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeLoginForm } from '../../slices/ui';

@@ -1,11 +1,14 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import StarsRaintg from "../shared/StarsRating";
+import { paths } from "../../config/apiConfig";
 
 function ProfilCardTeam({ data, logo }) {
 
     const title = data.title.rendered;
-    const logoMd = logo.media_details.sizes.medium.source_url;
+    const logoMd = logo?.media_details?.sizes?.medium?.source_url ||
+        logo?.media_details?.sizes?.full?.source_url ||
+        paths.getDefaultImg();
     const rating = data.acf.overall_rating;
     const league = data.acf.league;
 

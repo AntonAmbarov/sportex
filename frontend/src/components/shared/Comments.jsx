@@ -12,6 +12,8 @@ function Comments({ id }) {
 
     const currentUser = useSelector(state => state.authorizedUser);
 
+    console.log('currentUser: ', currentUser) //log
+
     const { data: rawData, error, isLoading } = useGetCommentsQuery(id);
 
     useEffect(() => {
@@ -26,12 +28,13 @@ function Comments({ id }) {
     if (!rawData || rawData.length === 0) return (<div>Нет данных</div>);
 
     const handleNewComment = (comment) => {
-        console.log(comment)
+        console.log('new comment: ', comment) //log
+
         setComments(prevState => [...prevState, comment]);
     }
 
     const handleReplyComment = (comment) => {
-        console.log(comment)
+        console.log(comment) //log
         setComments(prevState => {
             return prevState.map(prevComment => {
                 if (prevComment.userId === comment.parentOfRepliedCommentId) {
@@ -46,13 +49,13 @@ function Comments({ id }) {
     }
 
     const handlePostComment = (comment) => {
-        console.log(comment)
+        console.log(comment) //log
     }
 
     return (
         <CommentSection
             currentUser={{
-                currentUserId: currentUser.userName,
+                currentUserId: currentUser.userId,
                 currentUserImg: currentUser.avatar,
                 currentUserProfile: null,
                 currentUserFullName: currentUser.userName,

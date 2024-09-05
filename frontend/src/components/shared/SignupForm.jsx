@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import Popap from '../shared/Popap';
+import Popap from './Popap';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeRegisterForm } from '../../slices/ui';
@@ -10,7 +10,7 @@ import cn from 'classnames';
 
 function SignupForm() {
 
-    const show = useSelector(state => state.ui.registerForm.show);
+    const isShow = useSelector(state => state.ui.registerForm.isShow);
     const dispatch = useDispatch();
     const [register] = useRegisterMutation();
     const [login] = useLoginMutation();
@@ -40,7 +40,7 @@ function SignupForm() {
     }
 
     return (
-        <Popap title={'Регистрация'} onClose={() => dispatch(closeRegisterForm())} show={show}>
+        <Popap title={'Регистрация'} onClose={() => dispatch(closeRegisterForm())} show={isShow}>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}

@@ -2,10 +2,11 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
-import ProfilCard from "../components/team/ProfilCard";
-import ListSkills from "../components/team/ListSkills";
-import RadarDiagram from "../components/shared/RadarDiagram";
-import Comments from "../components/shared/Comments";
+import ProfilCard from "../components/units/ProfilCard";
+import ListSkills from "../components/units/ListSkills";
+import RadarDiagram from "../components/units/RadarDiagram";
+import Comments from "../components/units/Comments";
+import ReatingOffcanvas from "../components/units/ReatingOffcanvas";
 
 function Team() {
 
@@ -35,6 +36,7 @@ function Team() {
                 <Col md={9}>
                     <ListSkills data={team.acf} />
                     <Comments id={team.id} />
+                    <ReatingOffcanvas data={team.acf} id={team.id} />
                 </Col>
             </Row>
         </Container>

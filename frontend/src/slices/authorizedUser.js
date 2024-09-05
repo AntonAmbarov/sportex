@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const authorizedUserSlice = createSlice({
-    name: 'token',
+    name: 'authorizedUser',
     initialState: initialState,
     reducers: {
         setProfil: (state, actions) => {

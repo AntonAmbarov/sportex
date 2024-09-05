@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import StarsRaintg from "../shared/StarsRating";
+import StarsRaintg from "./StarsRating";
 import { paths } from "../../config/apiConfig";
 
 function ProfilCardTeam({ data, logo }) {

@@ -12,7 +12,7 @@ import { setProfil } from '../../slices/authorizedUser';
 
 function LoginForm() {
 
-    const show = useSelector(state => state.ui.loginForm.show);
+    const isShow = useSelector(state => state.ui.loginForm.isShow);
     const dispatch = useDispatch();
     const [login] = useLoginMutation();
 
@@ -30,8 +30,6 @@ function LoginForm() {
     const handleSubmit = async (values) => {
         try {
             const userData = await login(values).unwrap();
-
-            console.log(userData)
 
             const profile = {
                 userDisplayName: userData.user_display_name,
@@ -52,7 +50,7 @@ function LoginForm() {
     }
 
     return (
-        <Popap title={'Авторизация'} onClose={() => dispatch(closeLoginForm())} show={show}>
+        <Popap title={'Авторизация'} onClose={() => dispatch(closeLoginForm())} show={isShow}>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}

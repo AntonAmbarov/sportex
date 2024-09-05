@@ -5,6 +5,7 @@ import { useGetCommentsQuery, usePostCommentMutation } from "../../services/api/
 import transformCommentsForSection from "../../utils/transformCommentsForSection";
 import { useSelector } from "react-redux";
 import transformCommentsForApi from "../../utils/transformCommentsForApi";
+// import AuthButtons from '../shared/AuthButtons';
 // import parse from 'html-react-parser';
 
 
@@ -18,6 +19,7 @@ function Comments({ id }) {
     const [postComment] = usePostCommentMutation()
 
     useEffect(() => {
+        console.log('currentUser: ', currentUser)
         if (rawData) {
             const data = transformCommentsForSection(rawData);
             setComments(data);
@@ -34,7 +36,7 @@ function Comments({ id }) {
         try {
             await postComment(data).unwrap();
         }
-        catch(error) {
+        catch (error) {
             console.error(error)
         }
     }
@@ -55,29 +57,43 @@ function Comments({ id }) {
         try {
             await postComment(data).unwrap();
         }
-        catch(error) {
+        catch (error) {
             console.error(error)
         }
     }
 
+    const customNoComment = () => (
+        <div className='no-com'>Sheessh! Zero Comments posted here!</div>
+    )
+
     return (
         <CommentSection
-            currentUser={{
+            key={currentUser.userId || 'guest'}
+            currentUser={currentUser.userId && {
                 currentUserId: currentUser.userId,
                 currentUserImg: currentUser.avatar,
                 currentUserProfile: null,
                 currentUserFullName: currentUser.userName,
             }}
             logIn={{
-                loginLink: null,
-                signupLink: null,
+                loginLink: '#',
+                signupLink: '#',
             }}
             commentData={comments}
             onSubmitAction={handleNewComment}
             onReplyAction={handleReplyComment}
+            submitBtnStyle={{
+                backgroundColor: 'var(--bs-primary)',
+                color: 'var(--bs-white)',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                border: 'none',
+                cursor: 'pointer',
+            }}
+            customNoComment={() => customNoComment()}
         >
 
-        </CommentSection>
+        </CommentSection >
     )
 }
 

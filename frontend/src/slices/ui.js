@@ -2,12 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     loginForm: {
-        show: false,
+        isShow: false,
     },
     registerForm: {
-        show: false,
+        isShow: false,
     },
     statusAuth: false,
+    reatingOffcanvas: {
+        isShow: false,
+    },
 };
 
 const uiSlice = createSlice({
@@ -15,23 +18,35 @@ const uiSlice = createSlice({
     initialState,
     reducers: {
         openLoginForm: (state) => {
-            state.loginForm.show = true;
+            state.loginForm.isShow = true;
         },
         openRegisterForm: (state) => {
-            state.registerForm.show = true;
+            state.registerForm.isShow = true;
         },
         closeLoginForm: (state) => {
-            state.loginForm.show = false;
+            state.loginForm.isShow = false;
         },
         closeRegisterForm: (state) => {
-            state.registerForm.show = false;
+            state.registerForm.isShow = false;
         },
         toggleStatusAuth: (state, actions) => {
             const flag = actions.payload;
             state.statusAuth = flag;
-        }
+        },
+        openReatingOffcanvas: (state) => {
+            state.reatingOffcanvas.isShow = true;
+        },
+        closeReatingOffcanvas: (state) => {
+            state.reatingOffcanvas.isShow = false;
+        },
     },
 })
 
 export default uiSlice.reducer;
-export const { openLoginForm, openRegisterForm, closeLoginForm, closeRegisterForm, toggleStatusAuth } = uiSlice.actions;
+export const { openLoginForm,
+    openRegisterForm,
+    closeLoginForm,
+    closeRegisterForm,
+    toggleStatusAuth,
+    openReatingOffcanvas,
+    closeReatingOffcanvas } = uiSlice.actions;

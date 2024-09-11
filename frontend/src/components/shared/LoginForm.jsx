@@ -31,17 +31,22 @@ function LoginForm() {
         try {
             const userData = await login(values).unwrap();
 
-            const profile = {
-                userDisplayName: userData.user_display_name,
-                userEmail: userData.user_email,
-                userId: userData.user_id,
-                userName: userData.user_nicename,
+            if (userData) {
+                const profile = {
+                    userDisplayName: userData.data.displayName,
+                    userEmail: userData.data.email,
+                    userId: userData.data.id,
+                    userName: userData.data.nicename,
+                };
+
+                localStorage.setItem('currentUser', JSON.stringify(profile));
+                console.log('token handleSubmit', userData.data.token)
+                localStorage.setItem('token', userData.data.token);
+                console.log(localStorage.getItem('token'))
+
+                dispatch(setProfil({ profile: profile }));
+                dispatch(toggleStatusAuth(true));
             }
-
-            localStorage.setItem('currentUser', JSON.stringify(profile))
-
-            dispatch(setProfil({ profile }));
-            dispatch(toggleStatusAuth(true));
         }
         catch (error) {
             alert('Авторизация не удалась');

@@ -15,18 +15,15 @@ const authorizedUserSlice = createSlice({
     reducers: {
         setProfil: (state, actions) => {
             const { profile } = actions.payload;
-
-            return {
-                ...state,
-                ...profile,
-                avatar: paths.avatar(profile.userName)
-            }
+            console.log('profile', profile)
+            state.userDisplayName = profile.userDisplayName;
+            state.userEmail = profile.userEmail;
+            state.userId = profile.userId;
+            state.userName = profile.userName;
+            state.avatar = paths.avatar(profile.userName);
         },
         removeProfil: (state) => {
-            return {
-                ...state,
-                ...initialState
-            }
+            Object.assign(state, initialState);
         }
     }
 });

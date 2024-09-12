@@ -15,7 +15,7 @@ const authorizedUserSlice = createSlice({
     reducers: {
         setProfil: (state, actions) => {
             const { profile } = actions.payload;
-            console.log('profile', profile)
+            // console.log('profile', profile) //log
             state.userDisplayName = profile.userDisplayName;
             state.userEmail = profile.userEmail;
             state.userId = profile.userId;

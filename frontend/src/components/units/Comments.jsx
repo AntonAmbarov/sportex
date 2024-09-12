@@ -19,7 +19,7 @@ function Comments({ id }) {
     const [postComment] = usePostCommentMutation()
 
     useEffect(() => {
-        console.log('currentUser: ', currentUser)
+        // console.log('currentUser: ', currentUser) //log
         if (rawData) {
             const data = transformCommentsForSection(rawData);
             setComments(data);
@@ -28,7 +28,7 @@ function Comments({ id }) {
 
     if (isLoading) return (<div>Загрузка</div>);
     if (error) return (<div>Ошибка</div>);
-    if (!rawData || rawData.length === 0) return (<div>Нет данных</div>);
+    if (!rawData) return (<div>Нет данных</div>);
 
     const handleNewComment = async (comment) => {
         setComments(prevState => [...prevState, comment]);

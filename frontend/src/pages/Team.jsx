@@ -36,7 +36,7 @@ function Team() {
                 <Col md={9}>
                     <ListSkills data={team.acf} />
                     <Comments id={team.id} />
-                    <ReatingOffcanvas type={'team'} id={team.id} />
+                    <ReatingOffcanvas type={'team'} teamId={team.id} />
                 </Col>
             </Row>
         </Container>

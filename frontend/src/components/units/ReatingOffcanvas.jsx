@@ -1,16 +1,21 @@
 import React from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { closeReatingOffcanvas } from "../../slices/ui";
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap'
 import i18n from "../../config/i18n";
 import grades from "../../config/grades";
+import transformScoresForApi from "../../utils/transformScoresForApi";
+import { closeReatingOffcanvas } from "../../slices/ui";
+import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from "../../services/api/apiScores";
 
-function ReatingOffcanvas({ type, id }) {
+function ReatingOffcanvas({ type, teamId = null, participantId = null, role = null }) {
 
-    const { isShow } = useSelector(state => state.ui.reatingOffcanvas)
+    const { isShow } = useSelector(state => state.ui.reatingOffcanvas);
+    const { userId } = useSelector(state => state.authorizedUser);
     const dispatch = useDispatch();
+    const [postScoresPlayer] = usePostScoresPlayerMutation();
+    const [postScoresTeam] = usePostScoresTeamMutation();
     const { features } = i18n[type];
 
     const initialValues = features.reduce((acc, { key }) => {
@@ -20,8 +25,9 @@ function ReatingOffcanvas({ type, id }) {
 
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit: (values) => {
-            console.log(values)
+        onSubmit: async (values) => {
+            const data = transformScoresForApi({ userId: userId, participantId: participantId, teamId: teamId, values: values, role: role });
+            await type === 'team' ? postScoresTeam(data).unwrap() : postScoresPlayer(data).unwrap();
         }
     })
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Row, Col, Badge } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap'
@@ -8,17 +8,18 @@ import grades from "../../config/grades";
 import transformScoresForApi from "../../utils/transformScoresForApi";
 import { closeReatingOffcanvas } from "../../slices/ui";
 import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from "../../services/api/apiScores";
+import skillsConfig from "../../config/skillsConfig";
 
-function ReatingOffcanvas({ type, teamId = null, participantId = null, role = null }) {
+function ReatingForm({ type, sport, teamId = null, participantId = null, role = null }) {
 
     const { isShow } = useSelector(state => state.ui.reatingOffcanvas);
     const { userId } = useSelector(state => state.authorizedUser);
     const dispatch = useDispatch();
     const [postScoresPlayer] = usePostScoresPlayerMutation();
     const [postScoresTeam] = usePostScoresTeamMutation();
-    const { features } = i18n[type];
+    const skills = skillsConfig[type][sport];
 
-    const initialValues = features.reduce((acc, { key }) => {
+    const initialValues = skills.reduce((acc, key) => {
         acc[key] = 0;
         return acc;
     }, {})
@@ -38,9 +39,16 @@ function ReatingOffcanvas({ type, teamId = null, participantId = null, role = nu
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Form onSubmit={formik.handleSubmit}>
-                    {features.map(({ key, name }) => (
+                    {skills.map(key => (
                         <Form.Group key={key}>
-                            <Form.Label htmlFor={key}>{name}</Form.Label>
+                            <Row className="justify-content-between">
+                                <Col xs='auto'>
+                                    <Form.Label htmlFor={key}>{i18n[type].features[key]}</Form.Label>
+                                </Col>
+                                <Col xs='auto'>
+                                    <Badge bg='secondary'>{formik.values[key]}</Badge>
+                                </Col>
+                            </Row>
                             <Form.Range
                                 id={key}
                                 min={grades.min}
@@ -57,4 +65,4 @@ function ReatingOffcanvas({ type, teamId = null, participantId = null, role = nu
     )
 }
 
-export default ReatingOffcanvas;
+export default ReatingForm;

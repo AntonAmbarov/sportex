@@ -15,8 +15,8 @@ const paths = {
     refreshToken: () => (`${jwtBasePath}/token/refresh`),
     getComments: (id) => (`${wpBasePath}/comments?post=${id}`),
     postComment: () => (`${wpBasePath}/comments`),
-    scoresTeam: () => (`${customBasePath}/team-ratings/`),
-    scoresPlayer: () => (`${customBasePath}/participant-ratings/`),
+    postScoresTeam: () => (`${customBasePath}/team-ratings/`),
+    postScoresPlayer: () => (`${customBasePath}/participant-ratings/`),
     getScoresAvg: (type, postId, sport) => (`${customBasePath}/average-ratings/?type=${type}&post_id=${postId}&sport=${sport}`),
     avatar: (name) => (`https://ui-avatars.com/api/?name=${name}&background=random&rounded=true`),
 };

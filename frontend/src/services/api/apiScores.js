@@ -6,30 +6,22 @@ const apiScores = createApi({
     reducerPath: 'scores',
     baseQuery: baseQueryRefresh,
     endpoints: (builder) => ({
-        getScoresPlayer: builder.query({
-            query: (data) => ({
-                url: paths.scoresPlayer(),
+        getScoresAvg: builder.query({
+            query: ({ type, postId, sport }) => ({
+                url: paths.getScoresAvg(type, postId, sport),
                 method: 'GET',
-                body: data,
-            })
-        }),
-        getScoresTeam: builder.query({
-            query: (data) => ({
-                url: paths.scoresTeam(),
-                method: 'GET',
-                body: data,
             })
         }),
         postScoresPlayer: builder.mutation({
             query: (data) => ({
-                url: paths.scoresPlayer(),
+                url: paths.postScoresPlayer(),
                 method: 'POST',
                 body: data,
             })
         }),
         postScoresTeam: builder.mutation({
             query: (data) => ({
-                url: paths.scoresTeam(),
+                url: paths.postScoresTeam(),
                 method: 'POST',
                 body: data,
             })
@@ -38,4 +30,4 @@ const apiScores = createApi({
 })
 
 export default apiScores;
-export const { useGetScoresPlayerQuery, useGetScoresTeamQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;
+export const { useGetScoresAvgQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;

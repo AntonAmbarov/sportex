@@ -3,14 +3,14 @@ import { Card } from "react-bootstrap";
 import StarsRaintg from "./StarsRating";
 import { paths } from "../../config/apiConfig";
 
-function ProfilCardTeam({ data, logo }) {
+function ProfilCardTeam({ data, logo, overallRating }) {
 
     const title = data.title.rendered;
     const logoMd = logo?.media_details?.sizes?.medium?.source_url ||
         logo?.media_details?.sizes?.full?.source_url ||
         paths.getDefaultImg();
-    const rating = data.acf.overall_rating;
-    const league = data.acf.league;
+    const rating = overallRating;
+    // const league = data.acf.league;
 
     return (
         <Card className="mb-3">
@@ -19,7 +19,7 @@ function ProfilCardTeam({ data, logo }) {
             </div>
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
-                <Card.Subtitle>{league}</Card.Subtitle>
+                {/* <Card.Subtitle>{league}</Card.Subtitle> */}
                 <StarsRaintg score={rating} />
             </Card.Body>
         </Card>

@@ -7,7 +7,8 @@ import ListSkills from "../components/units/ListSkills";
 // import RadarDiagram from "../components/units/RadarDiagram";
 import Comments from "../components/units/Comments";
 import ReatingForm from "../components/units/ReatingForm";
-import { useGetScoresAvgQuery } from "../services/api/apiScores";
+import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../services/api/apiScores";
+import RecentScores from "../components/units/RecentScores";
 
 function Team() {
 
@@ -16,9 +17,11 @@ function Team() {
 
     const { data: teamData, error: teamError, isLoading: teamIsLoading } = useGetTeamQuery(slug);
     const idImg = teamData && teamData.length > 0 ? teamData[0].acf.logo : null;
-    const { data: imgData, error: imgError, isLoading: imgIsLoading } = useGetImgQuery(idImg);
+    const postId = teamData && teamData.length > 0 ? teamData[0].id : null;
 
-    const { data: scoresData, error: scoresError, isLoading: scoresIsLoading } = useGetScoresAvgQuery({ type: 'team', postId: 48, sport: sport });
+    const { data: imgData, error: imgError, isLoading: imgIsLoading } = useGetImgQuery(idImg);
+    const { data: scoresData, error: scoresError, isLoading: scoresIsLoading } = useGetScoresAvgQuery({ type: 'team', postId: postId, sport: sport });
+    const { data: scoresListData, error: scoresListError, isLoading: scoresListIsLoading } = useGetAllScoresQuery({ type: 'team', postId: postId, sport: sport })
 
     if (teamIsLoading) return (<div>Загрузка</div>);
     if (teamError) return (<div>Ошибка</div>);
@@ -32,13 +35,13 @@ function Team() {
     if (scoresError) return (<div>Ошибка</div>);
     if (!scoresData || scoresData.length === 0) return (<div>Нет данных</div>);
 
+    if (scoresListIsLoading) return (<div>Загрузка</div>);
+    if (scoresListError) return (<div>Ошибка</div>);
+    if (!scoresListData || scoresListData.length === 0) return (<div>Нет данных</div>);
+
     const [team] = teamData;
 
     const { avg_rating_value: overallRating } = scoresData.find(item => item.avg_rating_type === 'overall_rating') || 0;
-    console.log(overallRating)
-    // console.log(scoresData) //log
-    // console.log(team) //log
-    // console.log(imgData) //log
 
     return (
         <Container>
@@ -49,6 +52,7 @@ function Team() {
                 </Col>
                 <Col md={9}>
                     <ListSkills data={scoresData} />
+                    <RecentScores data={scoresListData} />
                     <Comments id={team.id} />
                     <ReatingForm type={'team'} sport={sport} teamId={team.id} />
                 </Col>

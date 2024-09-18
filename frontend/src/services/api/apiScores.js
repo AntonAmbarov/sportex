@@ -12,6 +12,12 @@ const apiScores = createApi({
                 method: 'GET',
             })
         }),
+        getAllScores: builder.query({
+            query: ({ type, postId, sport }) => ({
+                url: paths.getAllScores(type, postId, sport),
+                method: 'GET',
+            })
+        }),
         postScoresPlayer: builder.mutation({
             query: (data) => ({
                 url: paths.postScoresPlayer(),
@@ -30,4 +36,4 @@ const apiScores = createApi({
 })
 
 export default apiScores;
-export const { useGetScoresAvgQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;
+export const { useGetScoresAvgQuery, useGetAllScoresQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;

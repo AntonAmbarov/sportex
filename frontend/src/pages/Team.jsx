@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
 import ProfilCard from "../components/units/ProfilCard";
 import ListSkills from "../components/units/ListSkills";
-// import RadarDiagram from "../components/units/RadarDiagram";
+import RadarDiagram from "../components/units/RadarDiagram";
 import Comments from "../components/units/Comments";
 import ReatingForm from "../components/units/ReatingForm";
 import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../services/api/apiScores";
@@ -48,7 +48,7 @@ function Team() {
             <Row>
                 <Col md={3}>
                     <ProfilCard data={team} logo={imgData} overallRating={overallRating} />
-                    {/* <RadarDiagram data={team} type={'team'} /> */}
+                    <RadarDiagram data={scoresData} type={'team'} />
                 </Col>
                 <Col md={9}>
                     <ListSkills data={scoresData} />

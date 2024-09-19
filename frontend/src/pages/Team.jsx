@@ -9,50 +9,44 @@ import Comments from "../components/units/Comments";
 import ReatingForm from "../components/units/ReatingForm";
 import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../services/api/apiScores";
 import RecentScores from "../components/units/RecentScores";
+import useQueryStatus from "../hooks/useQueryStatus";
 
 function Team() {
 
     const { slug } = useParams()
     const sport = 'hockey'
 
-    const { data: teamData, error: teamError, isLoading: teamIsLoading } = useGetTeamQuery(slug);
-    const idImg = teamData && teamData.length > 0 ? teamData[0].acf.logo : null;
-    const postId = teamData && teamData.length > 0 ? teamData[0].id : null;
+    const teamQuery = useGetTeamQuery(slug);
+    const idImg = teamQuery.data && teamQuery.data.length > 0 ? teamQuery.data[0].acf.logo : null;
+    const postId = teamQuery.data && teamQuery.data.length > 0 ? teamQuery.data[0].id : null;
+    const imgQuery = useGetImgQuery(idImg);
+    const scoresAvgQuery = useGetScoresAvgQuery({ type: 'team', postId: postId, sport: sport });
+    const allScoresQuery = useGetAllScoresQuery({ type: 'team', postId: postId, sport: sport });
 
-    const { data: imgData, error: imgError, isLoading: imgIsLoading } = useGetImgQuery(idImg);
-    const { data: scoresData, error: scoresError, isLoading: scoresIsLoading } = useGetScoresAvgQuery({ type: 'team', postId: postId, sport: sport });
-    const { data: scoresListData, error: scoresListError, isLoading: scoresListIsLoading } = useGetAllScoresQuery({ type: 'team', postId: postId, sport: sport })
+    const teamStatus = useQueryStatus(teamQuery);
+    const imgStatus = useQueryStatus(imgQuery);
+    const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
+    const allScoresStatus = useQueryStatus(allScoresQuery);
 
-    if (teamIsLoading) return (<div>Загрузка</div>);
-    if (teamError) return (<div>Ошибка</div>);
-    if (!teamData || teamData.length === 0) return (<div>Нет данных</div>);
+    if (teamStatus) return teamStatus;
+    if (imgStatus) return imgStatus;
+    if (scoresAvgStatus) return scoresAvgStatus;
+    if (allScoresStatus) return allScoresStatus;
 
-    if (imgIsLoading) return (<div>Загрузка</div>);
-    if (imgError) return (<div>Ошибка</div>);
-    if (!imgData || imgData.length === 0) return (<div>Нет данных</div>);
+    const [team] = teamQuery.data;
 
-    if (scoresIsLoading) return (<div>Загрузка</div>);
-    if (scoresError) return (<div>Ошибка</div>);
-    if (!scoresData || scoresData.length === 0) return (<div>Нет данных</div>);
-
-    if (scoresListIsLoading) return (<div>Загрузка</div>);
-    if (scoresListError) return (<div>Ошибка</div>);
-    if (!scoresListData || scoresListData.length === 0) return (<div>Нет данных</div>);
-
-    const [team] = teamData;
-
-    const { avg_rating_value: overallRating } = scoresData.find(item => item.avg_rating_type === 'overall_rating') || 0;
+    const { avg_rating_value: overallRating } = scoresAvgQuery.data.find(item => item.avg_rating_type === 'overall_rating') || 0;
 
     return (
         <Container>
             <Row>
                 <Col md={3}>
-                    <ProfilCard data={team} logo={imgData} overallRating={overallRating} />
-                    <RadarDiagram data={scoresData} type={'team'} />
+                    <ProfilCard data={team} logo={imgQuery} overallRating={overallRating} />
+                    <RadarDiagram data={scoresAvgQuery.data} type={'team'} />
                 </Col>
                 <Col md={9}>
-                    <ListSkills data={scoresData} />
-                    <RecentScores data={scoresListData} />
+                    <ListSkills data={scoresAvgQuery.data} />
+                    <RecentScores data={allScoresQuery.data} />
                     <Comments id={team.id} />
                     <ReatingForm type={'team'} sport={sport} teamId={team.id} />
                 </Col>

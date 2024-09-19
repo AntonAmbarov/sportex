@@ -2,25 +2,19 @@ import React from "react";
 import SharedCard from "../shared/SharedCard";
 import formatDate from "../../utils/formatDate";
 import { Badge, Col, ListGroup } from "react-bootstrap";
-// import i18n from "../../config/i18n";
 
 const convertData = (data) => {
-    const result = data.reduce((acc, item) => {
+    const result = data.reduce((acc, {
+        rating_date: ratingDate,
+        user_name: userName,
+        rating_value: ratingValue
+    }) => {
+        const date = formatDate(ratingDate);
 
-        const date = formatDate(item.rating_date);
-        const userName = item.user_name;
-        // const ratingType = i18n[item.rating_type];
-        const ratingValue = item.rating_value;
-
-        if (acc[date]) {
-            acc[date].scoresList.push(ratingValue);
-            acc[date].userList.add(userName);
-        } else {
-            acc[date] = {
-                userList: new Set().add(userName),
-                scoresList: [ratingValue],
-            }
-        }
+        const entry = acc[date] || { userList: new Set(), scoresList: [] };
+        entry.userList.add(userName);
+        entry.scoresList.push(Number(ratingValue));
+        acc[date] = entry;
 
         return acc;
     }, {})
@@ -39,12 +33,13 @@ function RecentScores({ data }) {
     const convertedData = convertData(data);
     const sortedData = sortData(convertedData);
 
+    const getAvg = (arr) => Math.round(arr.reduce((acc, num) => acc += num, 0) / arr.length);
+
     const renderList = (data) => {
-        return data.map(([date, value]) => {
-            const count = value.userList.size;
-            const lastName = Array.from(value.userList)[0];
-            const getAvg = arr => Math.round(arr.reduce((acc, num) => acc += Number(num), 0) / arr.length);
-            const avg = getAvg(value.scoresList);
+        return data.map(([date, { userList, scoresList }]) => {
+            const count = userList.size;
+            const [lastName] = userList;
+            const avg = getAvg(scoresList);
 
             return (
                 <ListGroup.Item key={date} className="d-flex justify-content-between align-items-center">

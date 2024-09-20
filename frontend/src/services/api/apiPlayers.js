@@ -6,8 +6,8 @@ const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getPlayers: builder.query({
-            query: () => ({
-                url: paths.getPlayers(),
+            query: (teamId) => ({
+                url: paths.getPlayers(teamId),
                 method: 'GET',
             })
         }),

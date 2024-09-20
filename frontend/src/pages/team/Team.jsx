@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useGetTeamQuery, useGetImgQuery } from "../services/api/apiTeams";
-import ProfilCard from "../components/units/ProfilCard";
-import ListSkills from "../components/units/ListSkills";
-import RadarDiagram from "../components/units/RadarDiagram";
-import Comments from "../components/units/Comments";
-import ReatingForm from "../components/units/ReatingForm";
-import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../services/api/apiScores";
-import RecentScores from "../components/units/RecentScores";
-import useQueryStatus from "../hooks/useQueryStatus";
+import { useGetTeamQuery, useGetImgQuery } from "../../services/api/apiTeams";
+import ProfilCard from "../../components/units/ProfilCard";
+import ListSkills from "../../components/units/ListSkills";
+import RadarDiagram from "../../components/units/RadarDiagram";
+import Comments from "../../components/units/Comments";
+import ReatingForm from "../../components/units/ReatingForm";
+import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../../services/api/apiScores";
+import RecentScores from "../../components/units/RecentScores";
+import useQueryStatus from "../../hooks/useQueryStatus";
 
 function Team() {
 

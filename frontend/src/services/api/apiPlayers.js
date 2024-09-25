@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import baseUrl, { paths } from '../../config/apiConfig';
 
 const api = createApi({
-    reducerPath: 'players',
+    reducerPath: 'apiPlayers',
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getPlayers: builder.query({
-            query: (teamId) => ({
-                url: paths.getPlayers(teamId),
+            query: () => ({
+                url: paths.getPlayers(),
                 method: 'GET',
             })
         }),

@@ -4,6 +4,10 @@ import apiPlayers from '../services/api/apiPlayers';
 import apiAuth from '../services/api/apiAuth';
 import apiComments from '../services/api/apiComments';
 import apiScores from '../services/api/apiScores';
+import apiImgs from '../services/api/apiImgs';
+import apiLeagues from '../services/api/apiLeagues';
+import apiRoles from '../services/api/apiRoles';
+import apiSports from '../services/api/apiSports';
 import uiReducer from './ui';
 import authorizedUserReducer from './authorizedUser';
 import teamsReducer from './teams';
@@ -20,6 +24,10 @@ const store = configureStore({
         [apiAuth.reducerPath]: apiAuth.reducer,
         [apiComments.reducerPath]: apiComments.reducer,
         [apiScores.reducerPath]: apiScores.reducer,
+        [apiImgs.reducerPath]: apiImgs.reducer,
+        [apiLeagues.reducerPath]: apiLeagues.reducer,
+        [apiRoles.reducerPath]: apiRoles.reducer,
+        [apiSports.reducerPath]: apiSports.reducer,
         ui: uiReducer,
         teams: teamsReducer,
         players: playersReducer,
@@ -36,6 +44,10 @@ const store = configureStore({
             apiAuth.middleware,
             apiComments.middleware,
             apiScores.middleware,
+            apiImgs.middleware,
+            apiLeagues.middleware,
+            apiRoles.middleware,
+            apiSports.middleware,
         ),
 })
 

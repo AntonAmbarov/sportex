@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import baseUrl, { paths } from '../../config/apiConfig';
 
 const api = createApi({
-    reducerPath: 'teams',
+    reducerPath: 'apiTeams',
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getTeams: builder.query({

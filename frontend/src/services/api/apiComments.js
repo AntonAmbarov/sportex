@@ -3,7 +3,7 @@ import { paths } from "../../config/apiConfig";
 import baseQueryRefresh from './refreshToken';
 
 const apiComments = createApi({
-    reducerPath: 'comments',
+    reducerPath: 'apiComments',
     baseQuery: baseQueryRefresh,
     endpoints: (builder) => ({
         postComment: builder.mutation({

@@ -3,7 +3,7 @@ import { paths } from "../../config/apiConfig";
 import baseQueryRefresh from './refreshToken';
 
 const apiScores = createApi({
-    reducerPath: 'scores',
+    reducerPath: 'apiScores',
     baseQuery: baseQueryRefresh,
     endpoints: (builder) => ({
         getScoresAvg: builder.query({

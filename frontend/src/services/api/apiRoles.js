@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseUrl, { paths } from "../../config/apiConfig";
+import baseUrl, { paths } from '../../config/apiConfig';
 
 const api = createApi({
-    reducerPath: 'apiImgs',
+    reducerPath: 'apiRoles',
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
-        getImgs: builder.query({
+        getRoles: builder.query({
             query: () => ({
-                url: paths.getImgs(),
+                url: paths.getRoles(),
                 method: 'GET',
             })
         })
@@ -15,4 +15,4 @@ const api = createApi({
 })
 
 export default api;
-export const { useGetImgsQuery } = api;
+export const { useGetRolesQuery } = api;

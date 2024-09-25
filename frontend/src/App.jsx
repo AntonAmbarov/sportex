@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setProfil } from './slices/authorizedUser';
 import { toggleStatusAuth } from './slices/ui';
+import fetchInitAppData from './config/fetchInitAppData';
 
 function App() {
 
@@ -14,13 +15,15 @@ function App() {
 
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem('currentUser'));
-    // console.log('useEffect: ', profile) //log
     if (profile) {
-      // console.log('if:', profile) //log
       dispatch(setProfil({ profile }));
       dispatch(toggleStatusAuth(true));
     }
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchInitAppData())
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

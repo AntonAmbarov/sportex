@@ -10,6 +10,9 @@ import ReatingForm from "../../components/units/ReatingForm";
 import { useGetAllScoresQuery, useGetScoresAvgQuery } from "../../services/api/apiScores";
 import RecentScores from "../../components/units/RecentScores";
 import useQueryStatus from "../../hooks/useQueryStatus";
+import SharedCard from '../../components/shared/SharedCard'
+import PlayersList from "../../components/units/PlayersList";
+
 
 function Team() {
 
@@ -45,8 +48,15 @@ function Team() {
                     <RadarDiagram data={scoresAvgQuery.data} type={'team'} />
                 </Col>
                 <Col md={9}>
-                    <ListSkills data={scoresAvgQuery.data} />
-                    <RecentScores data={allScoresQuery.data} />
+                    <SharedCard title={'Характеристики команды'}>
+                        <ListSkills data={scoresAvgQuery.data} />
+                    </SharedCard>
+                    <SharedCard title={`Последние оценки`}>
+                        <RecentScores data={allScoresQuery.data} />
+                    </SharedCard>
+                    <SharedCard title={'Игроки команды'}>
+                        <PlayersList teamId={team.id} />
+                    </SharedCard>
                     <Comments id={team.id} />
                     <ReatingForm type={'team'} sport={sport} teamId={team.id} />
                 </Col>

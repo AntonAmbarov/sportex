@@ -3,12 +3,11 @@ import { ListGroup } from "react-bootstrap";
 import i18n from "../../config/i18n";
 import SkillLine from "./SkillLine";
 import ReatingButton from "./ReatingButton";
-import SharedCard from "../shared/SharedCard";
 
 function ListSkills({ data }) {
 
     return (
-        <SharedCard title={'Характеристики команды'}>
+        <>
             <ListGroup className="list-group-flush mb-3">
                 {data.map(({ avg_rating_type, avg_rating_value }) => {
                     if (avg_rating_type !== 'overall_rating') {
@@ -24,7 +23,7 @@ function ListSkills({ data }) {
                 )}
             </ListGroup>
             <ReatingButton />
-        </SharedCard>
+        </>
     )
 }
 

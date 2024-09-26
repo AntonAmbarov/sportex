@@ -1,5 +1,4 @@
 import React from "react";
-import SharedCard from "../shared/SharedCard";
 import formatDate from "../../utils/formatDate";
 import { Badge, Col, ListGroup } from "react-bootstrap";
 
@@ -57,11 +56,9 @@ function RecentScores({ data }) {
     }
 
     return (
-        <SharedCard title={`Последние оценки`}>
-            <ListGroup>
-                {renderList(sortedData)}
-            </ListGroup>
-        </SharedCard>
+        <ListGroup>
+            {renderList(sortedData)}
+        </ListGroup>
     )
 }
 

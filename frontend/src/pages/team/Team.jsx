@@ -12,16 +12,22 @@ import RecentScores from "../../components/units/RecentScores";
 import useQueryStatus from "../../hooks/useQueryStatus";
 import SharedCard from '../../components/shared/SharedCard'
 import PlayersList from "../../components/units/PlayersList";
+import { useSelector } from "react-redux";
 
 
 function Team() {
 
     const { slug } = useParams()
-    const sport = 'hockey'
 
     const teamQuery = useGetTeamQuery(slug);
-    const idImg = teamQuery.data && teamQuery.data.length > 0 ? teamQuery.data[0].acf.logo : null;
-    const postId = teamQuery.data && teamQuery.data.length > 0 ? teamQuery.data[0].id : null;
+    const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
+    const { acf, id } = hasTeamData ? teamQuery.data[0] : {};
+
+    const idImg = acf?.logo || null;
+    const postId = id || null;
+    const allSports = useSelector(state => state.sports.entities);
+    const sport = allSports[acf?.sport].slug || null;
+
     const imgQuery = useGetImgQuery(idImg);
     const scoresAvgQuery = useGetScoresAvgQuery({ type: 'team', postId: postId, sport: sport });
     const allScoresQuery = useGetAllScoresQuery({ type: 'team', postId: postId, sport: sport });

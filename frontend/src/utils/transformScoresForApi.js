@@ -1,18 +1,18 @@
 function transformScoresForApi({
     values,
-    // participantId,
+    participantId,
     teamId,
     userId,
-    // role,
-    // sport
+    role,
+    sport
 }) {
     return {
         "user_id": userId,
-        // "participant_id": participantId,
+        "participant_id": participantId,
         "team_id": teamId,
-        // "role": role,
+        "role": role,
         "ratings": values,
-        "sport": 'hockey',
+        "sport": sport,
     }
 }
 

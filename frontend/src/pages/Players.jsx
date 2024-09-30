@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetPlayersQuery } from "../services/api/apiPlayers";
+import { Link } from "react-router-dom";
 
 function Players() {
     const { data, error, isLoading } = useGetPlayersQuery();
@@ -11,7 +12,10 @@ function Players() {
     return (
         <div>
             <ul>
-                {data.map(player => <li key={player.id}>{player.title.rendered}</li>)}
+                {data.map(player => {
+                    const title = `${player.acf.name} ${player.acf.last_name}`
+                    return <li key={player.id}>{<Link to={`/players/${player.slug}`}>{title}</Link>}</li>;
+                })}
             </ul>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetTeamsQuery } from "../services/api/apiTeams";
-// import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Teams() {
 
@@ -13,7 +13,9 @@ function Teams() {
     return (
         <div>
             <ul>
-                {data.map(team => <li key={team.id}>{team.title.rendered}</li>)}
+                {data.map(team => {
+                    return <li key={team.id}>{<Link to={`/teams/${team.slug}`}>{team.title.rendered}</Link>}</li>;
+                })}
             </ul>
         </div>
     )

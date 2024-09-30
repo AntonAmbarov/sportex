@@ -8,19 +8,17 @@ import { Card } from "react-bootstrap";
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 function RadarDiagram({ data, type }) {
-
     const namesList = i18n[type].features;
-
-    const values = data.reduce((acc, {
+    const values = data?.reduce((acc, {
         avg_rating_type: typeRating,
         avg_rating_value: value
     }) => {
+        if (typeRating === 'overall_rating') return acc;
         const name = namesList[typeRating];
         acc.labels.push(name);
         acc.data.push(value);
         return acc;
     }, { labels: [], data: [] })
-
     const dataDiagram = {
         labels: values.labels,
         datasets: [{

@@ -16,9 +16,16 @@ const api = createApi({
                 url: paths.getPlayer(slug),
                 method: 'GET',
             })
+        }),
+        getPhoto: builder.query({
+            query: (id) => ({
+                url: paths.getImg(id),
+                method: 'GET',
+            })
         })
+
     })
 })
 
 export default api;
-export const { useGetPlayersQuery, useGetPlayerQuery } = api;
+export const { useGetPlayersQuery, useGetPlayerQuery, useGetPhotoQuery } = api;

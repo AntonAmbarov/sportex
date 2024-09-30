@@ -17,7 +17,7 @@ function ReatingForm({ type, sport, teamId = null, participantId = null, role = 
     const dispatch = useDispatch();
     const [postScoresPlayer] = usePostScoresPlayerMutation();
     const [postScoresTeam] = usePostScoresTeamMutation();
-    const skills = skillsConfig[type][sport];
+    const skills = skillsConfig[type]?.[sport] || [];
 
     const initialValues = skills.reduce((acc, key) => {
         acc[key] = 0;
@@ -27,7 +27,8 @@ function ReatingForm({ type, sport, teamId = null, participantId = null, role = 
     const formik = useFormik({
         initialValues: initialValues,
         onSubmit: async (values) => {
-            const data = transformScoresForApi({ userId: userId, participantId: participantId, teamId: teamId, values: values, role: role });
+            const data = transformScoresForApi({ userId: userId, participantId: participantId, teamId: teamId, values: values, role: role, sport: sport });
+            console.log(data)
             await type === 'team' ? postScoresTeam(data).unwrap() : postScoresPlayer(data).unwrap();
         }
     })

@@ -21,16 +21,17 @@ function Team() {
 
     const teamQuery = useGetTeamQuery(slug);
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
-    const { acf, id } = hasTeamData ? teamQuery.data[0] : {};
+    const { acf, id, title } = hasTeamData ? teamQuery.data[0] : {};
 
     const idImg = acf?.logo || null;
     const postId = id || null;
     const allSports = useSelector(state => state.sports.entities);
-    const sport = allSports[acf?.sport].slug || null;
+    const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
 
     const imgQuery = useGetImgQuery(idImg);
-    const scoresAvgQuery = useGetScoresAvgQuery({ type: 'team', postId: postId, sport: sport });
-    const allScoresQuery = useGetAllScoresQuery({ type: 'team', postId: postId, sport: sport });
+    const preset = { type: 'team', postId: postId, sport: sport };
+    const scoresAvgQuery = useGetScoresAvgQuery(preset);
+    const allScoresQuery = useGetAllScoresQuery(preset);
 
     const teamStatus = useQueryStatus(teamQuery);
     const imgStatus = useQueryStatus(imgQuery);
@@ -42,29 +43,27 @@ function Team() {
     if (scoresAvgStatus) return scoresAvgStatus;
     if (allScoresStatus) return allScoresStatus;
 
-    const [team] = teamQuery.data;
-
     const { avg_rating_value: overallRating } = scoresAvgQuery.data.find(item => item.avg_rating_type === 'overall_rating') || 0;
 
     return (
         <Container>
             <Row>
                 <Col md={3}>
-                    <ProfilCard data={team} logo={imgQuery} overallRating={overallRating} />
+                    <ProfilCard title={title.rendered} logo={imgQuery} overallRating={overallRating} />
                     <RadarDiagram data={scoresAvgQuery.data} type={'team'} />
                 </Col>
                 <Col md={9}>
                     <SharedCard title={'Характеристики команды'}>
-                        <ListSkills data={scoresAvgQuery.data} />
+                        <ListSkills type={'team'} data={scoresAvgQuery.data} />
                     </SharedCard>
                     <SharedCard title={`Последние оценки`}>
                         <RecentScores data={allScoresQuery.data} />
                     </SharedCard>
                     <SharedCard title={'Игроки команды'}>
-                        <PlayersList teamId={team.id} />
+                        <PlayersList teamId={id} />
                     </SharedCard>
-                    <Comments id={team.id} />
-                    <ReatingForm type={'team'} sport={sport} teamId={team.id} />
+                    <Comments id={id} />
+                    <ReatingForm type={'team'} sport={sport} teamId={id} />
                 </Col>
             </Row>
         </Container>

@@ -3,9 +3,10 @@ import { Card } from "react-bootstrap";
 import StarsRaintg from "./StarsRating";
 import { paths } from "../../config/apiConfig";
 
-function ProfilCardTeam({ data, logo, overallRating }) {
+function ProfilCard({ title, logo, overallRating }) {
 
-    const title = data.title.rendered;
+    // const title = data.title.rendered;
+    console.log('Logo data:', logo);
     const logoMd = logo?.media_details?.sizes?.medium?.source_url ||
         logo?.media_details?.sizes?.full?.source_url ||
         paths.getDefaultImg();
@@ -26,4 +27,4 @@ function ProfilCardTeam({ data, logo, overallRating }) {
     )
 }
 
-export default ProfilCardTeam;
+export default ProfilCard;

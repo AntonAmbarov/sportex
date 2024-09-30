@@ -10,7 +10,7 @@ const paths = {
     getImgs: () => (`${wpBasePath}/media/?_fields=id,alt_text,media_details`),
     getDefaultImg: () => (`${baseUrl}/wp-content/uploads/2024/08/333333textprekrasnayakartinkafontkelson.png`),
     getPlayers: () => (`${wpBasePath}/players?_fields=id,slug,acf.name,acf.last_name,acf.team,acf.role,acf.sport,acf.photo`),
-    getPlayer: (slug) => (`${wpBasePath}/players?slug=${slug}&_fields=id,title,acf`),
+    getPlayer: (slug) => (`${wpBasePath}/players?slug=${slug}`),
     getLeagues: () => (`${wpBasePath}/league?_fields=id,slug,name,acf.logo`),
     getSports: () => (`${wpBasePath}/sport?_fields=id,name,slug,acf.logo`),
     getRoles: () => (`${wpBasePath}/role?_fields=id,slug,name`),

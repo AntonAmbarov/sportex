@@ -16,6 +16,7 @@ import leaguesReducer from './leagues';
 import sportsReducer from './sports';
 import rolesReducer from './roles';
 import imgsReducer from './imgs';
+import avgScoresReducer from './avgScores';
 
 const store = configureStore({
     reducer: {
@@ -36,6 +37,7 @@ const store = configureStore({
         roles: rolesReducer,
         imgs: imgsReducer,
         authorizedUser: authorizedUserReducer,
+        avgScores: avgScoresReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

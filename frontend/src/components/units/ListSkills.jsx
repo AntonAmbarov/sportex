@@ -3,22 +3,25 @@ import { ListGroup } from "react-bootstrap";
 import i18n from "../../config/i18n";
 import SkillLine from "./SkillLine";
 import ReatingButton from "./ReatingButton";
+import { useGetScoresAvgQuery } from "../../services/api/apiScores";
+import useQueryStatus from "../../hooks/useQueryStatus";
 
-function ListSkills({ type, data }) {
-
-    const isData = data && data.length > 0;
+function ListSkills({ data }) {
+    const { type, postId, sport } = data;
+    const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport });
+    const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
+    if (scoresAvgStatus) return scoresAvgStatus;
+    const { data: dataAvgQuery } = scoresAvgQuery;
 
     const renerdScoreList = () => {
-        return data.map(({ avg_rating_type, avg_rating_value }) => {
-            if (avg_rating_type !== 'overall_rating') {
-                const name = i18n[type].features[avg_rating_type];
-                const value = avg_rating_value;
-                return (
-                    <ListGroup.Item key={avg_rating_type}>
-                        <SkillLine name={name} score={value} />
-                    </ListGroup.Item>
-                )
-            }
+        return dataAvgQuery.map(({ avg_rating_type, avg_rating_value }) => {
+            const name = i18n[type].features[avg_rating_type];
+            const value = avg_rating_value;
+            return (
+                <ListGroup.Item key={avg_rating_type}>
+                    <SkillLine name={name} score={value} />
+                </ListGroup.Item>
+            )
         }
         )
     }
@@ -26,7 +29,7 @@ function ListSkills({ type, data }) {
     return (
         <>
             <ListGroup className="list-group-flush mb-3">
-                {isData ? renerdScoreList() : <div>{'Нет оценок'}</div>}
+                {renerdScoreList()}
             </ListGroup>
             <ReatingButton />
         </>

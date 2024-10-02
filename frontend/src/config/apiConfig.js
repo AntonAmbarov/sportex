@@ -23,6 +23,7 @@ const paths = {
     postScoresPlayer: () => (`${customBasePath}/participant-ratings/`),
     getScoresAvg: (type, postId, sport) => (`${customBasePath}/average-ratings/?type=${type}&post_id=${postId}&sport=${sport}`),
     getAllScores: (type, postId, sport) => (`${customBasePath}/all-ratings/?type=${type}&post_id=${postId}&sport=${sport}`),
+    getAllScoresAvg: () => (`${customBasePath}/overall-ratings/`),
     avatar: (name) => (`https://ui-avatars.com/api/?name=${name}&background=random&rounded=true`),
 };
 

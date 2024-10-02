@@ -4,6 +4,7 @@ import apiLeagues from '../services/api/apiLeagues';
 import apiSports from '../services/api/apiSports';
 import apiRoles from '../services/api/apiRoles';
 import apiImgs from '../services/api/apiImgs';
+import apiScores from '../services/api/apiScores';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const fetchInitAppData = createAsyncThunk(
@@ -18,6 +19,7 @@ const fetchInitAppData = createAsyncThunk(
                 dispatch(apiSports.endpoints.getSports.initiate()),
                 dispatch(apiRoles.endpoints.getRoles.initiate()),
                 dispatch(apiImgs.endpoints.getImgs.initiate()),
+                dispatch(apiScores.endpoints.getAllScoresAvg.initiate()),
             ];
 
             const resp = await Promise.all(promises);

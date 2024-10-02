@@ -4,12 +4,20 @@ import grades from "../../config/grades";
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 import { Card } from "react-bootstrap";
+import { useGetScoresAvgQuery } from "../../services/api/apiScores";
+import useQueryStatus from "../../hooks/useQueryStatus";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
-function RadarDiagram({ data, type }) {
+function RadarDiagram({ data }) {
+    const { type, postId, sport } = data;
+    const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport }, { refetchOnMountOrArgChange: false });
+    const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
+    if (scoresAvgStatus) return scoresAvgStatus;
+    const { data: dataAvgQuery } = scoresAvgQuery;
+
     const namesList = i18n[type].features;
-    const values = data?.reduce((acc, {
+    const values = dataAvgQuery?.reduce((acc, {
         avg_rating_type: typeRating,
         avg_rating_value: value
     }) => {

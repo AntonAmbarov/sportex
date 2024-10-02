@@ -1,6 +1,8 @@
 import React from "react";
 import formatDate from "../../utils/formatDate";
 import { Badge, Col, ListGroup } from "react-bootstrap";
+import { useGetAllScoresQuery } from "../../services/api/apiScores";
+import useQueryStatus from "../../hooks/useQueryStatus";
 
 const convertData = (data) => {
     const result = data.reduce((acc, {
@@ -29,7 +31,13 @@ const sortData = (data) => {
 }
 
 function RecentScores({ data }) {
-    const convertedData = convertData(data);
+    const { postId, type, sport } = data;
+    const scoresQuery = useGetAllScoresQuery({ postId: postId, type: type, sport: sport });
+    const scoresStatus = useQueryStatus(scoresQuery);
+    if (scoresStatus) return scoresStatus;
+    const { data: dataScores } = scoresQuery;
+
+    const convertedData = convertData(dataScores);
     const sortedData = sortData(convertedData);
 
     const getAvg = (arr) => Math.round(arr.reduce((acc, num) => acc += num, 0) / arr.length);

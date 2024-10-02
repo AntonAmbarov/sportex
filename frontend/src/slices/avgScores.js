@@ -1,31 +1,31 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import fetchInitAppData from "../config/fetchInitAppData";
 
-const imgsAdapter = createEntityAdapter();
+const avgScoresAdapter = createEntityAdapter();
 
-const imgsSlice = createSlice({
-    name: 'imgs',
-    initialState: imgsAdapter.getInitialState({
-        loading: false,
+const avgScoresSlice = createSlice({
+    name: 'allAvgScores',
+    initialState: avgScoresAdapter.getInitialState({
+        isLoading: false,
         error: null,
     }),
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchInitAppData.pending, (state) => {
-                state.loading = true;
+                state.isLoading = true;
                 state.error = null;
             })
             .addCase(fetchInitAppData.rejected, (state, { payload }) => {
-                state.loading = false;
+                state.isLoading = false;
                 state.error = payload;
             })
             .addCase(fetchInitAppData.fulfilled, (state, { payload }) => {
-                state.loading = false;
+                state.isLoading = false;
                 state.error = null;
-                imgsAdapter.setAll(state, payload.getImgs);
+                avgScoresAdapter.setAll(state, payload.getAllScoresAvg);
             })
     }
-});
+})
 
-export default imgsSlice.reducer;
+export default avgScoresSlice.reducer;

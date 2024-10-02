@@ -28,5 +28,5 @@ const leaguesSlice = createSlice({
     }
 });
 
-export default leaguesSlice;
+export default leaguesSlice.reducer;
 export const { setLeagues } = leaguesSlice.actions;

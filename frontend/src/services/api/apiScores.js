@@ -10,11 +10,18 @@ const apiScores = createApi({
             query: ({ type, postId, sport }) => ({
                 url: paths.getScoresAvg(type, postId, sport),
                 method: 'GET',
-            })
+            }),
+            keepUnusedDataFor: 60,
         }),
         getAllScores: builder.query({
             query: ({ type, postId, sport }) => ({
                 url: paths.getAllScores(type, postId, sport),
+                method: 'GET',
+            })
+        }),
+        getAllScoresAvg: builder.query({
+            query: () => ({
+                url: paths.getAllScoresAvg(),
                 method: 'GET',
             })
         }),
@@ -31,9 +38,9 @@ const apiScores = createApi({
                 method: 'POST',
                 body: data,
             })
-        })
+        }),
     })
 })
 
 export default apiScores;
-export const { useGetScoresAvgQuery, useGetAllScoresQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;
+export const { useGetScoresAvgQuery, useGetAllScoresQuery, useGetAllScoresAvgQuery, usePostScoresPlayerMutation, usePostScoresTeamMutation } = apiScores;

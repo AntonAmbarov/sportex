@@ -2,26 +2,26 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import StarsRaintg from "./StarsRating";
 import { paths } from "../../config/apiConfig";
+import { useSelector } from "react-redux";
 
-function ProfilCard({ title, logo, overallRating }) {
+function ProfilCard({ data }) {
+    const { title, id, imgId } = data;
+    const images = useSelector(state => state.imgs.entities);
+    const avgScore = useSelector(state => state.avgScores.entities[id]?.overall_rating);
 
-    // const title = data.title.rendered;
-    console.log('Logo data:', logo);
-    const logoMd = logo?.media_details?.sizes?.medium?.source_url ||
-        logo?.media_details?.sizes?.full?.source_url ||
+    const img = images[imgId]?.media_details?.sizes?.medium?.source_url ||
+        images[imgId]?.media_details?.sizes?.full?.source_url ||
         paths.getDefaultImg();
-    const rating = overallRating;
-    // const league = data.acf.league;
 
     return (
         <Card className="mb-3">
             <div className="ratio ratio-4x3">
-                <Card.Img variant={'top'} src={logoMd} className="object-fit-cover" />
+                <Card.Img variant={'top'} src={img} className="object-fit-cover" />
             </div>
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 {/* <Card.Subtitle>{league}</Card.Subtitle> */}
-                <StarsRaintg score={rating} />
+                <StarsRaintg score={avgScore} />
             </Card.Body>
         </Card>
     )

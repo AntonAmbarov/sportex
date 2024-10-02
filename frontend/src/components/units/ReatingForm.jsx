@@ -10,7 +10,14 @@ import { closeReatingOffcanvas } from "../../slices/ui";
 import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from "../../services/api/apiScores";
 import skillsConfig from "../../config/skillsConfig";
 
-function ReatingForm({ type, sport, teamId = null, participantId = null, role = null }) {
+function ReatingForm({ data }) {
+    const {
+        type,
+        postId,
+        sport,
+        teamId,
+        role,
+    } = data;
 
     const { isShow } = useSelector(state => state.ui.reatingOffcanvas);
     const { userId } = useSelector(state => state.authorizedUser);
@@ -24,13 +31,28 @@ function ReatingForm({ type, sport, teamId = null, participantId = null, role = 
         return acc;
     }, {})
 
+    const handleSubmit = async (values) => {
+        const isTeam = type === 'team';
+        const param = {
+            userId: userId,
+            participantId: isTeam ? null : postId,
+            teamId: isTeam ? postId : teamId,
+            values: values,
+            role: role || null,
+            sport: sport
+        }
+        try {
+            const data = transformScoresForApi(param);
+            await isTeam ? postScoresTeam(data).unwrap() : postScoresPlayer(data).unwrap();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    }
+
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit: async (values) => {
-            const data = transformScoresForApi({ userId: userId, participantId: participantId, teamId: teamId, values: values, role: role, sport: sport });
-            console.log(data)
-            await type === 'team' ? postScoresTeam(data).unwrap() : postScoresPlayer(data).unwrap();
-        }
+        onSubmit: handleSubmit,
+        enableReinitialize: true,
     })
 
     return (

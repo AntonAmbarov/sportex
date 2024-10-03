@@ -12,6 +12,7 @@ import SharedCard from '../../components/shared/SharedCard'
 import PlayersList from "../../components/units/PlayersList";
 import RecentScores from "../../components/units/RecentScores";
 import { useSelector } from "react-redux";
+import Content from "../../components/units/Content";
 
 
 function Team() {
@@ -20,7 +21,7 @@ function Team() {
 
     const teamQuery = useGetTeamQuery(slug);
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
-    const { acf, id, title } = hasTeamData ? teamQuery.data[0] : {};
+    const { acf, id, title, content } = hasTeamData ? teamQuery.data[0] : {};
 
     const allSports = useSelector(state => state.sports.entities);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
@@ -55,6 +56,9 @@ function Team() {
                     <SharedCard title={'Игроки команды'}>
                         <PlayersList teamId={id} />
                     </SharedCard>
+                    {content.rendered.length > 0 && <Content title={'Подробнее о команде'}>
+                        {content.rendered}
+                    </Content>}
                     <Comments id={id} />
                     <ReatingForm data={settings} />
                 </Col>

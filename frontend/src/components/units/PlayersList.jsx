@@ -10,11 +10,11 @@ function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
 
     const result = useMemo(() => (ids.filter(id => {
         const { team, sport, league } = entities[id].acf;
-        const teamMatch = teamId ? team[0] === teamId : true;
+        const teamMatch = teamId ? team === teamId : true;
         const sportMatch = sportId ? sport === sportId : true;
         const leagueMatch = leagueId ? league === leagueId : true;
         return teamMatch && sportMatch && leagueMatch;
-    })), [ids, entities, teamId, sportId, leagueId])
+    })), [ids, entities, teamId, sportId, leagueId]);
 
     const renderRows = useCallback(() => {
         if (result.length === 0) return (<p>В команде нет игроков</p>)

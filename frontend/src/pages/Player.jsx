@@ -11,10 +11,12 @@ import SharedCard from '../components/shared/SharedCard';
 import RecentScores from "../components/units/RecentScores";
 import useQueryStatus from "../hooks/useQueryStatus";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 function Player() {
 
-    const { slug } = useParams()
+    const { slug } = useParams();
+    const { t } = useTranslation();
 
     const playerQuery = useGetPlayerQuery(slug);
     const hasPlayerData = playerQuery.data && playerQuery.data.length > 0;
@@ -46,10 +48,10 @@ function Player() {
                     <RadarDiagram data={settings} />
                 </Col>
                 <Col md={9}>
-                    <SharedCard title={'Характеристики игрока'}>
+                    <SharedCard title={t('titles.playerCharacteristics')}>
                         <ListSkills data={settings} />
                     </SharedCard>
-                    <SharedCard title={`Последние оценки`}>
+                    <SharedCard title={t('titles.recentEvaluations')}>
                         <RecentScores data={settings} />
                     </SharedCard>
                     <Comments id={id} />

@@ -5,30 +5,28 @@ import { useGetCommentsQuery, usePostCommentMutation } from "../../services/api/
 import transformCommentsForSection from "../../utils/transformCommentsForSection";
 import { useSelector } from "react-redux";
 import transformCommentsForApi from "../../utils/transformCommentsForApi";
-// import AuthButtons from '../shared/AuthButtons';
-// import parse from 'html-react-parser';
-
+import useQueryStatus from '../../hooks/useQueryStatus';
+import { useTranslation } from "react-i18next";
 
 function Comments({ id }) {
 
     const [comments, setComments] = useState();
-
     const currentUser = useSelector(state => state.authorizedUser);
+    const { t } = useTranslation();
 
-    const { data: rawData, error, isLoading } = useGetCommentsQuery(id);
-    const [postComment] = usePostCommentMutation()
+    const commentsQuery = useGetCommentsQuery(id); //получаем комментарии для записи по id
+    const [postComment] = usePostCommentMutation();
+    const { data: rawData } = commentsQuery;
 
     useEffect(() => {
-        // console.log('currentUser: ', currentUser) //log
         if (rawData) {
-            const data = transformCommentsForSection(rawData);
+            const data = transformCommentsForSection(rawData); //трансформируем комментарии в понятный формат для рендера
             setComments(data);
         }
     }, [rawData])
 
-    if (isLoading) return (<div>Загрузка</div>);
-    if (error) return (<div>Ошибка</div>);
-    if (!rawData) return (<div>Нет данных</div>);
+    const commentsQueryStatus = useQueryStatus(commentsQuery); // получаем isLoading, error или null если data получена
+    if (commentsQueryStatus) return commentsQueryStatus;
 
     const handleNewComment = async (comment) => {
         setComments(prevState => [...prevState, comment]);
@@ -63,7 +61,7 @@ function Comments({ id }) {
     }
 
     const customNoComment = () => (
-        <div className='no-com'>Sheessh! Zero Comments posted here!</div>
+        <div className='no-com'>{t('comments.empty')}</div>
     )
 
     return (

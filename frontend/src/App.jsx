@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { setProfil } from './slices/authorizedUser';
 import { toggleStatusAuth } from './slices/ui';
 import fetchInitAppData from './config/fetchInitAppData';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './config/i18nextConfig';
 
 function App() {
 
@@ -26,19 +28,21 @@ function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Container>
-          <Routes>
-            {routes.map(({ path, element }) => (
-              <Route key={path} path={path} element={element} />
-            ))}
-          </Routes>
-        </Container>
-      </main>
-      <Footer />
-    </BrowserRouter>
+    <I18nextProvider i18n={i18n}>
+      <BrowserRouter>
+        <Header />
+        <main>
+          <Container>
+            <Routes>
+              {routes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))}
+            </Routes>
+          </Container>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </I18nextProvider>
   );
 }
 

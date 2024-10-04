@@ -3,6 +3,7 @@ import formatDate from "../../utils/formatDate";
 import { Badge, Col, ListGroup } from "react-bootstrap";
 import { useGetAllScoresQuery } from "../../services/api/apiScores";
 import useQueryStatus from "../../hooks/useQueryStatus";
+import { useTranslation } from "react-i18next";
 
 const convertData = (data) => {
     const result = data.reduce((acc, {
@@ -31,6 +32,7 @@ const sortData = (data) => {
 }
 
 function RecentScores({ data }) {
+    const { t } = useTranslation();
     const { postId, type, sport } = data;
     const scoresQuery = useGetAllScoresQuery({ postId: postId, type: type, sport: sport });
     const scoresStatus = useQueryStatus(scoresQuery);
@@ -44,19 +46,18 @@ function RecentScores({ data }) {
 
     const renderList = (data) => {
         return data.map(([date, { userList, scoresList }]) => {
-            const count = userList.size;
+            const count = userList.size - 1;
             const [lastName] = userList;
             const avg = getAvg(scoresList);
-
             return (
                 <ListGroup.Item key={date} className="d-flex justify-content-between align-items-center">
                     <Col xs={2} md={1} className="d-flex justify-content-center align-items-center flex-column">
                         <i className="bi bi-person-circle fs-1"></i>
-                        <Badge bg="secondary">{count}</Badge>
+                        <Badge bg="secondary">{count + 1}</Badge>
                     </Col>
                     <Col xs={10} md={11}>
                         <span className="fs-5">{date}</span>
-                        <p>{`${lastName} и еще ${count - 1} пользователей поставили оценки в среднем на ${avg}`}</p>
+                        <p>{`${lastName} ${t('messages.recentScores', { count })} ${avg}`}</p>
                     </Col>
                 </ListGroup.Item>
             )

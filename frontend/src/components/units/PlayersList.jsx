@@ -1,5 +1,6 @@
 import React, { useMemo, useCallback } from "react";
 import { Image, Table } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,6 +8,7 @@ function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
     const { ids, entities } = useSelector(state => state.players);
     const { entities: roles } = useSelector(state => state.roles);
     const { entities: photos } = useSelector(state => state.imgs);
+    const { t } = useTranslation();
 
     const result = useMemo(() => (ids.filter(id => {
         const { team, sport, league } = entities[id].acf;
@@ -17,7 +19,7 @@ function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
     })), [ids, entities, teamId, sportId, leagueId]);
 
     const renderRows = useCallback(() => {
-        if (result.length === 0) return (<p>В команде нет игроков</p>)
+        if (result.length === 0) return (t('players.empty'))
 
         return result.map(id => {
             const player = entities[id];

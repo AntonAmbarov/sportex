@@ -1,12 +1,13 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import i18n from "../../config/i18n";
 import SkillLine from "./SkillLine";
 import ReatingButton from "./ReatingButton";
 import { useGetScoresAvgQuery } from "../../services/api/apiScores";
 import useQueryStatus from "../../hooks/useQueryStatus";
+import { useTranslation } from "react-i18next";
 
 function ListSkills({ data }) {
+    const { t } = useTranslation();
     const { type, postId, sport } = data;
     const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport });
     const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
@@ -15,7 +16,7 @@ function ListSkills({ data }) {
 
     const renerdScoreList = () => {
         return dataAvgQuery.map(({ avg_rating_type, avg_rating_value }) => {
-            const name = i18n[type].features[avg_rating_type];
+            const name = t(`skills.${avg_rating_type}`);
             const value = avg_rating_value;
             return (
                 <ListGroup.Item key={avg_rating_type}>

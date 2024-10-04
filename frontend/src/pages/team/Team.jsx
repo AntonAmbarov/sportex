@@ -13,11 +13,13 @@ import PlayersList from "../../components/units/PlayersList";
 import RecentScores from "../../components/units/RecentScores";
 import { useSelector } from "react-redux";
 import Content from "../../components/units/Content";
+import { useTranslation } from "react-i18next";
 
 
 function Team() {
 
     const { slug } = useParams()
+    const { t } = useTranslation();
 
     const teamQuery = useGetTeamQuery(slug);
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
@@ -47,16 +49,16 @@ function Team() {
                     <RadarDiagram data={settings} />
                 </Col>
                 <Col md={9}>
-                    <SharedCard title={'Характеристики команды'}>
+                    <SharedCard title={t('titles.teamCharacteristics')}>
                         <ListSkills data={settings} />
                     </SharedCard>
-                    <SharedCard title={`Последние оценки`}>
+                    <SharedCard title={t('titles.recentEvaluations')}>
                         <RecentScores data={settings} />
                     </SharedCard>
-                    <SharedCard title={'Игроки команды'}>
+                    <SharedCard title={t('titles.teamPlayers', { name: title.rendered })}>
                         <PlayersList teamId={id} />
                     </SharedCard>
-                    {content.rendered.length > 0 && <Content title={'Подробнее о команде'}>
+                    {content.rendered.length > 0 && <Content title={t('titles.aboutTeam', { name: title.rendered })}>
                         {content.rendered}
                     </Content>}
                     <Comments id={id} />

@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { openReatingOffcanvas } from "../../slices/ui";
 import cn from 'classnames';
+import { useTranslation } from "react-i18next";
 
 function ReatingButton() {
 
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const isAuth = useSelector(state => (state.authorizedUser.userId !== null));
 
     const styleButton = cn({
@@ -17,13 +19,13 @@ function ReatingButton() {
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" className="text-muted mx-3" {...props}>
-            Доступно для авторизованных пользователей
+            {t('messages.availableAuthorized')}
         </Tooltip>
     );
 
     const renderButton = () => (
         <Button onClick={() => dispatch(openReatingOffcanvas())} className={styleButton} disabled={!isAuth}>
-            Оценить
+            {t('ui.rate')}
         </Button>
     )
 

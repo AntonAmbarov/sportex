@@ -3,12 +3,12 @@ import { Button, Offcanvas, Row, Col, Badge } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap'
-import i18n from "../../config/i18n";
 import grades from "../../config/grades";
 import transformScoresForApi from "../../utils/transformScoresForApi";
 import { closeReatingOffcanvas } from "../../slices/ui";
 import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from "../../services/api/apiScores";
 import skillsConfig from "../../config/skillsConfig";
+import { useTranslation } from "react-i18next";
 
 function ReatingForm({ data }) {
     const {
@@ -19,6 +19,7 @@ function ReatingForm({ data }) {
         role,
     } = data;
 
+    const { t } = useTranslation();
     const { isShow } = useSelector(state => state.ui.reatingOffcanvas);
     const { userId } = useSelector(state => state.authorizedUser);
     const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function ReatingForm({ data }) {
     return (
         <Offcanvas show={isShow} onHide={() => dispatch(closeReatingOffcanvas())}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Оцените навыки</Offcanvas.Title>
+                <Offcanvas.Title>{t('titles.ratingForm')}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Form onSubmit={formik.handleSubmit}>
@@ -66,7 +67,7 @@ function ReatingForm({ data }) {
                         <Form.Group key={key}>
                             <Row className="justify-content-between">
                                 <Col xs='auto'>
-                                    <Form.Label htmlFor={key}>{i18n[type].features[key]}</Form.Label>
+                                    <Form.Label htmlFor={key}>{t(`skills.${key}`)}</Form.Label>
                                 </Col>
                                 <Col xs='auto'>
                                     <Badge bg='secondary'>{formik.values[key]}</Badge>
@@ -81,7 +82,7 @@ function ReatingForm({ data }) {
                             />
                         </Form.Group>
                     ))}
-                    <Button type='submit'>Отправить</Button>
+                    <Button type='submit'>{t('ui.submit')}</Button>
                 </Form>
             </Offcanvas.Body>
         </Offcanvas>

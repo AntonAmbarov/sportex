@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DOMPurify from "dompurify";
 import { Button } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
 
 const splitContent = (text) => {
     const divText = document.createElement('div');
@@ -19,8 +20,11 @@ const splitContent = (text) => {
 
 function Content({ title, children }) {
     const [isOpen, setOpen] = useState(false);
+    const [t] = useTranslation();
+
     const sanitizeHTML = DOMPurify.sanitize(children);
     const { firstPart, secondPart } = splitContent(sanitizeHTML);
+
     return (
         <>
             <h2>{title}</h2>
@@ -34,7 +38,7 @@ function Content({ title, children }) {
                 aria-expanded={isOpen}
                 variant="link"
             >
-                {isOpen ? 'Скрыть' : 'Развернуть'}
+                {isOpen ? t('ui.hide') : t('ui.show')}
             </Button>
         </>
     )

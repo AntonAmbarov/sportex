@@ -1,11 +1,11 @@
 import React from "react";
-import i18n from '../../config/i18n';
 import grades from "../../config/grades";
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 import { Card } from "react-bootstrap";
 import { useGetScoresAvgQuery } from "../../services/api/apiScores";
 import useQueryStatus from "../../hooks/useQueryStatus";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
@@ -13,16 +13,16 @@ function RadarDiagram({ data }) {
     const { type, postId, sport } = data;
     const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport }, { refetchOnMountOrArgChange: false });
     const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
+    const { t } = useTranslation();
     if (scoresAvgStatus) return scoresAvgStatus;
     const { data: dataAvgQuery } = scoresAvgQuery;
 
-    const namesList = i18n[type].features;
     const values = dataAvgQuery?.reduce((acc, {
         avg_rating_type: typeRating,
         avg_rating_value: value
     }) => {
         if (typeRating === 'overall_rating') return acc;
-        const name = namesList[typeRating];
+        const name = t(`skills${typeRating}`);
         acc.labels.push(name);
         acc.data.push(value);
         return acc;

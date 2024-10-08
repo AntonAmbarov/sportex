@@ -21,12 +21,16 @@ function TableListing({ teamId = null, sportId = null, leagueId = null }) {
                 {result.map(id => {
 
                     const player = entities[id];
-                    const name = `${player.acf.name} ${player.acf.last_name}`;
-                    const role = roles[player.acf.role].name;
-                    const slug = player.slug;
-                    const imgId = player.acf.logo;
 
-                    return RowTable(name, role, imgId, slug);
+                    const params = {
+                        name: `${player.acf.name} ${player.acf.last_name}`,
+                        role: roles[player.acf.role].name,
+                        slug: player.slug,
+                        imgId: player.acf.logo,
+                    }
+
+
+                    return <RowTable key={id} {...params} />
                 })}
             </tbody>
         </Table>

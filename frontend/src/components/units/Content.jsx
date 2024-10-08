@@ -20,7 +20,7 @@ const splitContent = (text) => {
 
 function Content({ title, children }) {
     const [isOpen, setOpen] = useState(false);
-    const [t] = useTranslation();
+    const { t } = useTranslation();
 
     const sanitizeHTML = DOMPurify.sanitize(children);
     const { firstPart, secondPart } = splitContent(sanitizeHTML);

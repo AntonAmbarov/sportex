@@ -6,12 +6,9 @@ import { Link } from "react-router-dom";
 import useGetImg from "../../hooks/useGetImg";
 
 function ProfilCard({ title, id, imgId, slug = null }) {
-    // const images = useSelector(state => state.imgs.entities);
     const avgScore = useSelector(state => state.avgScores.entities[id]?.overall_rating);
-    // const defaultImg = useDefaultImg()
     const img = useGetImg(imgId); //второй параметр size: thumbnail, medium или full. Если ничего не задано - medium
-    console.log('imgId', imgId)
-    console.log('title', title)
+
     return (
         <Card className="mb-3">
             <div className="ratio ratio-4x3">

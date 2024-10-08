@@ -9,7 +9,7 @@ import Comments from "../../components/units/Comments";
 import ReatingForm from "../../components/units/ReatingForm";
 import useQueryStatus from "../../hooks/useQueryStatus";
 import SharedCard from '../../components/shared/SharedCard'
-import PlayersList from "../../components/units/PlayersList";
+import TableListing from "../../components/shared/TableListing";
 import RecentScores from "../../components/units/RecentScores";
 import { useSelector } from "react-redux";
 import Content from "../../components/units/Content";
@@ -41,11 +41,11 @@ function Team() {
         <Container>
             <Row>
                 <Col md={3}>
-                    <ProfilCard data={{
-                        title: title.rendered,
-                        id: id,
-                        imgId: acf?.logo,
-                    }} />
+                    <ProfilCard
+                        title={title.rendered}
+                        id={id}
+                        imgId={acf?.logo}
+                    />
                     <RadarDiagram data={settings} />
                 </Col>
                 <Col md={9}>
@@ -56,7 +56,7 @@ function Team() {
                         <RecentScores data={settings} />
                     </SharedCard>
                     <SharedCard title={t('titles.teamPlayers', { name: title.rendered })}>
-                        <PlayersList teamId={id} />
+                        <TableListing teamId={id} />
                     </SharedCard>
                     {content.rendered.length > 0 && <Content title={t('titles.aboutTeam', { name: title.rendered })}>
                         {content.rendered}

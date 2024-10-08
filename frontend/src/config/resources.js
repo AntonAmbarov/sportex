@@ -26,6 +26,8 @@ const resources = {
                 aboutTeam: 'Подробнее о команде {{name}}',
                 playerCharacteristics: 'Характеристики игрока',
                 aboutPlayer: 'Подробнее о спортсмене',
+                teamsPage: 'Все команды',
+                playersPage: 'Все игкроки',
             },
             messages: {
                 availableAuthorized: 'Доступно для авторизованных пользователей',

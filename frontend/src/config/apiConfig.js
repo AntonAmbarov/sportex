@@ -6,10 +6,10 @@ const jwtBasePath = '/wp-json/jwt-auth/v1';
 const paths = {
     getTeams: () => (`${wpBasePath}/teams?_fields=id,slug,title,acf.logo,acf.sport,acf.league`),
     getTeam: (slug) => (`${wpBasePath}/teams?slug=${slug}&_fields=id,title,content,acf`),
-    getImg: (id) => (`${wpBasePath}/media/${id}?_fields=media_details`),
+    getImg: (id = 101) => (`${wpBasePath}/media/${id}?_fields=media_details`),
     getImgs: () => (`${wpBasePath}/media/?_fields=id,alt_text,media_details`),
-    getDefaultImg: () => (`${baseUrl}/wp-content/uploads/2024/08/333333textprekrasnayakartinkafontkelson.png`),
-    getPlayers: () => (`${wpBasePath}/players?_fields=id,slug,acf.name,acf.last_name,acf.team,acf.role,acf.sport,acf.photo`),
+    getDefaultImg: () => (`${baseUrl}/wp-content/uploads/2024/10/defaultimg.png`),
+    getPlayers: () => (`${wpBasePath}/players?_fields=id,slug,title,acf.name,acf.last_name,acf.team,acf.role,acf.sport,acf.logo`),
     getPlayer: (slug) => (`${wpBasePath}/players?slug=${slug}&_fields=id,title,content,acf`),
     getLeagues: () => (`${wpBasePath}/league?_fields=id,slug,name,acf.logo`),
     getSports: () => (`${wpBasePath}/sport?_fields=id,name,slug,acf.logo`),

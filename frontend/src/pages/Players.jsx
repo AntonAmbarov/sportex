@@ -1,23 +1,22 @@
 import React from "react";
-import { useGetPlayersQuery } from "../services/api/apiPlayers";
-import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import TableListing from "../components/shared/TableListing";
+import { useTranslation } from "react-i18next";
 
 function Players() {
-    const { data, error, isLoading } = useGetPlayersQuery();
-
-    if (isLoading) return (<div>Загрузка</div>);
-    if (error) return (<div>Ошибка</div>);
-    if (!data || data.length === 0) return (<div>Нет данных</div>);
+    const { t } = useTranslation();
 
     return (
-        <div>
-            <ul>
-                {data.map(player => {
-                    const title = `${player.acf.name} ${player.acf.last_name}`
-                    return <li key={player.id}>{<Link to={`/players/${player.slug}`}>{title}</Link>}</li>;
+        <Container>
+            <h1 className="mb-3">{t('titles.playersPage')}</h1>
+            <TableListing />
+            {/* <ul>
+                {ids.map(id => {
+                    const player = entities[id];
+                    return <li key={id}>{<Link to={`/players/${player.slug}`}>{player.title.rendered}</Link>}</li>;
                 })}
-            </ul>
-        </div>
+            </ul> */}
+        </Container>
     )
 }
 

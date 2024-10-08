@@ -21,7 +21,6 @@ function Player() {
     const playerQuery = useGetPlayerQuery(slug);
     const hasPlayerData = playerQuery.data && playerQuery.data.length > 0;
     const { acf, id, title } = hasPlayerData ? playerQuery.data[0] : {};
-
     const allSports = useSelector(state => state.sports.entities);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
 
@@ -40,11 +39,11 @@ function Player() {
         <Container>
             <Row>
                 <Col md={3}>
-                    <ProfilCard data={{
-                        title: title.rendered,
-                        id: id,
-                        imgId: acf?.photo,
-                    }} />
+                    <ProfilCard
+                        title={title.rendered}
+                        id={id}
+                        imgId={acf?.logo}
+                    />
                     <RadarDiagram data={settings} />
                 </Col>
                 <Col md={9}>

@@ -26,7 +26,7 @@ function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
             const name = `${player.acf.name} ${player.acf.last_name}`;
             const slug = player.slug;
             const role = roles[player.acf.role].name;
-            const photoUrl = photos[player.acf.photo].media_details.sizes.thumbnail.source_url;
+            const photoUrl = photos[player.acf.logo].media_details.sizes.thumbnail.source_url;
 
             return (
                 <tr key={id}>

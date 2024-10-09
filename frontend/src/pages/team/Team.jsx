@@ -2,17 +2,17 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useGetTeamQuery } from "../../services/api/apiTeams";
-import ProfilCard from "../../components/units/ProfilCard";
+import ProfilCard from "../../components/units/ProfilCard/ProfilCard";
 import ListSkills from "../../components/units/ListSkills";
-import RadarDiagram from "../../components/units/RadarDiagram";
+import RadarDiagram from "../../components/units/RadarDiagram/RadarDiagram";
 import Comments from "../../components/units/Comments";
-import ReatingForm from "../../components/units/ReatingForm";
+import ReatingForm from "../../components/units/ReatingForm/ReatingForm";
 import useQueryStatus from "../../hooks/useQueryStatus";
-import SharedCard from '../../components/shared/SharedCard'
-import TableListing from "../../components/shared/TableListing";
-import RecentScores from "../../components/units/RecentScores";
+import SharedCard from '../../components/shared/SharedCard/SharedCard'
+import TableListing from "../../components/shared/TableListing/TableListing";
+import RecentScores from "../../components/units/RecentScores/RecentScores";
 import { useSelector } from "react-redux";
-import Content from "../../components/units/Content";
+import Content from "../../components/units/Contents";
 import { useTranslation } from "react-i18next";
 
 

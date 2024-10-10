@@ -9,9 +9,9 @@ function TableListing({ teamId = null, sportId = null, leagueId = null }) {
 
     const result = ids.filter(id => {
         const { team, sport, league } = entities[id].acf;
-        const teamMatch = teamId ? team === teamId : true;
-        const sportMatch = sportId ? sport === sportId : true;
-        const leagueMatch = leagueId ? league === leagueId : true;
+        const teamMatch = teamId ? team === Number(teamId) : true;
+        const sportMatch = sportId ? sport === Number(sportId) : true;
+        const leagueMatch = leagueId ? league === Number(leagueId) : true;
         return teamMatch && sportMatch && leagueMatch;
     });
 

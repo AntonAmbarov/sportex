@@ -14,6 +14,7 @@ import RecentScores from "../../components/units/RecentScores/RecentScores";
 import { useSelector } from "react-redux";
 import Content from "../../components/units/Contents";
 import { useTranslation } from "react-i18next";
+// import ProfilCardPlaceholder from "../../components/units/ProfilCard/ProfilCardPlaceholder";
 
 
 function Team() {

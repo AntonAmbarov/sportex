@@ -17,6 +17,10 @@ const resources = {
                 show: 'Показать',
                 hide: 'Скрыть',
                 submit: 'Отправить',
+                filterTeam: 'Выберите команду',
+                filterLeague: 'Выберите лигу',
+                reset: 'Сбросить',
+                search: 'Поиск',
             },
             titles: {
                 ratingForm: 'Оцените навыки',

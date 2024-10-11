@@ -6,6 +6,7 @@ import RowTable from "../RowTable/RowTable";
 function TableListing({ teamId = null, sportId = null, leagueId = null }) {
     const { ids, entities } = useSelector(state => state.players);
     const { entities: roles } = useSelector(state => state.roles);
+    const { entities: teams } = useSelector(state => state.teams);
 
     const result = ids.filter(id => {
         const { team, sport, league } = entities[id].acf;
@@ -21,12 +22,14 @@ function TableListing({ teamId = null, sportId = null, leagueId = null }) {
                 {result.map(id => {
 
                     const player = entities[id];
+                    const team = player.acf.team;
 
                     const params = {
                         name: `${player.acf.name} ${player.acf.last_name}`,
                         role: roles[player.acf.role].name,
                         slug: player.slug,
-                        imgId: player.acf.logo,
+                        imgPlayerId: player.acf.logo,
+                        imgTeamId: teams[team].acf.logo,
                     }
 
 

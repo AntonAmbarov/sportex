@@ -3,12 +3,15 @@ import { Image, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18nwext";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useGetImg from "../../../hooks/useGetImg";
 
 function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
     const { ids, entities } = useSelector(state => state.players);
     const { entities: roles } = useSelector(state => state.roles);
     const { entities: photos } = useSelector(state => state.imgs);
+    const { entities: teams } = useSelector(state => state.teams);
     const { t } = useTranslation();
+    const getImg = useGetImg();
 
     const result = useMemo(() => (ids.filter(id => {
         const { team, sport, league } = entities[id].acf;
@@ -27,12 +30,15 @@ function PlayersList({ teamId = null, sportId = null, leagueId = null }) {
             const slug = player.slug;
             const role = roles[player.acf.role].name;
             const photoUrl = photos[player.acf.logo].media_details.sizes.thumbnail.source_url;
-
+            const teamLogoId = teams[teamId].acf.logo;
+            const teamLogoPath = getImg(teamLogoId, 'thumbnail')
+            console.log(teamLogoId)
             return (
                 <tr key={id}>
-                    <td>{<Image src={photoUrl} roundedCircle />}</td>
+                    <td><Image src={photoUrl} roundedCircle /></td>
                     <td className="align-middle">{<Link to={`/players/${slug}`}>{name}</Link>}</td>
                     <td className="align-middle">{role}</td>
+                    <td className="alogn-middle"><Image src={teamLogoPath} roundedCircle /></td>
                 </tr>
             )
         })

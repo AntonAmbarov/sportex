@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useGetTeamQuery } from "../../services/api/apiTeams";
@@ -6,7 +6,6 @@ import ProfilCard from "../../components/units/ProfilCard/ProfilCard";
 import ListSkills from "../../components/units/ListSkills";
 import RadarDiagram from "../../components/units/RadarDiagram/RadarDiagram";
 import Comments from "../../components/units/Comments";
-import ReatingForm from "../../components/units/ReatingForm/ReatingForm";
 import useQueryStatus from "../../hooks/useQueryStatus";
 import SharedCard from '../../components/shared/SharedCard/SharedCard'
 import TableListing from "../../components/shared/TableListing/TableListing";
@@ -14,13 +13,15 @@ import RecentScores from "../../components/units/RecentScores/RecentScores";
 import { useSelector } from "react-redux";
 import Content from "../../components/units/Contents";
 import { useTranslation } from "react-i18next";
+const ReatingForm = lazy(() => import('../../components/units/ReatingForm'))
 // import ProfilCardPlaceholder from "../../components/units/ProfilCard/ProfilCardPlaceholder";
 
 
 function Team() {
 
-    const { slug } = useParams()
+    const { slug } = useParams();
     const { t } = useTranslation();
+    const isShowForm = useSelector(state => state.ui.reatingOffcanvas.isShow)
 
     const teamQuery = useGetTeamQuery(slug);
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
@@ -43,7 +44,7 @@ function Team() {
             <Row>
                 <Col md={3}>
                     <ProfilCard
-                        title={title.rendered}
+                        title={title?.rendered}
                         id={id}
                         imgId={acf?.logo}
                     />
@@ -59,11 +60,15 @@ function Team() {
                     <SharedCard title={t('titles.teamPlayers', { name: title.rendered })}>
                         <TableListing teamId={id} />
                     </SharedCard>
-                    {content.rendered.length > 0 && <Content title={t('titles.aboutTeam', { name: title.rendered })}>
+                    {content?.rendered && content.rendered.length > 0 && <Content title={t('titles.aboutTeam', { name: title.rendered })}>
                         {content.rendered}
                     </Content>}
                     <Comments id={id} />
-                    <ReatingForm data={settings} />
+                    {isShowForm &&
+                        <Suspense fallback={<div>{t('ui.loading')}</div>}>
+                            <ReatingForm data={settings} />
+                        </Suspense>
+                    }
                 </Col>
             </Row>
         </Container>

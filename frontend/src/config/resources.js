@@ -21,6 +21,7 @@ const resources = {
                 filterLeague: 'Выберите лигу',
                 reset: 'Сбросить',
                 search: 'Поиск',
+                loading: 'Загрузка',
             },
             titles: {
                 ratingForm: 'Оцените навыки',

@@ -11,6 +11,7 @@ import skillsConfig from "../../../config/skillsConfig";
 import { useTranslation } from "react-i18next";
 
 function ReatingForm({ data }) {
+
     const {
         type,
         postId,

@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Удаляем файлы прошлого деплоя
       run: |
-        ssh root@${{ secrets.SERVER_IP }} "rm -rf /var/www/html/*"
+       ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} "rm -rf /var/www/html/*"
 
 
     - name: Проверка кода

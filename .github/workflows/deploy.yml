@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Удаляем файлы прошлого деплоя
+      run: |
+        ssh root@${{ secrets.SERVER_IP }} "rm -rf /var/www/html/*"
+
+
     - name: Проверка кода
       uses: actions/checkout@v2
 

@@ -39,6 +39,7 @@ jobs:
       run: |
         npm install
         npm run build
+        
     - name: Проверка файлов билда
       run: ls -la ./build
 
@@ -48,6 +49,6 @@ jobs:
         host: ${{ secrets.SERVER_IP }}
         username: root
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
-        source: "./build/*"
+        source: "./build"
         target: "/var/www/html/"
         debug: true

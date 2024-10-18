@@ -39,6 +39,8 @@ jobs:
       run: |
         npm install
         npm run build
+    - name: Проверка файлов билда
+      run: ls -la ./build
 
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
@@ -48,3 +50,4 @@ jobs:
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
         source: "./build/*"
         target: "/var/www/html/"
+        debug: true

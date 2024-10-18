@@ -1,3 +1,10 @@
+name: Деплой на стейдж
+
+on:
+  push:
+    branches:
+      - dev
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -6,7 +13,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Создание директории .ssh
+    - name: Создание директории .ssh (если не существует)
       run: mkdir -p ~/.ssh
 
     - name: Настройка SSH Keys и known_hosts
@@ -15,7 +22,7 @@ jobs:
       run: |
         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        ssh-add - <<< "${{ secrets.DEPLOY_STAGE_SSH_KEY }}"
+        echo "${{ secrets.DEPLOY_STAGE_SSH_KEY }}" | ssh-add -
 
     - name: Удаление файлов прошлого деплоя
       env:

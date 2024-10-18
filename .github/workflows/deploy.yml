@@ -19,10 +19,12 @@ jobs:
     - name: Настройка SSH Keys и known_hosts
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        echo "${{ secrets.DEPLOY_STAGE_SSH_KEY }}" | ssh-add -
+        run: |
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.DEPLOY_STAGE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/id_rsa
 
     - name: Удаление файлов прошлого деплоя
       env:
@@ -50,7 +52,7 @@ jobs:
     - name: Проверка содержимого .ssh
       run: |
         ls -la ~/.ssh/
-        cat ~/.ssh/known_hosts
+        cat ~/.ssh/id_rsa
 
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
@@ -60,5 +62,5 @@ jobs:
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
         source: "./frontend/build/*"
         target: "/var/www/html/"
-        key_path: "~/.ssh/known_hosts"
+        key_path: "~/.ssh/id_rsa"
         debug: true

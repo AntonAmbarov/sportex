@@ -55,5 +55,5 @@ jobs:
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
         source: "./frontend/build/*"
         target: "/var/www/html/"
-        key_path: "~/.ssh/id_rsa"
+        use_insecure_cipher: true
         debug: true

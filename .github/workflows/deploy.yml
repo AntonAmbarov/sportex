@@ -49,8 +49,8 @@ jobs:
 
     - name: Проверка содержимого .ssh
       run: |
-        ls -la /home/runner/.ssh
-        cat /home/runner/.ssh/id_rsa
+        ls -la ~/.ssh/
+        cat ~/.ssh/known_hosts
 
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
@@ -60,5 +60,5 @@ jobs:
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
         source: "./frontend/build/*"
         target: "/var/www/html/"
-        key_path: "/home/runner/.ssh/id_rsa"
+        key_path: "~/.ssh/known_hosts"
         debug: true

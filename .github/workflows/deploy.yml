@@ -47,6 +47,11 @@ jobs:
         cd build
         ls -la
 
+    - name: Проверка содержимого .ssh
+      run: |
+        ls -la /home/runner/.ssh
+        cat /home/runner/.ssh/id_rsa
+
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
       with:

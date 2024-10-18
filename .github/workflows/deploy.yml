@@ -35,6 +35,7 @@ jobs:
         node-version: '20'
 
     - name: Инсталяция зависимостей и копиляция билда
+      working-directory: ./frontend
       run: |
         npm install
         npm run build

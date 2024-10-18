@@ -41,7 +41,9 @@ jobs:
         npm run build
         
     - name: Проверка файлов билда
-      run: ls -la ./build
+      run: ls -la
+      run: cd build
+      run: ls -la
 
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0

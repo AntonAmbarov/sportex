@@ -54,6 +54,9 @@ jobs:
         ls -la ~/.ssh/
         cat ~/.ssh/id_rsa
 
+    - name: Проверка приватного ключа
+      run: chmod 600 ~/.ssh/id_rsa
+
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
       with:
@@ -62,5 +65,5 @@ jobs:
         key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
         source: "./frontend/build/*"
         target: "/var/www/html/"
-        key_path: "~/.ssh/id_rsa"
+        key_path: "/home/runner/.ssh/id_rsa"
         debug: true

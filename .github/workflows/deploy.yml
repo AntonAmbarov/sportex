@@ -1,17 +1,13 @@
-name: Деплой на стейдж
-
-on:
-  push:
-    branches:
-      - dev
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Проверка кода
+    - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Создание директории .ssh
+      run: mkdir -p ~/.ssh
 
     - name: Настройка SSH Keys и known_hosts
       env:

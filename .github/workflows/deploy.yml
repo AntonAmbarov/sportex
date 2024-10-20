@@ -60,7 +60,7 @@ jobs:
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
       with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
           fingerprint: ${{ secrets.FINGERPRINT }}

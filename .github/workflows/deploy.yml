@@ -63,6 +63,5 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
-          fingerprint: ${{ secrets.FINGERPRINT }}
           source: "./frontend/build/*"
           target: "/var/www/html/"

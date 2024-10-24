@@ -1,23 +1,21 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useGetTeamQuery } from "../../services/api/apiTeams";
-import ProfilCard from "../../components/units/ProfilCard/ProfilCard";
-import ListSkills from "../../components/units/ListSkills";
-import RadarDiagram from "../../components/units/RadarDiagram/RadarDiagram";
-import Comments from "../../components/units/Comments";
-import useQueryStatus from "../../hooks/useQueryStatus";
-import SharedCard from '../../components/shared/SharedCard/SharedCard'
-import TableListing from "../../components/shared/TableListing/TableListing";
-import RecentScores from "../../components/units/RecentScores/RecentScores";
-import { useSelector } from "react-redux";
-import Content from "../../components/units/Contents";
-import { useTranslation } from "react-i18next";
-const ReatingForm = lazy(() => import('../../components/units/ReatingForm'))
-// import ProfilCardPlaceholder from "../../components/units/ProfilCard/ProfilCardPlaceholder";
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useGetTeamQuery } from 'services/api/apiTeams';
+import { ProfilCard } from 'widgets/profilCard';
+import { ListSkills } from 'features/listSkills';
+import { RadarDiagram } from 'features/radarDiagram';
+import { Comments } from 'features/comments';
+import { useQueryStatus } from 'shared/lib/useQueryStatus';
+import { SharedCard } from 'shared/ui/sharedCard';
+import { TableListing } from 'widgets/tableListing';
+import { RecentScores } from 'shared/ui/recentScores';
+import { Content } from 'shared/ui/content';
+const ReatingForm = lazy(() => import('features/listSkills/reatingForm'));
 
-
-function Team() {
+export function Team() {
 
     const { slug } = useParams();
     const { t } = useTranslation();
@@ -74,5 +72,3 @@ function Team() {
         </Container>
     )
 }
-
-export default Team;

@@ -1,0 +1,1 @@
+export { StarsRaintg } from './StarsRating';

@@ -1,0 +1,1 @@
+export { RecentScores } from './RecentScores';

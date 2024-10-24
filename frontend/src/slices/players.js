@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
-import fetchInitAppData from "../config/fetchInitAppData";
+import { fetchInitAppData } from 'shared/api/fetchInitAppData';
 
 const playersAdapter = createEntityAdapter({
     loading: false,

@@ -9,7 +9,7 @@ import apiLeagues from '../services/api/apiLeagues';
 import apiRoles from '../services/api/apiRoles';
 import apiSports from '../services/api/apiSports';
 import uiReducer from './ui';
-import authorizedUserReducer from './authorizedUser';
+import authorizedUserReducer from '../shared/api/auth/authorizedUser';
 import teamsReducer from './teams';
 import playersReducer from './players';
 import leaguesReducer from './leagues';

@@ -1,0 +1,1 @@
+export { signupFormSchema, loginFormSchema } from './yupConfig';

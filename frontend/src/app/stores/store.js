@@ -1,24 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import apiTeams from '../services/api/apiTeams';
-import apiPlayers from '../services/api/apiPlayers';
-import apiAuth from '../services/api/apiAuth';
-import apiComments from '../services/api/apiComments';
-import apiScores from '../services/api/apiScores';
-import apiImgs from '../services/api/apiImgs';
-import apiLeagues from '../services/api/apiLeagues';
-import apiRoles from '../services/api/apiRoles';
-import apiSports from '../services/api/apiSports';
-import uiReducer from './ui';
-import authorizedUserReducer from '../shared/api/auth/authorizedUser';
-import teamsReducer from './teams';
-import playersReducer from './players';
-import leaguesReducer from './leagues';
-import sportsReducer from './sports';
-import rolesReducer from './roles';
-import imgsReducer from './imgs';
-import avgScoresReducer from './avgScores';
+import apiTeams from '../../services/api/apiTeams';
+import apiPlayers from '../../services/api/apiPlayers';
+import apiAuth from '../../services/api/apiAuth';
+import apiComments from '../../services/api/apiComments';
+import apiScores from '../../services/api/apiScores';
+import apiImgs from '../../services/api/apiImgs';
+import apiLeagues from '../../services/api/apiLeagues';
+import apiRoles from '../../services/api/apiRoles';
+import apiSports from '../../services/api/apiSports';
+import uiReducer from '../../slices/ui';
+import authorizedUserReducer from '../../shared/api/auth';
+import teamsReducer from '../../slices/teams';
+import playersReducer from '../../slices/players';
+import leaguesReducer from '../../slices/leagues';
+import sportsReducer from '../../slices/sports';
+import rolesReducer from '../../slices/roles';
+import imgsReducer from '../../slices/imgs';
+import avgScoresReducer from '../../slices/avgScores';
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         [apiTeams.reducerPath]: apiTeams.reducer,
         [apiPlayers.reducerPath]: apiPlayers.reducer,
@@ -52,5 +52,3 @@ const store = configureStore({
             apiSports.middleware,
         ),
 })
-
-export default store;

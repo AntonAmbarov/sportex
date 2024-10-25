@@ -1,0 +1,1 @@
+export { authorizedUser, setProfil, removeProfil } from './authorizedUser';

@@ -1,22 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import apiTeams from '../../services/api/apiTeams';
-import apiPlayers from '../../services/api/apiPlayers';
+import { apiTeams, teamsReducer } from 'entities/team';
+import { apiPlayers, playersReducer } from 'entities/player';
+import { apiScores, avgScoresReducer } from 'entities/score';
+import { apiLeagues, leaguesReducer } from 'entities/league';
+import { apiRoles, rolesReducer } from 'entities/role';
+import { apiSports, sportsReducer } from 'entities/sport';
 import apiAuth from '../../services/api/apiAuth';
 import apiComments from '../../services/api/apiComments';
-import apiScores from '../../services/api/apiScores';
 import apiImgs from '../../services/api/apiImgs';
-import apiLeagues from '../../services/api/apiLeagues';
-import apiRoles from '../../services/api/apiRoles';
-import apiSports from '../../services/api/apiSports';
 import uiReducer from '../../slices/ui';
 import authorizedUserReducer from '../../shared/api/auth';
-import teamsReducer from '../../slices/teams';
-import playersReducer from '../../slices/players';
-import leaguesReducer from '../../slices/leagues';
-import sportsReducer from '../../slices/sports';
-import rolesReducer from '../../slices/roles';
 import imgsReducer from '../../slices/imgs';
-import avgScoresReducer from '../../slices/avgScores';
 
 export const store = configureStore({
     reducer: {

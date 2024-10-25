@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useGetPlayerQuery } from 'services/api/apiPlayers';
+import { useGetPlayerQuery } from 'entities/player/api/endpoints';
 import { ProfilCard } from 'widgets/profilCard';
 import { ListSkills } from 'features/listSkills';
 import { RadarDiagram } from 'features/radarDiagram';

@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
-import { fetchInitAppData } from 'shared/api/fetchInitAppData';
+import { fetchInitAppData } from 'app/stores/fetchInitAppData';
 
 const imgsAdapter = createEntityAdapter();
 

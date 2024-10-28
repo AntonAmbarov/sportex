@@ -4,11 +4,11 @@ import cn from 'classnames';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Popap } from 'shared/ui/popap';
-import { closeLoginForm } from 'slices/ui';
+import { closeLoginForm } from 'shared/model/ui';
 import { loginFormSchema } from 'shared/yup';
-import { useLoginMutation } from 'services/api/apiAuth';
-import { toggleStatusAuth } from 'slices/ui';
-import { setProfil } from 'shared/api/auth/authorizedUser';
+import { useLoginMutation } from 'shared/api/auth';
+import { toggleStatusAuth } from 'shared/model/ui';
+import { setProfil } from 'shared/model/currentUser';
 
 export function LoginForm() {
 

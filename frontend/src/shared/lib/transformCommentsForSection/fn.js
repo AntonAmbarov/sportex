@@ -1,4 +1,4 @@
-import { paths } from 'shared/api/apiConfig';
+import { paths } from '../../api/config';
 
 export function transformCommentsForSection(data) {
     const memo = {};

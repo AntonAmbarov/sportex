@@ -1,1 +1,1 @@
-export { transformCommentsForSection } from './transformCommentsForSection';
+export { transformCommentsForSection } from './fn';

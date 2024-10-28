@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { paths } from 'shared/api/apiConfig';
+import { paths } from '../../api/config';
 
 const initialState = {
     userDisplayName: null,

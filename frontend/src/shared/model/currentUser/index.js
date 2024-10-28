@@ -1,1 +1,1 @@
-export { default as authorizedReducer, setProfil, removeProfil } from './authorizedUser';
+export { default as currentUser, setProfil, removeProfil } from './slice'

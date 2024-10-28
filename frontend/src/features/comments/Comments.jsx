@@ -3,7 +3,7 @@ import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useGetCommentsQuery, usePostCommentMutation } from 'services/api/apiComments';
+import { useGetCommentsQuery, usePostCommentMutation } from 'shared/api/comments';
 import { transformCommentsForSection } from 'shared/lib/transformCommentsForSection';
 import { transformCommentsForApi } from 'shared/lib/transformCommentsForApi';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';

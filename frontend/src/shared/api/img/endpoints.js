@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl, paths } from 'shared/api/apiConfig';
+import { baseUrl, paths } from '../config';
 
-const api = createApi({
+export const api = createApi({
     reducerPath: 'apiImgs',
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
@@ -14,5 +14,4 @@ const api = createApi({
     })
 })
 
-export default api;
 export const { useGetImgsQuery } = api;

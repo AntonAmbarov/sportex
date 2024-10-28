@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { Popap } from '../../shared/ui/popap';
 import { Button } from 'react-bootstrap';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeRegisterForm } from 'slices/ui';
+import { closeRegisterForm } from 'shared/model/ui';
 import { signupFormSchema } from 'shared/yup';
-import { useRegisterMutation, useLoginMutation } from 'services/api/apiAuth';
+import { useRegisterMutation, useLoginMutation } from 'shared/api/auth';
+import { Popap } from 'shared/ui/popap';
 
 export function SignupForm() {
 

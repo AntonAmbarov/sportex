@@ -1,1 +1,0 @@
-export { baseUrl, paths } from './apiConfig'

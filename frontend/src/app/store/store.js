@@ -5,12 +5,12 @@ import { apiScores, avgScoresReducer } from 'entities/score';
 import { apiLeagues, leaguesReducer } from 'entities/league';
 import { apiRoles, rolesReducer } from 'entities/role';
 import { apiSports, sportsReducer } from 'entities/sport';
-import apiAuth from '../../services/api/apiAuth';
-import apiComments from '../../services/api/apiComments';
-import apiImgs from '../../services/api/apiImgs';
-import uiReducer from '../../slices/ui';
-import { authorizedReducer } from 'shared/api/auth';
-import imgsReducer from '../../slices/imgs';
+import { apiAuth } from 'shared/api/auth';
+import { apiComments } from 'shared/api/comments';
+import { apiImgs } from 'shared/api/img';
+import { uiReducer } from 'shared/model/ui';
+import { currentUser } from 'shared/model/currentUser';
+import { imgsReducer } from 'shared/model/img';
 
 export const store = configureStore({
     reducer: {
@@ -30,7 +30,7 @@ export const store = configureStore({
         sports: sportsReducer,
         roles: rolesReducer,
         imgs: imgsReducer,
-        authorizedUser: authorizedReducer,
+        authorizedUser: currentUser,
         avgScores: avgScoresReducer,
     },
     middleware: (getDefaultMiddleware) =>

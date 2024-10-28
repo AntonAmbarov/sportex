@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { paths } from 'shared/api/apiConfig';
-import baseQueryRefresh from 'services/api/refreshToken';
+import { paths } from 'shared/api/config';
+import { baseQueryRefresh } from 'shared/api/refreshToken';
 
 export const api = createApi({
     reducerPath: 'apiScores',

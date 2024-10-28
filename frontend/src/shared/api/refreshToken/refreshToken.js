@@ -1,5 +1,5 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl, paths } from 'shared/api/apiConfig';
+import { baseUrl, paths } from '../config';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
@@ -13,7 +13,7 @@ const baseQuery = fetchBaseQuery({
     }
 })
 
-const baseQueryRefresh = async (args, api, opts) => {
+export const baseQueryRefresh = async (args, api, opts) => {
     let result = await baseQuery(args, api, opts);
     if (result.error && result.error.status === 401) {
         const { data } = await baseQuery(paths.refreshToken, api, opts);
@@ -26,5 +26,3 @@ const baseQueryRefresh = async (args, api, opts) => {
     }
     return result;
 }
-
-export default baseQueryRefresh;

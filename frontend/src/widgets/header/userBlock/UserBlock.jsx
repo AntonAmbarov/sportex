@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleStatusAuth } from 'slices/ui';
-import { removeProfil } from 'shared/api/auth/authorizedUser';
+import { toggleStatusAuth } from 'shared/model/ui';
+import { removeProfil } from 'shared/model/currentUser';
 
 export function UserBlock() {
 

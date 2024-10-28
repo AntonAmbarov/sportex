@@ -9,7 +9,7 @@ import apiAuth from '../../services/api/apiAuth';
 import apiComments from '../../services/api/apiComments';
 import apiImgs from '../../services/api/apiImgs';
 import uiReducer from '../../slices/ui';
-import authorizedUserReducer from '../../shared/api/auth';
+import { authorizedReducer } from 'shared/api/auth';
 import imgsReducer from '../../slices/imgs';
 
 export const store = configureStore({
@@ -30,7 +30,7 @@ export const store = configureStore({
         sports: sportsReducer,
         roles: rolesReducer,
         imgs: imgsReducer,
-        authorizedUser: authorizedUserReducer,
+        authorizedUser: authorizedReducer,
         avgScores: avgScoresReducer,
     },
     middleware: (getDefaultMiddleware) =>

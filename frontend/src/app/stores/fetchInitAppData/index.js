@@ -1,1 +1,0 @@
-export { fetchInitAppData } from './fetchInitAppData'

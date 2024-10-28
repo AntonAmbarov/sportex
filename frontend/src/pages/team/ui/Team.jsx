@@ -11,9 +11,9 @@ import { Comments } from 'features/comments';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { TableListing } from 'widgets/tableListing';
-import { RecentScores } from 'shared/ui/recentScores';
+import { RecentScores } from 'features/recentScores';
 import { Content } from 'shared/ui/content';
-const ReatingForm = lazy(() => import('features/listSkills/reatingForm'));
+const ReatingForm = lazy(() => import('features/listSkills'));
 
 export function Team() {
 

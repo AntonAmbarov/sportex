@@ -1,1 +1,0 @@
-export { ReatingForm } from './ReatingForm';

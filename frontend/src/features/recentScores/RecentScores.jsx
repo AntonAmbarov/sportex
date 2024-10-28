@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge, Col, ListGroup } from 'react-bootstrap';
 import { formatDate } from 'shared/lib/formatDate';
-import { useGetAllScoresQuery } from '../../../services/api/apiScores';
+import { useGetAllScoresQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { useTranslation } from 'react-i18next';
 
@@ -31,7 +31,7 @@ const sortData = (data) => {
     })
 }
 
-export function RecentScores({ data }) {
+function RecentScores({ data }) {
     const { t } = useTranslation();
     const { postId, type, sport } = data;
     const scoresQuery = useGetAllScoresQuery({ postId: postId, type: type, sport: sport });
@@ -70,3 +70,5 @@ export function RecentScores({ data }) {
         </ListGroup>
     )
 }
+
+export default RecentScores;

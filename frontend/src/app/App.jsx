@@ -9,7 +9,7 @@ import { Header } from 'widgets/header';
 import { Footer } from 'widgets/footer';
 import { setProfil } from 'shared/api/auth';
 import { toggleStatusAuth } from 'slices/ui';
-import { fetchInitAppData } from 'app/stores/fetchInitAppData';
+import { fetchInitAppData } from 'app/store';
 
 function App() {
 

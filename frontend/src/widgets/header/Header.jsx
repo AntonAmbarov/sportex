@@ -5,7 +5,7 @@ import { MainMenu } from 'shared/ui/mainMenu';
 import { UserBlock } from 'widgets/header/userBlock';
 import { AuthButtons } from 'features/authButtons';
 
-function Header() {
+export function Header() {
 
     const isAuthorized = useSelector(state => state.authorizedUser.userName !== null);
 
@@ -40,5 +40,3 @@ function Header() {
         </header>
     )
 }
-
-export default Header;

@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup } from 'react-bootstrap';
 import { SkillLine } from 'shared/ui/skillLine';
-import { ReatingButton } from './reatingButton';
-import { useGetScoresAvgQuery } from 'services/api/apiScores';
+import { ReatingButton } from './ReatingButton';
+import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 
 export function ListSkills({ data }) {

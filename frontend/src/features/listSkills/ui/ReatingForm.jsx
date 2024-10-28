@@ -7,7 +7,7 @@ import { Form } from 'react-bootstrap'
 import { GRADES, SKILLSCONFIG } from 'shared/consts';
 import { transformScoresForApi } from 'shared/lib/transformScoresForApi';
 import { closeReatingOffcanvas } from "slices/ui";
-import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from "services/api/apiScores";
+import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from 'entities/score';
 
 export function ReatingForm({ data }) {
 

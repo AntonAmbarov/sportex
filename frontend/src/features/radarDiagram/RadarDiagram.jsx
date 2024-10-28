@@ -4,7 +4,7 @@ import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler,
 import { useTranslation } from 'react-i18next';
 import { Card } from 'react-bootstrap';
 import { GRADES } from 'shared/consts';
-import { useGetScoresAvgQuery } from 'services/api/apiScores';
+import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);

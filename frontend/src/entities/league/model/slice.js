@@ -25,7 +25,7 @@ const leaguesSlice = createSlice({
             .addCase(fetchLeaguesData.rejected, (state, { payload }) => {
                 state.loading = false;
                 state.error = null;
-                leaguesAdapter.setAll(state, payload)
+                adapter.setAll(state, payload)
             });
     }
 });

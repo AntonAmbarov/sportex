@@ -1,5 +1,5 @@
 import { fetchTeamsData } from 'entities/team';
-import { fetchPlayersData } from 'entities/players';
+import { fetchPlayersData } from 'entities/player';
 import { fetchLeaguesData } from 'entities/league';
 import { fetchRolesData } from 'entities/role';
 import { fetchScoresData } from 'entities/score';

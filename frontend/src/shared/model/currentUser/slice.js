@@ -27,5 +27,5 @@ const authorizedUserSlice = createSlice({
     }
 });
 
-export const { authorizedUser } = authorizedUserSlice.reducer;
+export default authorizedUserSlice.reducer;
 export const { setProfil, removeProfil } = authorizedUserSlice.actions;

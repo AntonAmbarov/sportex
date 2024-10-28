@@ -7,7 +7,7 @@ import { FooterBar } from './footerBar';
 const yourAccaunt = [{ name: 'Вход', path: '/' }, { name: 'Регистрация', path: '/' }];
 const information = [{ name: 'Конфиденциальность', path: '/' }];
 
-function Footer() {
+export function Footer() {
     return (
         <footer className={'bg-secondary text-white'}>
             <Container className="py-4">
@@ -52,5 +52,3 @@ function Footer() {
         </footer>
     )
 }
-
-export default Footer

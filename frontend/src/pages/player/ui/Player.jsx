@@ -8,10 +8,10 @@ import { ProfilCard } from 'widgets/profilCard';
 import { ListSkills } from 'features/listSkills';
 import { RadarDiagram } from 'features/radarDiagram';
 import { Comments } from 'features/comments';
-import { ReatingForm } from 'features/listSkills/reatingForm';
+import { ReatingForm } from 'features/listSkills';
 import { SharedCard } from 'shared/ui/sharedCard';
-import { RecentScores } from 'shared/ui/recentScores';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
+import { RecentScores } from 'features/recentScores';
 
 export function Player() {
 

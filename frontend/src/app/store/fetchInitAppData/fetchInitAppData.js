@@ -4,18 +4,22 @@ import { fetchLeaguesData } from 'entities/league';
 import { fetchRolesData } from 'entities/role';
 import { fetchScoresData } from 'entities/score';
 import { fetchSportsData } from 'entities/sport'
+import { fetchImgsData } from 'shared/api/img/fetchImgsData';
 
 export const fetchInitAppData = () => async (dispatch) => {
     try {
-
-        await new Promise.all([
+        console.log('run: fetchInitAppData') //log
+        const promises = [
             dispatch(fetchPlayersData()),
             dispatch(fetchTeamsData()),
             dispatch(fetchLeaguesData()),
             dispatch(fetchRolesData()),
             dispatch(fetchScoresData()),
             dispatch(fetchSportsData()),
-        ]);
+            dispatch(fetchImgsData()),
+        ];
+
+        await Promise.all(promises);
 
     } catch (error) {
         console.error('Ошибка при загрузке данных:', error);

@@ -5,7 +5,13 @@ export const fetchImgsData = createAsyncThunk(
     'fetchImgsData',
     async (_, thunkAPI) => {
         try {
-            const resp = await api.endpoints.getImgs.initiate();
+            const resp = await thunkAPI.dispatch(api.endpoints.getImgs.initiate());
+            const err = resp.err;
+
+            if (err) {
+                return thunkAPI.rejectWithValue(err)
+            }
+
             return resp.data || [];
         } catch (err) {
             return thunkAPI.rejectWithValue(err.message);

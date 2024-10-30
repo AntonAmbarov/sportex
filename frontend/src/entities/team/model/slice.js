@@ -25,6 +25,7 @@ const teamsSlice = createSlice({
             .addCase(fetchTeamsData.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.error = null;
+                adapter.setAll(state, payload)
             });
     },
 })

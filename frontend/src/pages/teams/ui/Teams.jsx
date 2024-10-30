@@ -6,8 +6,11 @@ import { ProfilCard } from 'widgets/profilCard';
 
 export function Teams() {
 
+    console.log('run: teams')
     const { ids, entities } = useSelector(state => state.teams);
     const { t } = useTranslation();
+
+    console.log(ids)
 
     return (
         <Container>

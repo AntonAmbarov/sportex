@@ -23,7 +23,7 @@ const imgsSlice = createSlice({
             .addCase(fetchImgsData.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.error = null;
-                imgsAdapter.setAll(state, payload.getImgs);
+                imgsAdapter.setAll(state, payload);
             })
     }
 });

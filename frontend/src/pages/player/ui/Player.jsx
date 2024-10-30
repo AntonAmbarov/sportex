@@ -8,7 +8,6 @@ import { ProfilCard } from 'widgets/profilCard';
 import { ListSkills } from 'features/listSkills';
 import { RadarDiagram } from 'features/radarDiagram';
 import { Comments } from 'features/comments';
-import { ReatingForm } from 'features/listSkills';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { RecentScores } from 'features/recentScores';
@@ -54,7 +53,6 @@ export function Player() {
                         <RecentScores data={settings} />
                     </SharedCard>
                     <Comments id={id} />
-                    <ReatingForm data={settings} />
                 </Col>
             </Row>
         </Container>

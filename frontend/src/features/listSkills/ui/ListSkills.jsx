@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup } from 'react-bootstrap';
 import { SkillLine } from 'shared/ui/skillLine';
-import { ReatingButton } from './ReatingButton';
 import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
+import { RatingButton } from './RatingButton';
+import { useSelector } from 'react-redux';
+const RatingForm = lazy(() => import('./RatingForm'))
 
 export function ListSkills({ data }) {
     const { t } = useTranslation();
     const { type, postId, sport } = data;
     const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport });
     const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
+    const isShowForm = useSelector(state => state.ui.reatingOffcanvas.isShow);
     if (scoresAvgStatus) return scoresAvgStatus;
     const { data: dataAvgQuery } = scoresAvgQuery;
 
-    const renerdScoreList = () => {
-        return dataAvgQuery.map(({ avg_rating_type, avg_rating_value }) => {
+    const renerdScoreList = (list) => {
+        return list.map(({ avg_rating_type, avg_rating_value }) => {
             const name = t(`skills.${avg_rating_type}`);
             const value = avg_rating_value;
             return (
@@ -30,9 +33,13 @@ export function ListSkills({ data }) {
     return (
         <>
             <ListGroup className="list-group-flush mb-3">
-                {renerdScoreList()}
+                {dataAvgQuery.length > 0 && renerdScoreList(dataAvgQuery)}
             </ListGroup>
-            <ReatingButton />
+            <RatingButton />
+            {isShowForm &&
+                <Suspense fallback={<div>{t('ui.loading')}</div>}>
+                    <RatingForm data={data} />
+                </Suspense>}
         </>
     )
 }

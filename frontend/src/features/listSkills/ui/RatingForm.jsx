@@ -9,7 +9,7 @@ import { transformScoresForApi } from 'shared/lib/transformScoresForApi';
 import { closeReatingOffcanvas } from 'shared/model/ui';
 import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from 'entities/score';
 
-export function ReatingForm({ data }) {
+function RatingForm({ data }) {
 
     const {
         type,
@@ -88,3 +88,5 @@ export function ReatingForm({ data }) {
         </Offcanvas>
     )
 }
+
+export default RatingForm;

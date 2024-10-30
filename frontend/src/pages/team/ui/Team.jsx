@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -13,13 +13,11 @@ import { SharedCard } from 'shared/ui/sharedCard';
 import { TableListing } from 'widgets/tableListing';
 import { RecentScores } from 'features/recentScores';
 import { Content } from 'shared/ui/content';
-const ReatingForm = lazy(() => import('features/listSkills'));
 
 export function Team() {
 
     const { slug } = useParams();
     const { t } = useTranslation();
-    const isShowForm = useSelector(state => state.ui.reatingOffcanvas.isShow)
 
     const teamQuery = useGetTeamQuery(slug);
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
@@ -62,11 +60,6 @@ export function Team() {
                         {content.rendered}
                     </Content>}
                     <Comments id={id} />
-                    {isShowForm &&
-                        <Suspense fallback={<div>{t('ui.loading')}</div>}>
-                            <ReatingForm data={settings} />
-                        </Suspense>
-                    }
                 </Col>
             </Row>
         </Container>

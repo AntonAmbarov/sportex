@@ -3,10 +3,11 @@ import { Formik, Form, Field } from 'formik';
 import { Button } from 'react-bootstrap';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { closeRegisterForm } from 'shared/model/ui';
-import { signupFormSchema } from 'shared/yup';
-import { useRegisterMutation, useLoginMutation } from 'shared/api/auth';
+import { signupFormSchema } from '../model/yupConfig';
 import { Popap } from 'shared/ui/popap';
+import { useRegisterMutation, useLoginMutation } from '../api/endpoints';
 
 export function SignupForm() {
 

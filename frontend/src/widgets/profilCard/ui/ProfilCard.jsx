@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { StarsRaintg } from 'shared/ui/starsRating';
 import { useGetImg } from 'shared/lib/useGetImg';
 

@@ -1,1 +1,0 @@
-export { api as apiAuth, useRegisterMutation, useLoginMutation } from './endpoints';

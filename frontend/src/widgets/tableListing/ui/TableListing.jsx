@@ -1,7 +1,8 @@
-import React from "react";
-import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { RowTable } from "./rowTable/RowTable";
+import React from 'react';
+import { Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
+import { RowTable } from './RowTable';
 
 export function TableListing({ teamId = null, sportId = null, leagueId = null }) {
     const { ids, entities } = useSelector(state => state.players);

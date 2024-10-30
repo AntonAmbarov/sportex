@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, ProgressBar } from 'react-bootstrap';
+
 import { GRADES } from 'shared/consts';
 
 export function SkillLine({ name, score }) {

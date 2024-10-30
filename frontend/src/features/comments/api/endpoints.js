@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { paths } from '../config';
-import { baseQueryRefresh } from '../refreshToken';
+import { paths } from 'shared/api/config';
+import { baseQueryRefresh } from 'shared/api/refreshToken';
 
 export const api = createApi({
     reducerPath: 'apiComments',

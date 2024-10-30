@@ -3,14 +3,15 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useGetPlayerQuery } from 'entities/player/api/endpoints';
+
 import { ProfilCard } from 'widgets/profilCard';
 import { ListSkills } from 'features/listSkills';
 import { RadarDiagram } from 'features/radarDiagram';
 import { Comments } from 'features/comments';
+import { RecentScores } from 'features/recentScores';
+import { useGetPlayerQuery } from 'entities/player';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
-import { RecentScores } from 'features/recentScores';
 
 export function Player() {
 

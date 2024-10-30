@@ -1,7 +1,8 @@
-import React from "react";
-import { useGetImg } from "shared/lib/useGetImg";
-import { Link } from "react-router-dom";
-import { Image } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Image } from 'react-bootstrap';
+
+import { useGetImg } from 'shared/lib/useGetImg';
 
 export function RowTable({ name, role, imgPlayerId, imgTeamId, slug }) {
     const imgPlayer = useGetImg(imgPlayerId, 'thumbnail'); //второй параметр size: thumbnail, medium или full. Если ничего не задано - medium

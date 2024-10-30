@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
+
 import { CustomFilterMenu } from './CustomFilterMenu';
 
 export function Filter({ title, options, onSelect }) {

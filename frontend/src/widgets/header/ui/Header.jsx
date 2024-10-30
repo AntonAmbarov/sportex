@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
+
 import { MainMenu } from 'shared/ui/mainMenu';
-import { UserBlock } from 'widgets/header/userBlock';
 import { AuthButtons } from 'features/authButtons';
+import { UserBlock } from './UserBlock';
 
 export function Header() {
 

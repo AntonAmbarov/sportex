@@ -3,12 +3,13 @@ import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Popap } from 'shared/ui/popap';
+
 import { closeLoginForm } from 'shared/model/ui';
-import { loginFormSchema } from 'shared/yup';
-import { useLoginMutation } from 'shared/api/auth';
 import { toggleStatusAuth } from 'shared/model/ui';
+import { loginFormSchema } from '../model/yupConfig';
+import { Popap } from 'shared/ui/popap';
 import { setProfil } from 'shared/model/currentUser';
+import { useLoginMutation } from '../api/endpoints';
 
 export function LoginForm() {
 

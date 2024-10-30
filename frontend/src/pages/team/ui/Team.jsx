@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useGetTeamQuery } from 'entities/team/api/endpoints';
+
 import { ProfilCard } from 'widgets/profilCard';
+import { TableListing } from 'widgets/tableListing';
 import { ListSkills } from 'features/listSkills';
 import { RadarDiagram } from 'features/radarDiagram';
 import { Comments } from 'features/comments';
+import { RecentScores } from 'features/recentScores';
+import { useGetTeamQuery } from 'entities/team/api/endpoints';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { SharedCard } from 'shared/ui/sharedCard';
-import { TableListing } from 'widgets/tableListing';
-import { RecentScores } from 'features/recentScores';
 import { Content } from 'shared/ui/content';
 
 export function Team() {

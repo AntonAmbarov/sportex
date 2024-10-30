@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+
 import { ProfilCard } from 'widgets/profilCard';
 
 export function Teams() {
 
-    console.log('run: teams')
     const { ids, entities } = useSelector(state => state.teams);
     const { t } = useTranslation();
 

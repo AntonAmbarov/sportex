@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+
 import { openReatingOffcanvas } from "shared/model/ui";
 
 export function RatingButton() {

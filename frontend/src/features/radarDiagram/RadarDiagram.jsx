@@ -3,6 +3,7 @@ import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 import { useTranslation } from 'react-i18next';
 import { Card } from 'react-bootstrap';
+
 import { GRADES } from 'shared/consts';
 import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';

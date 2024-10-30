@@ -1,12 +1,13 @@
 import React, { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
-import { SkillLine } from 'shared/ui/skillLine';
+
 import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { RatingButton } from './RatingButton';
-import { useSelector } from 'react-redux';
-const RatingForm = lazy(() => import('./RatingForm'))
+import { SkillLine } from './SkillLine';
+const RatingForm = lazy(() => import('./RatingForm'));
 
 export function ListSkills({ data }) {
     const { t } = useTranslation();

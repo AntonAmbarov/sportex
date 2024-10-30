@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ButtonGroup, Button, Col } from 'react-bootstrap';
-import { LoginForm } from 'features/loginForm';
-import { SignupForm } from 'features/signupForm';
+
 import { openLoginForm, openRegisterForm } from 'shared/model/ui';
+import { LoginForm } from './LoginForm';
+import { SignupForm } from './SignupForm';
 
 export function AuthButtons() {
     const dispatch = useDispatch();

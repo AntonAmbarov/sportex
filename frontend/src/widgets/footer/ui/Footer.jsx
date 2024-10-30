@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+
 import { MainMenu } from 'shared/ui/mainMenu';
-import { FooterBar } from './footerBar';
+import { FooterBar } from './FooterBar';
 
 const yourAccaunt = [{ name: 'Вход', path: '/' }, { name: 'Регистрация', path: '/' }];
 const information = [{ name: 'Конфиденциальность', path: '/' }];

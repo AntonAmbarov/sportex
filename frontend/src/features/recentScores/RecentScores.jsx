@@ -1,9 +1,10 @@
 import React from 'react';
 import { Badge, Col, ListGroup } from 'react-bootstrap';
-import { formatDate } from 'shared/lib/formatDate';
+import { useTranslation } from 'react-i18next';
+
 import { useGetAllScoresQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
-import { useTranslation } from 'react-i18next';
+import { formatDate } from 'shared/lib/formatDate';
 
 const convertData = (data) => {
     const result = data.reduce((acc, {

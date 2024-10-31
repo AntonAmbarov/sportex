@@ -1,4 +1,11 @@
 export {
+    selectLoginForm,
+    selectReatingOffcanvas,
+    selectRegisterForm,
+    selectStatusAuth,
+} from './selectors';
+
+export {
     default as uiReducer,
     openLoginForm,
     openRegisterForm,

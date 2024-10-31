@@ -1,13 +1,17 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { t } from 'i18next';
 
 import { RowTable } from './RowTable';
 
 export function TableListing({ teamId = null, sportId = null, leagueId = null }) {
-    const { ids, entities } = useSelector(state => state.players);
-    const { entities: roles } = useSelector(state => state.roles);
-    const { entities: teams } = useSelector(state => state.teams);
+    const { ids, entities, loading: loadingPlayers, error: errorPlayers } = useSelector(state => state.players);
+    const { entities: roles, loading: loadingRoles, error: errorRoles } = useSelector(state => state.roles);
+    const { entities: teams, loading: loadingTeams, error: errorTeams } = useSelector(state => state.teams);
+
+    if (errorPlayers || errorRoles || errorTeams) return <div>{t('messages.error')}</div>;
+    if (loadingPlayers || loadingRoles || loadingTeams) return <div>{t('messages.isLoading')}</div>
 
     const result = ids.filter(id => {
         const { team, sport, league } = entities[id].acf;

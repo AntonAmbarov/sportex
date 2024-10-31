@@ -4,13 +4,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { ProfilCard } from 'widgets/profilCard';
+import { selectTeams } from 'entities/team';
 
 export function Teams() {
 
-    const { ids, entities } = useSelector(state => state.teams);
+    const { ids, entities } = useSelector(selectTeams);
     const { t } = useTranslation();
-
-    console.log(ids)
 
     return (
         <Container>

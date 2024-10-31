@@ -9,8 +9,8 @@ const initialState = {
     avatar: null,
 }
 
-const authorizedUserSlice = createSlice({
-    name: 'authorizedUser',
+const currentUserSlice = createSlice({
+    name: 'currentUser',
     initialState: initialState,
     reducers: {
         setProfil: (state, actions) => {
@@ -27,5 +27,5 @@ const authorizedUserSlice = createSlice({
     }
 });
 
-export default authorizedUserSlice.reducer;
-export const { setProfil, removeProfil } = authorizedUserSlice.actions;
+export default currentUserSlice.reducer;
+export const { setProfil, removeProfil } = currentUserSlice.actions;

@@ -17,11 +17,11 @@ const roleSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchRolesData.rejected, (state, { payload }) => {
-                state.loading = true;
+                state.loading = false;
                 state.error = payload;
             })
             .addCase(fetchRolesData.fulfilled, (state, { payload }) => {
-                state.loading = true;
+                state.loading = false;
                 state.error = null;
                 roleAdapter.setAll(state, payload);
             });

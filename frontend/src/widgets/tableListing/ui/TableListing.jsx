@@ -4,11 +4,24 @@ import { useSelector } from 'react-redux';
 import { t } from 'i18next';
 
 import { RowTable } from './RowTable';
+import { selectPlayers, selectPlayersError, selectPlayersLoading } from 'entities/player';
+import { selectRoles, selectRolesError, selectRolesLoading } from 'entities/role';
+import { selectTeams, selectTeamsError, selectTeamsLoading } from 'entities/team';
 
 export function TableListing({ teamId = null, sportId = null, leagueId = null }) {
-    const { ids, entities, loading: loadingPlayers, error: errorPlayers } = useSelector(state => state.players);
-    const { entities: roles, loading: loadingRoles, error: errorRoles } = useSelector(state => state.roles);
-    const { entities: teams, loading: loadingTeams, error: errorTeams } = useSelector(state => state.teams);
+    // const { ids, entities, loading: loadingPlayers, error: errorPlayers } = useSelector(state => state.players);
+    // const { entities: roles, loading: loadingRoles, error: errorRoles } = useSelector(state => state.roles);
+    // const { entities: teams, loading: loadingTeams, error: errorTeams } = useSelector(state => state.teams);
+
+    const { ids, entities } = useSelector(selectPlayers);
+    const loadingPlayers = useSelector(selectPlayersLoading);
+    const errorPlayers = useSelector(selectPlayersError);
+    const { entities: roles } = useSelector(selectRoles);
+    const loadingRoles = useSelector(selectRolesLoading);
+    const errorRoles = useSelector(selectRolesError);
+    const { entities: teams } = useSelector(selectTeams);
+    const loadingTeams = useSelector(selectTeamsLoading);
+    const errorTeams = useSelector(selectTeamsError);
 
     if (errorPlayers || errorRoles || errorTeams) return <div>{t('messages.error')}</div>;
     if (loadingPlayers || loadingRoles || loadingTeams) return <div>{t('messages.isLoading')}</div>

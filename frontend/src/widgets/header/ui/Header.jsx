@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux';
 import { MainMenu } from 'shared/ui/mainMenu';
 import { AuthButtons } from 'features/authButtons';
 import { UserBlock } from './UserBlock';
+import { selectStatusAuth } from 'shared/model/ui';
 
 export function Header() {
 
-    const isAuthorized = useSelector(state => state.authorizedUser.userName !== null);
+    const isAuthorized = useSelector(selectStatusAuth);
 
     return (
         <header className="border-bottom mb-4">

@@ -10,10 +10,11 @@ import { loginFormSchema } from '../model/yupConfig';
 import { Popap } from 'shared/ui/popap';
 import { setProfil } from 'shared/model/currentUser';
 import { useLoginMutation } from '../api/endpoints';
+import { selectLoginForm } from 'shared/model/ui';
 
 export function LoginForm() {
 
-    const isShow = useSelector(state => state.ui.loginForm.isShow);
+    const { isShow } = useSelector(selectLoginForm);
     const dispatch = useDispatch();
     const [login] = useLoginMutation();
 

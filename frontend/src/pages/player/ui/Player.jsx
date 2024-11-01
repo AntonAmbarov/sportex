@@ -12,6 +12,7 @@ import { RecentScores } from 'features/recentScores';
 import { useGetPlayerQuery } from 'entities/player';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
+import { selectSports } from 'entities/sport';
 
 export function Player() {
 
@@ -21,7 +22,7 @@ export function Player() {
     const playerQuery = useGetPlayerQuery(slug);
     const hasPlayerData = playerQuery.data && playerQuery.data.length > 0;
     const { acf, id, title } = hasPlayerData ? playerQuery.data[0] : {};
-    const allSports = useSelector(state => state.sports.entities);
+    const { entities: allSports } = useSelector(selectSports);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
 
     const playerStatus = useQueryStatus(playerQuery);

@@ -8,11 +8,12 @@ import { useGetCommentsQuery, usePostCommentMutation } from '../api/endpoints';
 import { transformCommentsForSection } from 'shared/lib/transformCommentsForSection';
 import { transformCommentsForApi } from 'shared/lib/transformCommentsForApi';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
+import { selectCurrentUser } from 'shared/model/currentUser';
 
 export function Comments({ id }) {
 
     const [comments, setComments] = useState();
-    const currentUser = useSelector(state => state.authorizedUser);
+    const currentUser = useSelector(selectCurrentUser);
     const { t } = useTranslation();
 
     const commentsQuery = useGetCommentsQuery(id); //получаем комментарии для записи по id

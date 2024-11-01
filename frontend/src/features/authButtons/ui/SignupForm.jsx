@@ -8,10 +8,11 @@ import { closeRegisterForm } from 'shared/model/ui';
 import { signupFormSchema } from '../model/yupConfig';
 import { Popap } from 'shared/ui/popap';
 import { useRegisterMutation, useLoginMutation } from '../api/endpoints';
+import { selectRegisterForm } from 'shared/model/ui';
 
 export function SignupForm() {
 
-    const isShow = useSelector(state => state.ui.registerForm.isShow);
+    const { isShow } = useSelector(selectRegisterForm);
     const dispatch = useDispatch();
     const [register] = useRegisterMutation();
     const [login] = useLoginMutation();

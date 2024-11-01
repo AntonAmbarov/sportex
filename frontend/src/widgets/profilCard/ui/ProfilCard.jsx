@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { StarsRaintg } from 'shared/ui/starsRating';
 import { useGetImg } from 'shared/lib/useGetImg';
+import { selectAvgScoreById } from 'entities/score';
 
 export function ProfilCard({ title, id, imgId, slug = null }) {
-    const avgScore = useSelector(state => state.avgScores.entities[id]?.overall_rating);
+    const avgScore = useSelector(state => selectAvgScoreById(state, id));
     const img = useGetImg(imgId); //второй параметр size: thumbnail, medium или full. Если ничего не задано - medium
 
     return (

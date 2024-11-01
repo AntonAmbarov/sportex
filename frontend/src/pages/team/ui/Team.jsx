@@ -14,6 +14,7 @@ import { useGetTeamQuery } from 'entities/team/api/endpoints';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { Content } from 'shared/ui/content';
+import { selectSports } from 'entities/sport';
 
 export function Team() {
 
@@ -24,7 +25,7 @@ export function Team() {
     const hasTeamData = teamQuery.data && teamQuery.data.length > 0;
     const { acf, id, title, content } = hasTeamData ? teamQuery.data[0] : {};
 
-    const allSports = useSelector(state => state.sports.entities);
+    const { entities: allSports } = useSelector(selectSports);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
 
     const teamStatus = useQueryStatus(teamQuery);

@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 
-import { openReatingOffcanvas } from "shared/model/ui";
+import { openReatingOffcanvas, selectStatusAuth } from "shared/model/ui";
 
 export function RatingButton() {
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const isAuth = useSelector(state => (state.authorizedUser.userId !== null));
+    const isAuth = useSelector(selectStatusAuth);
 
     const styleButton = cn({
         'btn-primary': isAuth,

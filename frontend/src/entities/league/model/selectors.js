@@ -1,18 +1,18 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectBase = (state) => state.leaques;
+const selectBase = (state) => state.leagues;
 
-export const selectLeaques = createSelector(
+export const selectLeagues = createSelector(
     selectBase,
     ({ ids, entities }) => ({ ids, entities })
 );
 
-export const selectLeaquesError = createSelector(
+export const selectLeaguesError = createSelector(
     selectBase,
     (state) => state.error
 )
 
-export const selectLeaquesLoading = createSelector(
+export const selectLeaguesLoading = createSelector(
     selectBase,
     (state) => state.loading
 )

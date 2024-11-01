@@ -9,6 +9,8 @@ import { GRADES, SKILLSCONFIG } from 'shared/consts';
 import { transformScoresForApi } from 'shared/lib/transformScoresForApi';
 import { closeReatingOffcanvas } from 'shared/model/ui';
 import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from 'entities/score';
+import { selectReatingOffcanvas } from 'shared/model/ui'
+import { selectCurrentUser } from 'shared/model/currentUser';
 
 function RatingForm({ data }) {
 
@@ -21,8 +23,8 @@ function RatingForm({ data }) {
     } = data;
 
     const { t } = useTranslation();
-    const { isShow } = useSelector(state => state.ui.reatingOffcanvas);
-    const { userId } = useSelector(state => state.authorizedUser);
+    const { isShow } = useSelector(selectReatingOffcanvas);
+    const { userId } = useSelector(selectCurrentUser);
     const dispatch = useDispatch();
     const [postScoresPlayer] = usePostScoresPlayerMutation();
     const [postScoresTeam] = usePostScoresTeamMutation();

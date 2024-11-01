@@ -7,6 +7,7 @@ import { useGetScoresAvgQuery } from 'entities/score';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { RatingButton } from './RatingButton';
 import { SkillLine } from './SkillLine';
+import { selectReatingOffcanvas } from 'shared/model/ui'
 const RatingForm = lazy(() => import('./RatingForm'));
 
 export function ListSkills({ data }) {
@@ -14,7 +15,7 @@ export function ListSkills({ data }) {
     const { type, postId, sport } = data;
     const scoresAvgQuery = useGetScoresAvgQuery({ type: type, postId: postId, sport: sport });
     const scoresAvgStatus = useQueryStatus(scoresAvgQuery);
-    const isShowForm = useSelector(state => state.ui.reatingOffcanvas.isShow);
+    const { isShow: isShowForm } = useSelector(selectReatingOffcanvas);
     if (scoresAvgStatus) return scoresAvgStatus;
     const { data: dataAvgQuery } = scoresAvgQuery;
 

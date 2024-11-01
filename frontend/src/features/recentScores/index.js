@@ -1,1 +1,1 @@
-export { default as RecentScores } from './RecentScores';
+export { default as RecentScores } from './ui/RecentScores';

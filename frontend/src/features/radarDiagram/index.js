@@ -1,1 +1,1 @@
-export { RadarDiagram } from './RadarDiagram';
+export { RadarDiagram } from './ui/RadarDiagram';

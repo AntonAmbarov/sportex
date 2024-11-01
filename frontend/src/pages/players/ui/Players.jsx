@@ -5,11 +5,13 @@ import { useTranslation } from 'react-i18next';
 
 import { TableListing } from 'widgets/tableListing';
 import { Filter } from 'features/filter';
+import { selectTeams } from 'entities/team';
+import { selectLeagues } from 'entities/league';
 
 export function Players() {
     const { t } = useTranslation();
-    const teams = useSelector(state => state.teams);
-    const leagues = useSelector(state => state.leagues);
+    const teams = useSelector(selectTeams);
+    const leagues = useSelector(selectLeagues);
     const [team, setTeam] = useState(null);
     const [league, setLeague] = useState(null);
 

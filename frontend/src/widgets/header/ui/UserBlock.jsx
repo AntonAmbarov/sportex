@@ -2,12 +2,12 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleStatusAuth } from 'shared/model/ui';
-import { removeProfil } from 'shared/model/currentUser';
+import { removeProfil, selectCurrentUser } from 'shared/model/currentUser';
 
 export function UserBlock() {
 
     const dispatch = useDispatch();
-    const userName = useSelector(state => state.authorizedUser.userName);
+    const { userName } = useSelector(selectCurrentUser);
 
     const handleExit = () => {
         dispatch(toggleStatusAuth(false));

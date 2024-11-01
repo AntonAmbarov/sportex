@@ -4,9 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import { MainMenu } from 'shared/ui/mainMenu';
 import { FooterBar } from './FooterBar';
-
-const yourAccaunt = [{ name: 'Вход', path: '/' }, { name: 'Регистрация', path: '/' }];
-const information = [{ name: 'Конфиденциальность', path: '/' }];
+import { yourAccaunt, information } from '../model/links'
 
 export function Footer() {
     return (

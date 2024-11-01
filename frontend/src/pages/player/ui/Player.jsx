@@ -13,6 +13,7 @@ import { useGetPlayerQuery } from 'entities/player';
 import { SharedCard } from 'shared/ui/sharedCard';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { selectSports } from 'entities/sport';
+import { isData } from 'shared/lib/isData';
 
 export function Player() {
 
@@ -20,7 +21,7 @@ export function Player() {
     const { t } = useTranslation();
 
     const playerQuery = useGetPlayerQuery(slug);
-    const hasPlayerData = playerQuery.data && playerQuery.data.length > 0;
+    const hasPlayerData = isData(playerQuery);
     const { acf, id, title } = hasPlayerData ? playerQuery.data[0] : {};
     const { entities: allSports } = useSelector(selectSports);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;

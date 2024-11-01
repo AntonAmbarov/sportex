@@ -42,9 +42,7 @@ export function LoginForm() {
                 };
 
                 localStorage.setItem('currentUser', JSON.stringify(profile));
-                // console.log('token handleSubmit', userData.data.token); //log
                 localStorage.setItem('token', userData.data.token);
-                // console.log(localStorage.getItem('token')) //log
 
                 dispatch(setProfil({ profile: profile }));
                 dispatch(toggleStatusAuth(true));

@@ -5,11 +5,15 @@ import { useTranslation } from 'react-i18next';
 
 import { ProfilCard } from 'widgets/profilCard';
 import { selectTeams } from 'entities/team';
+import { useGetImg } from 'shared/lib/useGetImg';
+import { selectAvgScores } from 'entities/score';
 
 export function Teams() {
 
     const { ids, entities } = useSelector(selectTeams);
     const { t } = useTranslation();
+    const getImg = useGetImg;
+    const { entities: avgScores } = useSelector(selectAvgScores);
 
     return (
         <Container>
@@ -17,13 +21,16 @@ export function Teams() {
             <Row className="row-cols-1 row-cols-md-3 g-4">
                 {ids.map(id => {
                     const team = entities[id];
+                    const img = getImg(team.acf?.logo); //второй параметр size: thumbnail, medium или full. Если ничего не задано - medium
+                    const avgScore = avgScores[id]?.overall_rating;
+
                     return (
                         <Col key={id}>
                             < ProfilCard
                                 key={id}
-                                id={id}
                                 title={team.title.rendered}
-                                imgId={team.acf?.logo}
+                                img={img}
+                                score={avgScore}
                                 slug={team.slug}
                             />
                         </Col>

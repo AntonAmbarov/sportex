@@ -31,18 +31,21 @@ export function LoginForm() {
 
     const handleSubmit = async (values) => {
         try {
-            const userData = await login(values).unwrap();
+            const { data: userData } = await login(values).unwrap();
 
             if (userData) {
                 const profile = {
-                    userDisplayName: userData.data.displayName,
-                    userEmail: userData.data.email,
-                    userId: userData.data.id,
-                    userName: userData.data.nicename,
+                    userDisplayName: userData.displayName,
+                    userEmail: userData.email,
+                    userId: userData.id,
+                    userName: userData.nicename,
+                    firstName: userData.firstName,
+                    lastName: userData.lastName,
                 };
+                console.log(profile)
 
                 localStorage.setItem('currentUser', JSON.stringify(profile));
-                localStorage.setItem('token', userData.data.token);
+                localStorage.setItem('token', userData.token);
 
                 dispatch(setProfil({ profile: profile }));
                 dispatch(toggleStatusAuth(true));

@@ -7,6 +7,8 @@ const initialState = {
     userId: null,
     userName: null,
     avatar: null,
+    firstName: null,
+    lastName: null,
 }
 
 const currentUserSlice = createSlice({
@@ -15,11 +17,15 @@ const currentUserSlice = createSlice({
     reducers: {
         setProfil: (state, actions) => {
             const { profile } = actions.payload;
-            state.userDisplayName = profile.userDisplayName;
-            state.userEmail = profile.userEmail;
-            state.userId = profile.userId;
-            state.userName = profile.userName;
-            state.avatar = paths.avatar(profile.userName);
+            Object.assign(state, {
+                userDisplayName: profile.userDisplayName,
+                userEmail: profile.userEmail,
+                userId: profile.userId,
+                userName: profile.userName,
+                avatar: paths.avatar(profile.userName),
+                firstName: profile.firstName,
+                lastName: profile.lastName
+            });
         },
         removeProfil: (state) => {
             Object.assign(state, initialState);

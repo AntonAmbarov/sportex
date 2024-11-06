@@ -16,6 +16,8 @@ import { SharedCard } from 'shared/ui/sharedCard';
 import { Content } from 'shared/ui/content';
 import { selectSports } from 'entities/sport';
 import { isData } from 'shared/lib/isData';
+import { useGetImg } from 'shared/lib/useGetImg';
+import { selectAvgScoreById } from 'entities/score';
 
 export function Team() {
 
@@ -28,6 +30,8 @@ export function Team() {
 
     const { entities: allSports } = useSelector(selectSports);
     const sport = acf?.sport && allSports[acf.sport] ? allSports[acf.sport].slug : null;
+    const img = useGetImg(acf?.logo); //второй параметр size: thumbnail, medium или full. Если ничего не задано - medium
+    const avgScore = useSelector(state => selectAvgScoreById(state, id));
 
     const teamStatus = useQueryStatus(teamQuery);
     if (teamStatus) return teamStatus;
@@ -45,7 +49,8 @@ export function Team() {
                     <ProfilCard
                         title={title?.rendered}
                         id={id}
-                        imgId={acf?.logo}
+                        img={img}
+                        score={avgScore}
                     />
                     <RadarDiagram data={settings} />
                 </Col>

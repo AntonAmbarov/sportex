@@ -18,7 +18,7 @@ export const api = createApi({
                 url: paths.getComments(id),
                 method: 'GET',
             })
-        })
+        }),
     })
 })
 

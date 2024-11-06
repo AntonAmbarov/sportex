@@ -4,6 +4,7 @@ import { Teams } from 'pages/teams';
 import { Team } from 'pages/team';
 import { Players } from 'pages/players';
 import { Player } from 'pages/player';
+import { UserProfile } from 'pages/userProfile';
 
 export const appRouter = [
     {
@@ -25,5 +26,9 @@ export const appRouter = [
     {
         path: '/teams/:slug',
         element: <Team />,
+    },
+    {
+        path: '/profile',
+        element: <UserProfile />
     }
 ]

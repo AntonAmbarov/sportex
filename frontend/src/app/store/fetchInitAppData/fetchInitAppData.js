@@ -8,7 +8,6 @@ import { fetchImgsData } from 'shared/api/img/fetchImgsData';
 
 export const fetchInitAppData = () => async (dispatch) => {
     try {
-        console.log('run: fetchInitAppData') //log
         const promises = [
             dispatch(fetchPlayersData()),
             dispatch(fetchTeamsData()),

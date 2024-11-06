@@ -17,7 +17,7 @@ const paths = {
     register: () => (`${customBasePath}/register`),
     auth: () => (`${jwtBasePath}/token`),
     refreshToken: () => (`${jwtBasePath}/token/refresh`),
-    getComments: (id) => (`${wpBasePath}/comments?post=${id}`),
+    getComments: (id) => (id ? `${wpBasePath}/comments?post=${id}` : `${wpBasePath}/comments`),
     postComment: () => (`${wpBasePath}/comments`),
     postScoresTeam: () => (`${customBasePath}/team-ratings/`),
     postScoresPlayer: () => (`${customBasePath}/participant-ratings/`),

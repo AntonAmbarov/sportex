@@ -5,6 +5,7 @@ import { Team } from 'pages/team';
 import { Players } from 'pages/players';
 import { Player } from 'pages/player';
 import { UserProfile } from 'pages/userProfile';
+import { PrivateRoute } from 'shared/ui/privateRoute';
 import { ErrorPage } from 'pages/error';
 
 export const appRouter = [
@@ -30,10 +31,10 @@ export const appRouter = [
     },
     {
         path: '/profile',
-        element: <UserProfile />
+        element: <PrivateRoute><UserProfile /></PrivateRoute>,
     },
     {
         path: '*',
-        element: <ErrorPage />
+        element: <ErrorPage />,
     }
 ]

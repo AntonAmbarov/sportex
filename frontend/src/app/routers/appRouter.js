@@ -5,6 +5,7 @@ import { Team } from 'pages/team';
 import { Players } from 'pages/players';
 import { Player } from 'pages/player';
 import { UserProfile } from 'pages/userProfile';
+import { ErrorPage } from 'pages/error';
 
 export const appRouter = [
     {
@@ -30,5 +31,9 @@ export const appRouter = [
     {
         path: '/profile',
         element: <UserProfile />
+    },
+    {
+        path: '*',
+        element: <ErrorPage />
     }
 ]

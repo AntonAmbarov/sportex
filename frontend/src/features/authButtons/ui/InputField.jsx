@@ -19,14 +19,14 @@ export function InputField({ textLabel, name, placeholder, errors, touched, type
             >{textLabel}</label>
 
             <Field
-                type={name}
+                type={type}
                 name={name}
                 placeholder={placeholder}
-                className={styleField(errors.username && touched.username)}
+                className={styleField(errors[name] && touched[name])}
             />
 
-            {errors.username && touched.username ?
-                <div className='invalid-feedback'>{errors.username}</div> :
+            {errors[name] && touched[name] ?
+                <div className='invalid-feedback'>{errors[name]}</div> :
                 null}
 
         </div>

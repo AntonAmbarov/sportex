@@ -1,48 +1,50 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { Button } from 'react-bootstrap';
-import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { closeRegisterForm } from 'shared/model/ui';
 import { signupFormSchema } from '../model/yupConfig';
 import { Popap } from 'shared/ui/popap';
-import { useRegisterMutation, useLoginMutation } from '../api/endpoints';
-import { selectRegisterForm } from 'shared/model/ui';
+import { useSignupForm } from '../model/useSignupForm';
+import { InputField } from './InputField';
 
 export function SignupForm() {
 
-    const { isShow } = useSelector(selectRegisterForm);
     const dispatch = useDispatch();
-    const [register] = useRegisterMutation();
-    const [login] = useLoginMutation();
+    const { initialValues, handleSubmit, isShow } = useSignupForm();
 
-    const styleField = (isError) => {
-        return cn('form-control', {
-            'is-invalid': isError
-        })
-    }
-
-    const initialValues = {
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    }
-
-    const handleSubmit = async (values) => {
-        try {
-            await register(values).unwrap();
-            login(values);
+    const inputs = [
+        {
+            textLabel: 'Ваш логин',
+            name: 'username',
+            placeholder: 'Логин',
+            type: 'text'
+        },
+        {
+            textLabel: 'Ваш e-mail',
+            name: 'email',
+            placeholder: 'name@example.com',
+            type: 'email'
+        },
+        {
+            textLabel: 'Ваш пароль',
+            name: 'password',
+            placeholder: 'Пароль',
+            type: 'password'
+        },
+        {
+            textLabel: 'Подтвердите пароль',
+            name: 'confirmPassword',
+            placeholder: 'Подтвердите пароль',
+            type: 'password'
         }
-        catch (error) {
-            alert('Регистрация не удалась')
-            console.error(error)
-        }
-    }
+    ]
+
+    if (!isShow) return null;
 
     return (
-        <Popap title={'Регистрация'} onClose={() => dispatch(closeRegisterForm())} show={isShow}>
+        <Popap title='Регистрация' onClose={() => dispatch(closeRegisterForm())} show={isShow}>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -50,26 +52,14 @@ export function SignupForm() {
             >
                 {({ errors, touched }) => (
                     <Form>
-                        <div className="form-group mb-3">
-                            <label htmlFor='username' className='form-label' hidden>Ваш логин</label>
-                            <Field type='text' name='username' placeholder='Логин' className={styleField(errors.username && touched.username)} />
-                            {errors.username && touched.username ? <div>{errors.username}</div> : null}
-                        </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor='email' className='form-label' hidden>Ваш e-mail</label>
-                            <Field type='email' name='email' placeholder='name@example.com' className={styleField(errors.email && touched.email)} />
-                            {errors.email && touched.email ? <div className='invalid-feedback'>{errors.email}</div> : null}
-                        </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor='password' className='form-label' hidden>Ваш пароль</label>
-                            <Field type='password' name='password' placeholder='Пароль' className={styleField(errors.password && touched.password)} />
-                            {errors.password && touched.password ? <div className='invalid-feedback'>{errors.password}</div> : null}
-                        </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor='confirmPassword' className='form-label' hidden>Подтвердите пароль</label>
-                            <Field type='password' name='confirmPassword' placeholder='Подтвердите пароль' className={styleField(errors.confirmPassword && touched.confirmPassword)} />
-                            {errors.confirmPassword && touched.confirmPassword ? <div className='invalid-feedback'>{errors.confirmPassword}</div> : null}
-                        </div>
+                        {inputs.map((props) =>
+                            <InputField
+                                key={props.name}
+                                {...props}
+                                errors={errors}
+                                touched={touched}
+                            />
+                        )}
                         <Button as='input' type='submit' value={'Зарегистрироваться'} />
                     </Form>
                 )}

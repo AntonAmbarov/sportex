@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ButtonGroup, Button, Col } from 'react-bootstrap';
 
 import { openLoginForm, openRegisterForm } from 'shared/model/ui';
 import { LoginForm } from './LoginForm';
@@ -9,20 +8,20 @@ import { SignupForm } from './SignupForm';
 export function AuthButtons() {
     const dispatch = useDispatch();
     return (
-        <Col md={3} className="text-end">
-            <ButtonGroup>
+        <div className="col md-3 text-end">
+            <div className='btn-group'>
 
-                <Button variant="outline-primary" className="me-2" onClick={() => dispatch(openLoginForm())}>
+                <button type='button' className="btn btn-light" onClick={() => dispatch(openLoginForm())}>
                     Войти
-                </Button>
-                <Button variant="primary" onClick={() => dispatch(openRegisterForm())}>
+                </button>
+                <button className='btn btn-primary' onClick={() => dispatch(openRegisterForm())}>
                     Регистрация
-                </Button>
+                </button>
 
-            </ButtonGroup>
+            </div>
 
             <LoginForm />
             <SignupForm />
-        </Col>
+        </div>
     )
 }

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
-
 import { CustomFilterMenu } from './CustomFilterMenu';
 
 export function Filter({ title, options, onSelect }) {
@@ -8,27 +6,47 @@ export function Filter({ title, options, onSelect }) {
     const [activeId, setActiveId] = useState(null);
     const [activeTitle, setActiveTitle] = useState(title);
 
-    const handleSelect = (eventKey) => {
-        const id = Number(eventKey);
-        const newTitle = eventKey ? entities[id].title.rendered : title;
+    const handleSelect = (id) => {
+        const newTitle = id ? entities[id].title.rendered : title;
         setActiveId(id);
         setActiveTitle(newTitle);
         onSelect(id);
-    }
+    };
+
+    const handleReset = () => {
+        setActiveId(null);
+        setActiveTitle(title);
+        onSelect(null);
+    };
 
     return (
-
-        <Dropdown onSelect={handleSelect}>
-            <Dropdown.Toggle variant="secondary">
+        <div className="dropdown">
+            <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
                 {activeTitle}
-            </Dropdown.Toggle>
+            </button>
 
-            <Dropdown.Menu as={CustomFilterMenu} onReset={handleSelect}>
-                {ids.map(id => {
-                    const name = entities[id].title.rendered;
-                    return <Dropdown.Item key={id} eventKey={id} active={id === activeId}>{name}</Dropdown.Item>
-                })}
-            </Dropdown.Menu>
-        </Dropdown>
-    )
+            <div className="dropdown-menu">
+                {/* Custom Filter Menu */}
+                <CustomFilterMenu onReset={handleReset}>
+                    {ids.map((id) => {
+                        const name = entities[id].title.rendered;
+                        return (
+                            <button
+                                key={id}
+                                className={`dropdown-item ${id === activeId ? 'active' : ''}`}
+                                onClick={() => handleSelect(id)}
+                            >
+                                {name}
+                            </button>
+                        );
+                    })}
+                </CustomFilterMenu>
+            </div>
+        </div>
+    );
 }

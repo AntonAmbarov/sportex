@@ -8,10 +8,16 @@ const styleField = (isError) => {
     })
 }
 
-export function InputField({ textLabel, name, placeholder, errors, touched, type = 'text' }) {
+export function InputField({
+    textLabel,
+    name,
+    placeholder,
+    errors = {},
+    touched = {},
+    type = 'text' },
+) {
     return (
         <div className="form-group mb-3">
-
             <label
                 htmlFor={name}
                 className='form-label'
@@ -28,7 +34,6 @@ export function InputField({ textLabel, name, placeholder, errors, touched, type
             {errors[name] && touched[name] ?
                 <div className='invalid-feedback'>{errors[name]}</div> :
                 null}
-
         </div>
     )
 }

@@ -1,19 +1,17 @@
 import React from 'react';
-import { Button, Offcanvas, Row, Col, Badge } from 'react-bootstrap';
+import { Form, Button, Offcanvas, Row, Col, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Form } from 'react-bootstrap'
 
 import { GRADES, SKILLSCONFIG } from 'shared/consts';
 import { transformScoresForApi } from 'shared/lib/transformScoresForApi';
 import { closeReatingOffcanvas } from 'shared/model/ui';
-import { usePostScoresTeamMutation, usePostScoresPlayerMutation } from 'entities/score';
 import { selectReatingOffcanvas } from 'shared/model/ui'
 import { selectCurrentUser } from 'shared/model/currentUser';
+import { usePostScores } from '../model/usePostScores';
 
 function RatingForm({ data }) {
-
     const {
         type,
         postId,
@@ -26,8 +24,7 @@ function RatingForm({ data }) {
     const { isShow } = useSelector(selectReatingOffcanvas);
     const { userId } = useSelector(selectCurrentUser);
     const dispatch = useDispatch();
-    const [postScoresPlayer] = usePostScoresPlayerMutation();
-    const [postScoresTeam] = usePostScoresTeamMutation();
+    const postScores = usePostScores(type);
     const skills = SKILLSCONFIG[type]?.[sport] || [];
 
     const initialValues = skills.reduce((acc, key) => {
@@ -47,7 +44,7 @@ function RatingForm({ data }) {
         }
         try {
             const data = transformScoresForApi(param);
-            await isTeam ? postScoresTeam(data).unwrap() : postScoresPlayer(data).unwrap();
+            await postScores(data).unwrap();
         } catch (error) {
             console.error('Error submitting form:', error);
         }

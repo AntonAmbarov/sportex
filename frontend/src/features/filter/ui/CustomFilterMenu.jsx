@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 const CustomFilterMenu = React.forwardRef(
@@ -18,9 +17,9 @@ const CustomFilterMenu = React.forwardRef(
                 className={className}
                 aria-labelledby={labeledBy}
             >
-                <Form.Control
+                <input
                     autoFocus
-                    className="mx-3 my-2 w-auto"
+                    className="mx-3 my-2 w-auto form-control"
                     placeholder={t('ui.search')}
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
@@ -31,9 +30,9 @@ const CustomFilterMenu = React.forwardRef(
                             !value || child.props.children.toLowerCase().startsWith(value),
                     )}
                 </ul>
-                <Button variant="link" onClick={handleReset}>
+                <button className='btn btn-link' onClick={handleReset}>
                     {t('ui.reset')}
-                </Button>
+                </button>
             </div>
         );
     },

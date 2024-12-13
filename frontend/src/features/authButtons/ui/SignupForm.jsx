@@ -1,69 +1,64 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { closeRegisterForm } from 'shared/model/ui';
 import { signupFormSchema } from '../model/yupConfig';
 import { Popap } from 'shared/ui/popap';
 import { useSignupForm } from '../model/useSignupForm';
-import { InputField } from './InputField';
+import { useTranslation } from 'react-i18next';
+import { CustomForm } from './CustomForm';
+
+const inputs = [
+    {
+        textLabel: 'Ваш логин',
+        name: 'username',
+        placeholder: 'Логин',
+        type: 'text'
+    },
+    {
+        textLabel: 'Ваш e-mail',
+        name: 'email',
+        placeholder: 'name@example.com',
+        type: 'email'
+    },
+    {
+        textLabel: 'Ваш пароль',
+        name: 'password',
+        placeholder: 'Пароль',
+        type: 'password'
+    },
+    {
+        textLabel: 'Подтвердите пароль',
+        name: 'confirmPassword',
+        placeholder: 'Подтвердите пароль',
+        type: 'password'
+    }
+]
 
 export function SignupForm() {
-
-    const dispatch = useDispatch();
     const { initialValues, handleSubmit, isShow } = useSignupForm();
-
-    const inputs = [
-        {
-            textLabel: 'Ваш логин',
-            name: 'username',
-            placeholder: 'Логин',
-            type: 'text'
-        },
-        {
-            textLabel: 'Ваш e-mail',
-            name: 'email',
-            placeholder: 'name@example.com',
-            type: 'email'
-        },
-        {
-            textLabel: 'Ваш пароль',
-            name: 'password',
-            placeholder: 'Пароль',
-            type: 'password'
-        },
-        {
-            textLabel: 'Подтвердите пароль',
-            name: 'confirmPassword',
-            placeholder: 'Подтвердите пароль',
-            type: 'password'
-        }
-    ]
+    const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     if (!isShow) return null;
 
+    const formInit = {
+        initialValues,
+        onSubmit: handleSubmit,
+        validationSchema: signupFormSchema,
+    }
+
     return (
-        <Popap title='Регистрация' onClose={() => dispatch(closeRegisterForm())} show={isShow}>
-            <Formik
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-                validationSchema={signupFormSchema}
-            >
-                {({ errors, touched }) => (
-                    <Form>
-                        {inputs.map((props) =>
-                            <InputField
-                                key={props.name}
-                                {...props}
-                                errors={errors}
-                                touched={touched}
-                            />
-                        )}
-                        <Button as='input' type='submit' value={'Зарегистрироваться'} />
-                    </Form>
-                )}
-            </Formik>
+        <Popap
+            title={t('ui.signupPopap')}
+            onClose={() => dispatch(closeRegisterForm())}
+            show={isShow}
+        >
+            <CustomForm
+                formInit={formInit}
+                inputs={inputs}
+                submitButtonText={t('ui.signupBtn')}
+            />
         </Popap >
     )
 }

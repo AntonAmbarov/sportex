@@ -22,6 +22,10 @@ const resources = {
                 reset: 'Сбросить',
                 search: 'Поиск',
                 loading: 'Загрузка',
+                loginBtn: 'Войти',
+                signupBtn: 'Зарегистрироваться',
+                loginPopap: 'Авторизация',
+                signupPopap: 'Регистрация',
             },
             titles: {
                 ratingForm: 'Оцените навыки',

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { i18n } from 'app/i18n';
@@ -32,13 +31,13 @@ function App() {
       <BrowserRouter>
         <Header />
         <main>
-          <Container>
+          <div className="container">
             <Routes>
               {appRouter.map(({ path, element }) => (
                 <Route key={path} path={path} element={element} />
               ))}
             </Routes>
-          </Container>
+          </div>
         </main>
         <Footer />
       </BrowserRouter>

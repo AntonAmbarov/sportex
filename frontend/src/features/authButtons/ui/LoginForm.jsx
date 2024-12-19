@@ -1,10 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { Formik, Form } from 'formik';
 
 import { closeLoginForm } from 'shared/model/ui';
 import { Popap } from 'shared/ui/popap';
-// import { InputField } from './InputField';
 import { loginFormSchema } from '../model/yupConfig';
 import { useLoginForm } from '../model/useLoginForm';
 import { CustomForm } from './CustomForm';

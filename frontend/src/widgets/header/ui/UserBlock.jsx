@@ -1,8 +1,9 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownItem, DropdownDivider } from 'shared/ui/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleStatusAuth } from 'shared/model/ui';
 import { removeProfil, selectCurrentUser } from 'shared/model/currentUser';
+import { BtnSecondary } from 'shared/ui/button';
 
 export function UserBlock() {
 
@@ -17,15 +18,14 @@ export function UserBlock() {
 
     return (
         <div className='col-md-3 text-end'>
-            <Dropdown>
-                <Dropdown.Toggle variant='secondary'>
+            <Dropdown toggle={() =>
+                <BtnSecondary>
                     {userName}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item href={`/profile/`}>Профиль</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href='#' onClick={handleExit}>Выход</Dropdown.Item>
-                </Dropdown.Menu>
+                </BtnSecondary>
+            }>
+                <DropdownItem as={'a'} href={`/profile/`}>Профиль</DropdownItem>
+                <DropdownDivider />
+                <DropdownItem as={'a'} href='#' onClick={handleExit}>Выход</DropdownItem>
             </Dropdown>
         </div>
     )

@@ -1,13 +1,14 @@
 import React from "react";
 
-export function DropdownItem({ children, className, onClick, }) {
+export function DropdownItem({ children, className, onClick, as: Component = 'button', ...props }) {
 
     return (
-        <button
+        <Component
+            {...props}
             className={`dropdown-item ${className}`}
             onClick={onClick}
         >
             {children}
-        </button>
+        </Component>
     )
 }

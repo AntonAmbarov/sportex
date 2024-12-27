@@ -1,1 +1,6 @@
-export { Btn, BtnSecondary, BtnLight } from './Btn';
+export {
+    Btn,
+    BtnSecondary,
+    BtnLight,
+    BtnLink
+} from './Btn';

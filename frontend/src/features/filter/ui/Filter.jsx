@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CustomFilterMenu } from './CustomFilterMenu';
+import { Btn, BtnSecondary } from 'shared/ui/button';
 
 export function Filter({ title, options, onSelect }) {
     const { ids, entities } = options;
@@ -21,14 +22,13 @@ export function Filter({ title, options, onSelect }) {
 
     return (
         <div className="dropdown">
-            <button
-                className="btn btn-secondary dropdown-toggle"
-                type="button"
+            <BtnSecondary
+                className="dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
                 {activeTitle}
-            </button>
+            </BtnSecondary>
 
             <div className="dropdown-menu">
                 {/* Custom Filter Menu */}
@@ -36,13 +36,13 @@ export function Filter({ title, options, onSelect }) {
                     {ids.map((id) => {
                         const name = entities[id].title.rendered;
                         return (
-                            <button
+                            <Btn
                                 key={id}
                                 className={`dropdown-item ${id === activeId ? 'active' : ''}`}
                                 onClick={() => handleSelect(id)}
                             >
                                 {name}
-                            </button>
+                            </Btn>
                         );
                     })}
                 </CustomFilterMenu>

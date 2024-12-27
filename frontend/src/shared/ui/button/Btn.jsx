@@ -33,8 +33,15 @@ function BtnLight(props) {
 
 }
 
+function BtnLink(props) {
+    return (
+        <Btn {...props} variant="link" />
+    )
+}
+
 export {
     Btn,
     BtnSecondary,
-    BtnLight
+    BtnLight,
+    BtnLink
 }

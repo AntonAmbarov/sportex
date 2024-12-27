@@ -3,7 +3,7 @@ import { CustomFilterMenu } from './CustomFilterMenu';
 import { BtnSecondary } from 'shared/ui/button';
 import { Dropdown, DropdownItem } from 'shared/ui/dropdown';
 
-export function Filter({ title, options, onSelect }) {
+export function Filter2({ title, options, onSelect }) {
     const { ids, entities } = options;
     const [activeId, setActiveId] = useState(null);
     const [activeTitle, setActiveTitle] = useState(title);

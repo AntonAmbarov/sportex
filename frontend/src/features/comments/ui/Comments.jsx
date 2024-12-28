@@ -33,8 +33,8 @@ export function Comments({ id }) {
     const { comments: commentsById, queryStatus } = useGetComments(id);
     const sendComment = usePostComments(currentUser, id);
 
-    const handleNewComment = async (comment) => {
-        dispatch({ type: 'newComment', payload: comment })
+    const handleComment = async (type, comment) => {
+        dispatch({ type: type, payload: comment })
 
         try {
             await sendComment(comment);
@@ -44,16 +44,9 @@ export function Comments({ id }) {
         }
     }
 
-    const handleReplyComment = async (comment) => {
-        dispatch({ type: 'replyComment', payload: comment })
+    const handleNewComment = (comment) => handleComment('newComment', comment);
 
-        try {
-            await sendComment(comment);
-        }
-        catch (err) {
-            console.error('Ошибка при отправке формы: ', err);
-        }
-    }
+    const handleReplyComment = (comment) => handleComment('replyComment', comment);
 
     useEffect(() => {
         if (comments.length === 0 && commentsById?.length > 0) {

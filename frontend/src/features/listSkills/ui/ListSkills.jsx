@@ -41,9 +41,7 @@ export function ListSkills({ data }) {
             </ul>
 
             <RatingButton />
-            <Suspense
-                fallback={<div>{t('ui.loading')}</div>}
-            >
+            <Suspense fallback={<div>{t('ui.loading')}</div>}>
                 {isShowForm && <RatingForm data={data} />}
             </Suspense>
         </div>

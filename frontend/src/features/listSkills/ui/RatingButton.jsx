@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 import { openReatingOffcanvas, selectStatusAuth } from "shared/model/ui";
+import { Btn } from "shared/ui/button";
 
 const styleButton = (flag) => cn('btn', {
     'btn-primary': flag,
@@ -15,13 +16,13 @@ const StatusButton = ({ className, disabled, children }) => {
     const dispatch = useDispatch();
 
     return (
-        <button
+        <Btn
             onClick={() => dispatch(openReatingOffcanvas())}
             className={className}
             disabled={disabled}
         >
             {children}
-        </button>
+        </Btn>
     )
 }
 

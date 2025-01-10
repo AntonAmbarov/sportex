@@ -10,13 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Удаляем файлы прошлого деплоя
-      run: |
-        ssh root@${{ secrets.SERVER_IP }} "rm -rf /var/www/html/*"
-
-
-    - name: Проверка кода
+    - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Создание директории .ssh (если не существует)
+      run: mkdir -p ~/.ssh
+
+    - name: Настройка SSH Keys и known_hosts
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+        echo "${{ secrets.DEPLOY_STAGE_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add ~/.ssh/id_rsa
+
+    - name: Удаление файлов прошлого деплоя
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: ssh ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} "rm -rf /var/www/html/*"
 
     - name: Установка Node.js
       uses: actions/setup-node@v2
@@ -24,15 +37,32 @@ jobs:
         node-version: '20'
 
     - name: Инсталяция зависимостей и копиляция билда
+      working-directory: ./frontend
       run: |
         npm install
         npm run build
+        
+    - name: Проверка файлов билда
+      run: |
+        cd frontend
+        ls -la
+        cd build
+        ls -la
+
+    - name: Проверка содержимого .ssh
+      run: |
+        ls -la ~/.ssh/
+        cat ~/.ssh/id_rsa
+
+    - name: Проверка приватного ключа
+      run: chmod 600 ~/.ssh/id_rsa
 
     - name: Деплой на сервер
       uses: appleboy/scp-action@v0.1.0
       with:
-        host: ${{ secrets.SERVER_IP }}
-        username: root
-        key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
-        source: "./build/*"
-        target: "/var/www/html/"
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.DEPLOY_STAGE_SSH_KEY }}
+          source: "./frontend/build/*"
+          target: "/var/www/html/"
+          strip_components: 2

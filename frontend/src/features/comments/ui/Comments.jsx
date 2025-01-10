@@ -52,7 +52,7 @@ export function Comments({ id }) {
         if (comments.length === 0 && commentsById?.length > 0) {
             dispatch({ type: 'setComments', payload: commentsById });
         }
-    }, [commentsById]);
+    }, [commentsById, comments.length]);
 
     return (
         <CommentsUI

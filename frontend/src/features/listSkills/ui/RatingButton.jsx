@@ -35,11 +35,15 @@ export function RatingButton() {
         <>
             {!isAuth
                 ? <Tooltip
-                    as={StatusButton}
-                    placement='left'
+                    as={'span'}
+                    placement='right'
                     message={t('messages.availableAuthorized')}
-                />
-                : <StatusButton className={styleButton(isAuth)}>
+                >
+                    <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
+                        {t('ui.rate')}
+                    </StatusButton>
+                </Tooltip>
+                : <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
                     {t('ui.rate')}
                 </StatusButton>
             }

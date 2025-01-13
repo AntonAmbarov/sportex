@@ -1,17 +1,34 @@
-import React from "react";
-import { Btn } from "shared/ui/button";
+import React, { useRef, useEffect } from "react";
+import { Tooltip as BootstrapTooltip } from 'bootstrap';
 
 export function Tooltip({
-    as: Component = Btn,
+    as: Component = 'div',
     placement = 'top',
     children,
     message,
     className,
     ...props
 }) {
+
+    const tooltipRef = useRef(null);
+
+    useEffect(() => {
+        if (tooltipRef.current) {
+            const tooltip = new BootstrapTooltip(tooltipRef.current, {
+                container: 'body',
+                trigger: 'hover',
+            });
+
+            return () => {
+                tooltip.dispose();
+            };
+        }
+    }, [message, placement]);
+
     return (
         <Component
             {...props}
+            ref={tooltipRef}
             data-bs-toggle="tooltip"
             data-bs-custom-class="custom-tooltip"
             data-bs-title={message}

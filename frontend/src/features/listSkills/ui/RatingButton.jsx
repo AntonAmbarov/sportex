@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { openReatingOffcanvas, selectStatusAuth } from "shared/model/ui";
 import { Btn } from "shared/ui/button";
 import { Tooltip } from "shared/ui/tooltip";
+import { ConditionalWrapper } from "shared/lib/conditionalWrapper";
 
 const styleButton = (flag) => cn('btn', {
     'btn-primary': flag,
@@ -32,21 +33,38 @@ export function RatingButton() {
     const { t } = useTranslation();
 
     return (
-        <>
-            {!isAuth
-                ? <Tooltip
+        <ConditionalWrapper
+            condition={!isAuth}
+            wrapper={(children) => (
+                <Tooltip
                     as={'span'}
                     placement='right'
                     message={t('messages.availableAuthorized')}
                 >
-                    <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
-                        {t('ui.rate')}
-                    </StatusButton>
-                </Tooltip>
-                : <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
-                    {t('ui.rate')}
-                </StatusButton>
+                    {children}
+                </Tooltip>)
             }
-        </>
+        >
+            <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
+                {t('ui.rate')}
+            </StatusButton>
+        </ConditionalWrapper>
+
+        // <>
+        //     {!isAuth
+        //         ? <Tooltip
+        //             as={'span'}
+        //             placement='right'
+        //             message={t('messages.availableAuthorized')}
+        //         >
+        //             <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
+        //                 {t('ui.rate')}
+        //             </StatusButton>
+        //         </Tooltip>
+        //         : <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
+        //             {t('ui.rate')}
+        //         </StatusButton>
+        //     }
+        // </>
     )
 }

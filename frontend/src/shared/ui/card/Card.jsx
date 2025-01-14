@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 export function Card({ className, children, ...props }) {
     return (
-        <div className={cn('card', className)} {...props}>
+        <div className={cn('card  mb-3', className)} {...props}>
             {children}
         </div>
     )
@@ -11,7 +11,7 @@ export function Card({ className, children, ...props }) {
 
 export function CardBody({ className, children, ...props }) {
     return (
-        <div className={cn('card-body mb-3', className)} {...props}>
+        <div className={cn('card-body', className)} {...props}>
             {children}
         </div>
     )
@@ -44,5 +44,13 @@ export function CardText({ className, children, ...props }) {
 export function CardImg({ src, alt, variant, className, ...props }) {
     return (
         <img src={src} alt={alt} className={cn(`card-img-${variant}`, className)} {...props} />
+    )
+}
+
+export function CardHeader({ className, children, ...props }) {
+    return (
+        <div className='card-header' {...props}>
+            {children}
+        </div>
     )
 }

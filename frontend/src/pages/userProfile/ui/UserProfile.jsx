@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from 'shared/model/currentUser';
-import { SharedCard } from "shared/ui/sharedCard";
+import { SharedCard } from "widgets/sharedCard";
 import { ProfilCard } from "widgets/profilCard";
 
 export function UserProfile() {

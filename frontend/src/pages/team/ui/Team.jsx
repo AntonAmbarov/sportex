@@ -12,7 +12,7 @@ import { Comments } from 'features/comments';
 import { RecentScores } from 'features/recentScores';
 import { useGetTeamQuery } from 'entities/team/api/endpoints';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
-import { SharedCard } from 'shared/ui/sharedCard';
+import { SharedCard } from 'widgets/sharedCard';
 import { Content } from 'shared/ui/content';
 import { selectSports } from 'entities/sport';
 import { isData } from 'shared/lib/isData';

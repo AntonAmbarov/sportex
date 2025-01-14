@@ -10,7 +10,7 @@ import { RadarDiagram } from 'features/radarDiagram';
 import { Comments } from 'features/comments';
 import { RecentScores } from 'features/recentScores';
 import { useGetPlayerQuery } from 'entities/player';
-import { SharedCard } from 'shared/ui/sharedCard';
+import { SharedCard } from 'widgets/sharedCard';
 import { useQueryStatus } from 'shared/lib/useQueryStatus';
 import { selectSports } from 'entities/sport';
 import { isData } from 'shared/lib/isData';

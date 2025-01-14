@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from 'classnames';
+import cn from 'classnames';
 
 export function Card({ className, children, ...props }) {
     return (
@@ -11,7 +11,7 @@ export function Card({ className, children, ...props }) {
 
 export function CardBody({ className, children, ...props }) {
     return (
-        <div className={cn('card-body', className)} {...props}>
+        <div className={cn('card-body mb-3', className)} {...props}>
             {children}
         </div>
     )
@@ -25,6 +25,14 @@ export function CardTitle({ as: Component = 'h2', className, children, ...props 
     )
 }
 
+export function CardSubtitle({ as = 'h3', className, children, ...props }) {
+    return (
+        <CardTitle as={as} className={className} {...props}>
+            {children}
+        </CardTitle>
+    )
+}
+
 export function CardText({ className, children, ...props }) {
     return (
         <p className={cn('card-text', className)} {...props}>
@@ -33,8 +41,8 @@ export function CardText({ className, children, ...props }) {
     )
 }
 
-export function CardImg({ src, alt, position, className, ...props }) {
+export function CardImg({ src, alt, variant, className, ...props }) {
     return (
-        <img src={src} alt={alt} className={cn(`card-img-${position}`, className)} {...props} />
+        <img src={src} alt={alt} className={cn(`card-img-${variant}`, className)} {...props} />
     )
 }

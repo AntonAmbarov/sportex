@@ -49,22 +49,5 @@ export function RatingButton() {
                 {t('ui.rate')}
             </StatusButton>
         </ConditionalWrapper>
-
-        // <>
-        //     {!isAuth
-        //         ? <Tooltip
-        //             as={'span'}
-        //             placement='right'
-        //             message={t('messages.availableAuthorized')}
-        //         >
-        //             <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
-        //                 {t('ui.rate')}
-        //             </StatusButton>
-        //         </Tooltip>
-        //         : <StatusButton className={styleButton(isAuth)} disabled={!isAuth}>
-        //             {t('ui.rate')}
-        //         </StatusButton>
-        //     }
-        // </>
     )
 }

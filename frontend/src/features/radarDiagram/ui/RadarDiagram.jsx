@@ -4,7 +4,7 @@ import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler,
 
 import { Card, CardBody } from 'shared/ui/card';
 import { useRadarDiagramData } from '../model/useRadarDiagramData';
-import { options } from '../model/options';
+import { options } from '../config/options';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
